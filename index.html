@@ -1221,5 +1221,143 @@ function go(){if(on)return;on=true;last=performance.now();requestAnimationFrame(
 d.addEventListener('visibilitychange',function(){if(!d.hidden)go()});go();
 })();
 </script>
+  <!-- ===== ❄ WINTER UPGRADE: вставить перед </body> ===== -->
+<style id="ngWinterCss">
+/* --- кнопка-сніжинка --- */
+.wind-btn{position:fixed;left:calc(env(safe-area-inset-left,0px) + 14px);bottom:calc(env(safe-area-inset-bottom,0px) + 22px);z-index:950;width:56px;height:56px;padding:0;border:0;background:none;display:grid;place-items:center;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.wind-btn .wb-glow{position:absolute;inset:6px;border-radius:50%;background:radial-gradient(circle,rgba(255,210,130,.34),rgba(155,216,255,.2) 55%,transparent 72%);animation:wbGlow 7s ease-in-out infinite alternate;pointer-events:none}
+.wind-btn svg{position:relative;width:40px;height:40px;overflow:visible;animation:wbFloat 5s ease-in-out infinite;filter:drop-shadow(0 0 4px rgba(155,216,255,.8)) drop-shadow(0 0 9px rgba(255,200,110,.4));transition:transform .5s var(--ease)}
+@keyframes wbFloat{50%{translate:0 -7px}}
+@keyframes wbGlow{from{opacity:.45;transform:scale(.9)}to{opacity:1;transform:scale(1.12)}}
+@media(hover:hover) and (pointer:fine){.wind-btn:hover svg{transform:scale(1.12) rotate(18deg)}}
+.wind-btn:active svg{transform:scale(.9) rotate(-12deg)}
+.wind-btn[aria-pressed="true"] svg{transform:rotate(30deg)}
+.wind-btn[aria-pressed="true"] .wb-glow{background:radial-gradient(circle,rgba(255,220,150,.5),rgba(155,216,255,.3) 55%,transparent 72%)}
+.wind-btn:focus-visible{outline-offset:-6px;border-radius:50%}
+#windFx{position:fixed;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
+
+/* --- спільний тихий неон --- */
+:root{--nc:rgba(155,216,255,.22);--nw:rgba(255,200,110,.20);--nv:rgba(150,130,255,.16)}
+@keyframes ngNeon{0%,100%{box-shadow:0 12px 28px rgba(0,0,0,.4),0 0 20px var(--nc),0 0 3px var(--nc),inset 0 1px 0 rgba(200,230,255,.16)}
+50%{box-shadow:0 12px 28px rgba(0,0,0,.4),0 0 24px var(--nw),0 0 6px var(--nv),inset 0 1px 0 rgba(255,236,190,.2)}}
+.glass:not(:hover):not(.is-on):not(.rest):not(.live-card),.tgk,.btn.p,.btn.k,.btn.g,.tgb,.badge,.tgx{animation:ngNeon 11s ease-in-out infinite}
+.glass:nth-child(2n),.tgk:nth-child(2){animation-delay:-3.5s}
+.glass:nth-child(3n),.tgk:nth-child(3){animation-delay:-7s}
+.scrolling .glass,.scrolling .tgk,.scrolling .btn,.scrolling .tgb,.scrolling .badge{animation-play-state:paused}
+
+/* --- Telegram-вибір: єдина система кнопок --- */
+.tgl .tgk>i,.tgl .tgk:nth-child(n)>i{background:linear-gradient(135deg,#8fd0ff,#5b7cff 55%,#7a63ff);box-shadow:0 5px 16px rgba(80,130,255,.5),0 0 0 2px rgba(155,216,255,.35),inset 0 1px 0 rgba(255,255,255,.4)}
+.tgl .tgk:nth-child(2)>i{background:linear-gradient(135deg,#b9e4ff,#6f8dff 55%,#b7a6ff)}
+.tgl .tgk:nth-child(3)>i{background:linear-gradient(135deg,#9bd8ff,#6f8dff 55%,#4b3fb0)}
+.tgl .tgk{min-height:78px;touch-action:manipulation}
+.tgl .tgk:active{transform:scale(.97)}
+@media(hover:hover) and (pointer:fine){.tgl .tgk:nth-child(n):hover{box-shadow:0 0 26px rgba(155,216,255,.4),0 0 40px rgba(255,200,110,.16)}}
+
+/* --- «Новинки»: делікатне натискання --- */
+[data-ng-nov]{transition:transform .35s var(--ease)}[data-ng-nov]:active{transform:scale(.95)}
+
+/* --- режим оптимізації (дизайн не змінюється) --- */
+.tabhid *,.tabhid *::before,.tabhid *::after{animation-play-state:paused!important}
+
+/* --- вікно «Оптимізувати сайт?» --- */
+#ngOpt{position:fixed;inset:0;z-index:100005;display:grid;place-items:center;overflow-y:auto;padding:calc(env(safe-area-inset-top,0px) + 16px) 16px calc(env(safe-area-inset-bottom,0px) + 16px);background:radial-gradient(circle at 50% 20%,rgba(90,130,255,.28),transparent 55%),radial-gradient(circle at 50% 110%,rgba(255,200,110,.14),transparent 50%),rgba(3,8,24,.95);animation:ngFade .6s var(--ease) both}
+#ngOpt.out{opacity:0;transition:opacity .4s var(--ease);pointer-events:none}
+#ngOpt::before{content:'';position:absolute;left:0;right:0;top:-200px;bottom:0;pointer-events:none;background-image:radial-gradient(circle at 20px 30px,#fff 0,#fff 1.4px,transparent 2.6px),radial-gradient(circle at 95px 125px,rgba(255,255,255,.85) 0,rgba(255,255,255,.85) 1.8px,transparent 3px),radial-gradient(circle at 155px 70px,rgba(255,235,190,.9) 0,rgba(255,235,190,.9) 1.2px,transparent 2.4px);background-size:200px 200px;animation:ngSnow 16s linear infinite;will-change:transform}
+.ngo-box{position:relative;width:min(440px,100%);margin:auto;padding:34px 24px 26px;text-align:center;border-radius:28px;border:1.5px solid transparent;background:linear-gradient(rgba(9,19,46,.94),rgba(9,19,46,.94)) padding-box,var(--flow) border-box;background-size:auto,300% 100%;animation:ngPop .7s var(--ease) both,ngNeon 11s ease-in-out infinite}
+.ngo-box .fl0{font-size:2rem;line-height:1;margin-bottom:6px;filter:drop-shadow(0 0 10px rgba(155,216,255,.8))}
+.ngo-box h2{font-size:clamp(1.4rem,6vw,1.8rem);font-weight:900;margin-bottom:8px;background:linear-gradient(120deg,#9bd8ff,#fff,#ffdc94);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ngo-box p{color:#c6dbf5;font-size:.92rem;margin-bottom:22px}
+.ngo-act{display:flex;flex-direction:column;gap:12px}
+.ngo-b{min-height:52px;padding:12px 24px;border-radius:50px;font:800 1rem 'Montserrat',sans-serif;color:#fff;cursor:pointer;border:1.5px solid rgba(190,225,255,.55);touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.ngo-b.y{background:linear-gradient(120deg,#3d7bd9,#6f5cff 60%,#8b6df0);box-shadow:0 0 22px rgba(110,150,255,.5),0 0 44px rgba(255,200,110,.2)}
+.ngo-b.n{background:rgba(155,216,255,.07);border-color:rgba(255,220,148,.55);box-shadow:0 0 18px rgba(255,200,110,.22)}
+@media(hover:hover) and (pointer:fine){.ngo-b:hover{transform:translateY(-3px);box-shadow:0 0 30px rgba(155,216,255,.55),0 0 50px rgba(255,200,110,.25)}}
+.ngo-b:active{transform:scale(.96)}
+@keyframes ngFade{from{opacity:0}}
+@keyframes ngPop{from{opacity:0;transform:translateY(26px) scale(.94)}}
+@keyframes ngSnow{to{transform:translateY(200px)}}
+@media(prefers-reduced-motion:reduce){#ngOpt::before,.wind-btn svg,.wind-btn .wb-glow{animation:none}}
+</style>
+
+<script id="ngWinterJs">
+(function(){
+if(window.__ngWinter)return;window.__ngWinter=1;
+var d=document,B=d.body,RM=matchMedia('(prefers-reduced-motion:reduce)').matches,R=Math.random;
+
+/* ========== 1. Кнопка-сніжинка + зимовий вітер ========== */
+try{(function(){
+if(d.getElementById('windBtn'))return;
+var b=d.createElement('button');b.id='windBtn';b.className='wind-btn';b.type='button';
+b.setAttribute('aria-pressed','false');b.setAttribute('aria-label','Зимовий вітер і сніг');b.title='Зимовий вітер';
+var arms='';for(var i=0;i<6;i++)arms+='<path transform="rotate('+i*60+')" d="M0 0V-17M0 -11L-5 -16M0 -11L5 -16M0 -6L-3.5 -9.5M0 -6L3.5 -9.5"/>';
+b.innerHTML='<span class="wb-glow"></span><svg viewBox="-20 -20 40 40" aria-hidden="true"><defs><linearGradient id="wbG" gradientUnits="userSpaceOnUse" x1="-17" y1="-17" x2="17" y2="17"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#bfe6ff"/><stop offset="1" stop-color="#8fa8ff"/></linearGradient></defs><g fill="none" stroke="url(#wbG)" stroke-width="1.7" stroke-linecap="round">'+arms+'</g><circle r="2.2" fill="#fff"/></svg>';
+B.appendChild(b);
+var on=false,cv=null,cx,W,H,raf=0,last=0,al=0,tg=0,F=[],S=[];
+function size(){var dp=Math.min(devicePixelRatio||1,innerWidth<700?1:1.5);W=innerWidth;H=innerHeight;cv.width=Math.round(W*dp);cv.height=Math.round(H*dp);cx.setTransform(dp,0,0,dp,0,0)}
+function build(){var n=W<700?38:W<1100?55:75,i;F=[];S=[];
+for(i=0;i<n;i++)F.push({x:R()*W,y:R()*H,r:1.2+R()*3.2,vx:70+R()*50,vy:18+R()*34,ph:R()*6.28,sp:.5+R()*1,a:.45+R()*.4});
+for(i=0;i<(W<700?4:7);i++)S.push({x:R()*W,y:R()*H,l:120+R()*150,v:130+R()*90,w:R()<.5,a:.1+R()*.1})}
+function create(){cv=d.createElement('canvas');cv.id='windFx';cv.setAttribute('aria-hidden','true');B.appendChild(cv);cx=cv.getContext('2d');size();build()}
+function destroy(){if(raf)cancelAnimationFrame(raf);raf=0;if(cv&&cv.parentNode)cv.parentNode.removeChild(cv);cv=null;F=[];S=[];al=0}
+function loop(t){raf=0;if(!cv||d.hidden)return;raf=requestAnimationFrame(loop);
+var dt=Math.min((t-last)/1000,.05);last=t;if(dt<=0)return;
+al+=(tg-al)*Math.min(1,dt*2.5);if(tg===0&&al<.02){destroy();return}
+cx.clearRect(0,0,W,H);cx.globalAlpha=al;var i,f,s;
+cx.lineWidth=1.3;cx.lineCap='round';
+for(i=0;i<S.length;i++){s=S[i];s.x+=s.v*dt;if(s.x>W+40){s.x=-s.l-20;s.y=R()*H}
+cx.strokeStyle=s.w?'rgba(255,215,150,'+s.a+')':'rgba(190,225,255,'+s.a+')';
+cx.beginPath();cx.moveTo(s.x,s.y);cx.quadraticCurveTo(s.x+s.l*.5,s.y-6,s.x+s.l,s.y+s.l*.08);cx.stroke()}
+cx.fillStyle='rgba(235,245,255,.8)';
+for(i=0;i<F.length;i++){f=F[i];f.x+=f.vx*dt;f.y+=(f.vy+Math.sin(t/1000*f.sp+f.ph)*14)*dt;
+if(f.x>W+10){f.x=-10;f.y=R()*H}if(f.y>H+10){f.y=-10;f.x=R()*W}
+cx.globalAlpha=al*f.a;cx.beginPath();cx.arc(f.x,f.y,f.r,0,6.283);cx.fill()}
+cx.globalAlpha=1}
+function run(){if(!raf&&cv){last=performance.now();raf=requestAnimationFrame(loop)}}
+b.addEventListener('click',function(){on=!on;b.setAttribute('aria-pressed',on?'true':'false');
+if(RM)return; /* при reduce-motion рух не запускаємо */
+if(on){tg=1;if(!cv)create();run()}else tg=0});
+d.addEventListener('visibilitychange',function(){if(!d.hidden&&cv)run()});
+var rz;addEventListener('resize',function(){clearTimeout(rz);rz=setTimeout(function(){if(cv){size();build()}},200)},{passive:true});
+})()}catch(e){if(window.console)console.warn('wind',e)}
+
+/* ========== 2. Кнопка «Новинки» -> t.me/rspwn_events ========== */
+try{(function(){var U='https://t.me/rspwn_events';
+[].forEach.call(d.querySelectorAll('a,button'),function(e){if(e.hasAttribute('data-ng-nov'))return;
+var t=(e.textContent||'').replace(/\s+/g,' ').trim().toLowerCase();if(t.indexOf('новинки')<0||t.length>40)return;
+e.setAttribute('data-ng-nov','1');
+if(e.tagName==='A'){e.href=U;e.target='_blank';e.rel='noopener noreferrer'}
+else e.addEventListener('click',function(ev){ev.preventDefault();var w=window.open(U,'_blank','noopener');if(!w)location.href=U})})})()}catch(e){}
+
+/* ========== 3. Режим оптимізації ========== */
+var optOn=false;
+function enableOpt(){if(optOn)return;optOn=true;B.classList.add('opt');
+var st=0;addEventListener('scroll',function(){if(!st)B.classList.add('scrolling');clearTimeout(st);st=setTimeout(function(){st=0;B.classList.remove('scrolling')},160)},{passive:true});
+function vis(){B.classList.toggle('tabhid',d.hidden)}d.addEventListener('visibilitychange',vis);vis()}
+
+/* ========== 4. Вікно «Оптимізувати сайт?» (щоразу, без збереження) ========== */
+try{(function(){
+if(d.getElementById('ngOpt'))return;
+var lockEls=[].slice.call(d.querySelectorAll('main,nav,footer,.wscene,.rotating-cross-badge,#windBtn')),prevOv=d.documentElement.style.overflow,done=false;
+var o=d.createElement('div');o.id='ngOpt';o.setAttribute('role','dialog');o.setAttribute('aria-modal','true');o.setAttribute('aria-labelledby','ngOptT');
+o.innerHTML='<div class="ngo-box"><div class="fl0" aria-hidden="true">❄️</div><h2 id="ngOptT">Оптимізувати сайт?</h2><p>Дизайн, неон і всі функції залишаться. Зменшимо зайве навантаження на пристрій.</p><div class="ngo-act"><button type="button" class="ngo-b y" id="ngY">Оптимізувати</button><button type="button" class="ngo-b n" id="ngN">Пропустити</button></div></div>';
+B.appendChild(o);
+lockEls.forEach(function(e){try{e.inert=true}catch(x){}e.setAttribute('aria-hidden','true')});
+d.documentElement.style.overflow='hidden';
+try{if(d.activeElement&&d.activeElement.blur)d.activeElement.blur()}catch(x){}
+var y=d.getElementById('ngY'),n=d.getElementById('ngN');try{y.focus({preventScroll:true})}catch(x){}
+function close(optimize){if(done)return;done=true;
+try{if(optimize)enableOpt()}catch(x){if(window.console)console.warn('opt',x)}
+lockEls.forEach(function(e){try{e.inert=false}catch(x){}e.removeAttribute('aria-hidden')});
+d.documentElement.style.overflow=prevOv;d.removeEventListener('keydown',key,true);
+o.classList.add('out');setTimeout(function(){if(o.parentNode)o.parentNode.removeChild(o)},450)}
+function key(e){if(e.key==='Tab'){e.preventDefault();var a=d.activeElement===y?n:y;a.focus()}else if(e.key==='Escape'){e.preventDefault();e.stopPropagation()}}
+d.addEventListener('keydown',key,true);
+y.addEventListener('click',function(){close(true)});n.addEventListener('click',function(){close(false)});
+})()}catch(e){
+/* якщо щось пішло не так, сайт не лишається заблокованим */
+try{var z=d.getElementById('ngOpt');if(z)z.parentNode.removeChild(z);d.documentElement.style.overflow='';
+[].forEach.call(d.querySelectorAll('[aria-hidden="true"]'),function(x){if(x.tagName==='MAIN'||x.tagName==='NAV'||x.tagName==='FOOTER'){x.inert=false;x.removeAttribute('aria-hidden')}})}catch(x){}}
+})();
+</script>
 </body>
 </html>
