@@ -1204,37 +1204,27 @@ function size(){dpr=Math.min(devicePixelRatio||1,innerWidth<700?1:1.5);W=innerWi
 function mk(l){var f={x:r()*W,y:r()*H,ph:r()*6.28,sp:.3+r()*.7,tw:r()*6.28};
 if(l===0){f.r=.6+r()*.7;f.v=10+r()*12;f.a=14;A.push(f)}
 else if(l===1){f.r=1.1+r()*1.1;f.v=24+r()*22;f.a=22;(r()<.16?S:M).push(f)}
-else{f.r=3+r()*2.2;f.v=48+r()*30;f.a=38;Nr.push(f)}}
-function fill(){A=[];M=[];S=[];Nr=[];var low=B.classList.contains('low'),N=Math.round((W<700?44:W<1100?70:110)*(low?.65:1)),i;
-for(i=0;i<N*.56;i++)mk(0);for(i=0;i<N*.38;i++)mk(1);for(i=0;i<Math.max(3,Math.round(N*.055));i++)mk(2)}
-size();fill();
-var rz;addEventListener('resize',function(){clearTimeout(rz);rz=setTimeout(function(){var ow=W,oh=H;if(Math.abs(innerWidth-ow)>1||Math.abs(innerHeight-oh)>150){size();fill()}},200)},{passive:true});
-function up(f,dt,t,wi){f.y+=f.v*dt;f.x+=(Math.sin(t/1000*f.sp+f.ph)*f.a+wi)*dt;if(f.y>H+12){f.y=-12;f.x=r()*W}if(f.x>W+12)f.x=-12;else if(f.x<-12)f.x=W+12}
-function loop(t){if(d.hidden){on=false;return}requestAnimationFrame(loop);var dt=Math.min((t-last)/1000,.05);last=t;if(dt<=0)return;
-cx.clearRect(0,0,W,H);var wi=Math.sin(t/9000)*10+Math.sin(t/3700)*4,u=B.classList.contains('ultra'),i,f,n;
-n=u?A.length>>1:A.length;cx.fillStyle='rgba(185,212,255,.5)';cx.beginPath();for(i=0;i<n;i++){f=A[i];up(f,dt,t,wi*.5);cx.moveTo(f.x+f.r,f.y);cx.arc(f.x,f.y,f.r,0,6.283)}cx.fill();
-n=u?M.length>>1:M.length;cx.fillStyle='rgba(235,245,255,.82)';cx.beginPath();for(i=0;i<n;i++){f=M[i];up(f,dt,t,wi);cx.moveTo(f.x+f.r,f.y);cx.arc(f.x,f.y,f.r,0,6.283)}cx.fill();
-n=u?S.length>>1:S.length;for(i=0;i<n;i++){f=S[i];up(f,dt,t,wi);cx.globalAlpha=.35+.55*Math.abs(Math.sin(t/1000*1.3+f.tw));var z=f.r*5;cx.drawImage(f.y<150?sG:sC,f.x-z,f.y-z,z*2,z*2)}
-n=u?Nr.length>>1:Nr.length;cx.globalAlpha=.4;for(i=0;i<n;i++){f=Nr[i];up(f,dt,t,wi*1.4);var q=f.r*4;cx.drawImage(sN,f.x-q,f.y-q,q*2,q*2)}
-cx.globalAlpha=1}
-function go(){if(on)return;on=true;last=performance.now();requestAnimationFrame(loop)}
-d.addEventListener('visibilitychange',function(){if(!d.hidden)go()});go();
-})();
 </script>
-  <!-- ===== ❄ WINTER UPGRADE: вставить перед </body> ===== -->
+  <!-- ===== ❄ WINTER UPGRADE v2: заменяє попередній блок, вставити перед </body> ===== -->
 <style id="ngWinterCss">
-/* --- кнопка-сніжинка --- */
-.wind-btn{position:fixed;left:calc(env(safe-area-inset-left,0px) + 14px);bottom:calc(env(safe-area-inset-bottom,0px) + 22px);z-index:950;width:56px;height:56px;padding:0;border:0;background:none;display:grid;place-items:center;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent}
-.wind-btn .wb-glow{position:absolute;inset:6px;border-radius:50%;background:radial-gradient(circle,rgba(255,210,130,.34),rgba(155,216,255,.2) 55%,transparent 72%);animation:wbGlow 7s ease-in-out infinite alternate;pointer-events:none}
-.wind-btn svg{position:relative;width:40px;height:40px;overflow:visible;animation:wbFloat 5s ease-in-out infinite;filter:drop-shadow(0 0 4px rgba(155,216,255,.8)) drop-shadow(0 0 9px rgba(255,200,110,.4));transition:transform .5s var(--ease)}
-@keyframes wbFloat{50%{translate:0 -7px}}
-@keyframes wbGlow{from{opacity:.45;transform:scale(.9)}to{opacity:1;transform:scale(1.12)}}
-@media(hover:hover) and (pointer:fine){.wind-btn:hover svg{transform:scale(1.12) rotate(18deg)}}
-.wind-btn:active svg{transform:scale(.9) rotate(-12deg)}
-.wind-btn[aria-pressed="true"] svg{transform:rotate(30deg)}
-.wind-btn[aria-pressed="true"] .wb-glow{background:radial-gradient(circle,rgba(255,220,150,.5),rgba(155,216,255,.3) 55%,transparent 72%)}
-.wind-btn:focus-visible{outline-offset:-6px;border-radius:50%}
-#windFx{position:fixed;inset:0;width:100%;height:100%;z-index:3;pointer-events:none}
+/* --- кнопка зимового вітру (місце і принцип як у осінньої: ліво-низ, клік = пориви) --- */
+.wind-btn{position:fixed;left:calc(env(safe-area-inset-left,0px) + clamp(16px,3vw,26px));bottom:calc(env(safe-area-inset-bottom,0px) + clamp(20px,4vw,30px));z-index:950;width:54px;height:54px;padding:0;border-radius:50%;display:grid;place-items:center;border:1.5px solid transparent;cursor:pointer;background:linear-gradient(rgba(9,19,46,.92),rgba(9,19,46,.92)) padding-box,var(--flow) border-box;background-size:auto,300% 100%;box-shadow:0 8px 22px rgba(80,130,255,.35),0 0 20px rgba(255,200,110,.18);animation:wbFloat 5s ease-in-out infinite,ngNeon 11s ease-in-out infinite;transition:transform .5s var(--ease),box-shadow .5s var(--ease);touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.wind-btn svg{width:30px;height:30px;overflow:visible;filter:drop-shadow(0 0 4px rgba(155,216,255,.85)) drop-shadow(0 0 8px rgba(255,200,110,.4));transition:transform .9s var(--ease)}
+.wind-btn.blow svg{transform:rotate(120deg) scale(1.12)}
+@keyframes wbFloat{50%{translate:0 -6px}}
+.wind-btn:active{transform:scale(.92)}
+.wind-btn:disabled{cursor:default}
+@media(hover:hover) and (pointer:fine){.wind-btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(110,150,255,.5),0 0 28px rgba(255,200,110,.28)}}
+#windLayer{position:fixed;inset:0;z-index:5;pointer-events:none;overflow:hidden}
+#snow{transition:transform 1.4s var(--ease)}#snow.gust{transform:translateX(6vw)}
+.wl{position:absolute;left:-8vw;top:var(--y);width:var(--s);height:var(--s);will-change:transform;animation:wfly var(--t) cubic-bezier(.3,.1,.5,1) forwards,wspin var(--t) linear forwards,wfade var(--t) ease both}
+.wl svg{display:block;width:100%;height:100%;overflow:visible}
+.wk{position:absolute;left:-35%;top:var(--y);width:var(--w);height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,rgba(190,225,255,.55),rgba(255,220,150,.5),transparent);animation:wkm var(--t) cubic-bezier(.3,.1,.5,1) both}
+@keyframes wfly{from{translate:0 0}to{translate:var(--wx) var(--wy)}}
+@keyframes wspin{to{rotate:var(--wr)}}
+@keyframes wfade{0%{opacity:0}12%{opacity:.95}85%{opacity:.9}100%{opacity:0}}
+@keyframes wkm{from{translate:0 0;opacity:0}20%{opacity:.8}to{translate:var(--wx) var(--wy);opacity:0}}
+@media(prefers-reduced-motion:reduce){.wind-btn,#windLayer{display:none}}
 
 /* --- спільний тихий неон --- */
 :root{--nc:rgba(155,216,255,.22);--nw:rgba(255,200,110,.20);--nv:rgba(150,130,255,.16)}
@@ -1243,7 +1233,7 @@ d.addEventListener('visibilitychange',function(){if(!d.hidden)go()});go();
 .glass:not(:hover):not(.is-on):not(.rest):not(.live-card),.tgk,.btn.p,.btn.k,.btn.g,.tgb,.badge,.tgx{animation:ngNeon 11s ease-in-out infinite}
 .glass:nth-child(2n),.tgk:nth-child(2){animation-delay:-3.5s}
 .glass:nth-child(3n),.tgk:nth-child(3){animation-delay:-7s}
-.scrolling .glass,.scrolling .tgk,.scrolling .btn,.scrolling .tgb,.scrolling .badge{animation-play-state:paused}
+.scrolling .glass,.scrolling .tgk,.scrolling .btn,.scrolling .tgb,.scrolling .badge,.scrolling .wind-btn{animation-play-state:paused}
 
 /* --- Telegram-вибір: єдина система кнопок --- */
 .tgl .tgk>i,.tgl .tgk:nth-child(n)>i{background:linear-gradient(135deg,#8fd0ff,#5b7cff 55%,#7a63ff);box-shadow:0 5px 16px rgba(80,130,255,.5),0 0 0 2px rgba(155,216,255,.35),inset 0 1px 0 rgba(255,255,255,.4)}
@@ -1253,7 +1243,7 @@ d.addEventListener('visibilitychange',function(){if(!d.hidden)go()});go();
 .tgl .tgk:active{transform:scale(.97)}
 @media(hover:hover) and (pointer:fine){.tgl .tgk:nth-child(n):hover{box-shadow:0 0 26px rgba(155,216,255,.4),0 0 40px rgba(255,200,110,.16)}}
 
-/* --- «Новинки»: делікатне натискання --- */
+/* --- «Новинки» --- */
 [data-ng-nov]{transition:transform .35s var(--ease)}[data-ng-nov]:active{transform:scale(.95)}
 
 /* --- режим оптимізації (дизайн не змінюється) --- */
@@ -1276,7 +1266,7 @@ d.addEventListener('visibilitychange',function(){if(!d.hidden)go()});go();
 @keyframes ngFade{from{opacity:0}}
 @keyframes ngPop{from{opacity:0;transform:translateY(26px) scale(.94)}}
 @keyframes ngSnow{to{transform:translateY(200px)}}
-@media(prefers-reduced-motion:reduce){#ngOpt::before,.wind-btn svg,.wind-btn .wb-glow{animation:none}}
+@media(prefers-reduced-motion:reduce){#ngOpt::before{animation:none}}
 </style>
 
 <script id="ngWinterJs">
@@ -1284,40 +1274,33 @@ d.addEventListener('visibilitychange',function(){if(!d.hidden)go()});go();
 if(window.__ngWinter)return;window.__ngWinter=1;
 var d=document,B=d.body,RM=matchMedia('(prefers-reduced-motion:reduce)').matches,R=Math.random;
 
-/* ========== 1. Кнопка-сніжинка + зимовий вітер ========== */
+/* ========== 1. Кнопка зимового вітру: клік = порив, сніжинки летять кілька секунд ========== */
 try{(function(){
-if(d.getElementById('windBtn'))return;
+if(RM||d.getElementById('windBtn'))return;
+var A='';for(var i=0;i<6;i++)A+='<path transform="rotate('+i*60+')" d="M0 0V-10M0 -6L-3 -9M0 -6L3 -9"/>';
+function flake(c){return '<svg viewBox="-12 -12 24 24" fill="none" stroke="'+c+'" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">'+A+'<circle r="1.3" fill="'+c+'" stroke="none"/></svg>'}
 var b=d.createElement('button');b.id='windBtn';b.className='wind-btn';b.type='button';
-b.setAttribute('aria-pressed','false');b.setAttribute('aria-label','Зимовий вітер і сніг');b.title='Зимовий вітер';
-var arms='';for(var i=0;i<6;i++)arms+='<path transform="rotate('+i*60+')" d="M0 0V-17M0 -11L-5 -16M0 -11L5 -16M0 -6L-3.5 -9.5M0 -6L3.5 -9.5"/>';
-b.innerHTML='<span class="wb-glow"></span><svg viewBox="-20 -20 40 40" aria-hidden="true"><defs><linearGradient id="wbG" gradientUnits="userSpaceOnUse" x1="-17" y1="-17" x2="17" y2="17"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#bfe6ff"/><stop offset="1" stop-color="#8fa8ff"/></linearGradient></defs><g fill="none" stroke="url(#wbG)" stroke-width="1.7" stroke-linecap="round">'+arms+'</g><circle r="2.2" fill="#fff"/></svg>';
+b.setAttribute('aria-label','Подув зимового вітру');b.title='Подув зимового вітру';
+b.innerHTML='<svg viewBox="-20 -20 40 40" fill="none" stroke="url(#wbG)" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><defs><linearGradient id="wbG" gradientUnits="userSpaceOnUse" x1="-17" y1="-17" x2="17" y2="17"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#bfe6ff"/><stop offset="1" stop-color="#ffdc94"/></linearGradient></defs>'
++(function(){var s='';for(var k=0;k<6;k++)s+='<path transform="rotate('+k*60+')" d="M0 0V-17M0 -11L-5 -16M0 -11L5 -16M0 -6L-3.5 -9.5M0 -6L3.5 -9.5"/>';return s})()+'<circle r="2.2" fill="#fff" stroke="none"/></svg>';
 B.appendChild(b);
-var on=false,cv=null,cx,W,H,raf=0,last=0,al=0,tg=0,F=[],S=[];
-function size(){var dp=Math.min(devicePixelRatio||1,innerWidth<700?1:1.5);W=innerWidth;H=innerHeight;cv.width=Math.round(W*dp);cv.height=Math.round(H*dp);cx.setTransform(dp,0,0,dp,0,0)}
-function build(){var n=W<700?38:W<1100?55:75,i;F=[];S=[];
-for(i=0;i<n;i++)F.push({x:R()*W,y:R()*H,r:1.2+R()*3.2,vx:70+R()*50,vy:18+R()*34,ph:R()*6.28,sp:.5+R()*1,a:.45+R()*.4});
-for(i=0;i<(W<700?4:7);i++)S.push({x:R()*W,y:R()*H,l:120+R()*150,v:130+R()*90,w:R()<.5,a:.1+R()*.1})}
-function create(){cv=d.createElement('canvas');cv.id='windFx';cv.setAttribute('aria-hidden','true');B.appendChild(cv);cx=cv.getContext('2d');size();build()}
-function destroy(){if(raf)cancelAnimationFrame(raf);raf=0;if(cv&&cv.parentNode)cv.parentNode.removeChild(cv);cv=null;F=[];S=[];al=0}
-function loop(t){raf=0;if(!cv||d.hidden)return;raf=requestAnimationFrame(loop);
-var dt=Math.min((t-last)/1000,.05);last=t;if(dt<=0)return;
-al+=(tg-al)*Math.min(1,dt*2.5);if(tg===0&&al<.02){destroy();return}
-cx.clearRect(0,0,W,H);cx.globalAlpha=al;var i,f,s;
-cx.lineWidth=1.3;cx.lineCap='round';
-for(i=0;i<S.length;i++){s=S[i];s.x+=s.v*dt;if(s.x>W+40){s.x=-s.l-20;s.y=R()*H}
-cx.strokeStyle=s.w?'rgba(255,215,150,'+s.a+')':'rgba(190,225,255,'+s.a+')';
-cx.beginPath();cx.moveTo(s.x,s.y);cx.quadraticCurveTo(s.x+s.l*.5,s.y-6,s.x+s.l,s.y+s.l*.08);cx.stroke()}
-cx.fillStyle='rgba(235,245,255,.8)';
-for(i=0;i<F.length;i++){f=F[i];f.x+=f.vx*dt;f.y+=(f.vy+Math.sin(t/1000*f.sp+f.ph)*14)*dt;
-if(f.x>W+10){f.x=-10;f.y=R()*H}if(f.y>H+10){f.y=-10;f.x=R()*W}
-cx.globalAlpha=al*f.a;cx.beginPath();cx.arc(f.x,f.y,f.r,0,6.283);cx.fill()}
-cx.globalAlpha=1}
-function run(){if(!raf&&cv){last=performance.now();raf=requestAnimationFrame(loop)}}
-b.addEventListener('click',function(){on=!on;b.setAttribute('aria-pressed',on?'true':'false');
-if(RM)return; /* при reduce-motion рух не запускаємо */
-if(on){tg=1;if(!cv)create();run()}else tg=0});
-d.addEventListener('visibilitychange',function(){if(!d.hidden&&cv)run()});
-var rz;addEventListener('resize',function(){clearTimeout(rz);rz=setTimeout(function(){if(cv){size();build()}},200)},{passive:true});
+var C=['#ffffff','#e3f3ff','#bfe6ff','#9bd8ff','#ffe3a6'],L=null,cd=false,tt;
+function layer(){if(L&&L.parentNode)return L;L=d.createElement('div');L.id='windLayer';L.setAttribute('aria-hidden','true');B.appendChild(L);return L}
+function note(m){var t=d.getElementById('toast'),x=d.getElementById('toastText');if(!t||!x)return;x.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('show')},2200)}
+function gone(e){if(e.animationName==='wfly'||e.animationName==='wkm')this.remove()}
+b.addEventListener('click',function(){
+if(cd)return;cd=true;b.disabled=true;b.classList.add('blow');
+var sn=d.getElementById('snow');if(sn){sn.classList.add('gust');setTimeout(function(){sn.classList.remove('gust')},1100)}
+note('Зимовий вітер ❄️');
+var lay=layer(),W=innerWidth,n=B.classList.contains('ultra')?4:B.classList.contains('low')?8:W<700?10:18,i,e;
+for(i=0;i<(W<700?3:5);i++){e=d.createElement('div');e.className='wk';
+e.style.cssText='--y:'+(6+R()*84).toFixed(0)+'vh;--w:'+(22+R()*20).toFixed(0)+'vw;--t:'+(1.8+R()*1.2).toFixed(1)+'s;--wx:'+Math.round(W*1.5)+'px;--wy:'+Math.round(R()*50-10)+'px;animation-delay:'+(R()*.6).toFixed(2)+'s';
+e.addEventListener('animationend',gone);lay.appendChild(e)}
+for(i=0;i<n;i++){e=d.createElement('div');e.className='wl';
+e.style.cssText='--y:'+(3+R()*88).toFixed(0)+'vh;--s:'+(10+R()*22).toFixed(0)+'px;--t:'+(2.6+R()*2.4).toFixed(1)+'s;--wx:'+Math.round(W*1.2)+'px;--wy:'+Math.round(R()*160-30)+'px;--wr:'+Math.round(180+R()*360)+'deg;animation-delay:'+(R()*.5).toFixed(2)+'s';
+e.innerHTML=flake(C[i%C.length]);e.addEventListener('animationend',gone);lay.appendChild(e)}
+setTimeout(function(){cd=false;b.disabled=false;b.classList.remove('blow')},3200);
+setTimeout(function(){if(L&&!L.childElementCount){L.remove();L=null}},9000)});
 })()}catch(e){if(window.console)console.warn('wind',e)}
 
 /* ========== 2. Кнопка «Новинки» -> t.me/rspwn_events ========== */
@@ -1354,10 +1337,9 @@ function key(e){if(e.key==='Tab'){e.preventDefault();var a=d.activeElement===y?n
 d.addEventListener('keydown',key,true);
 y.addEventListener('click',function(){close(true)});n.addEventListener('click',function(){close(false)});
 })()}catch(e){
-/* якщо щось пішло не так, сайт не лишається заблокованим */
 try{var z=d.getElementById('ngOpt');if(z)z.parentNode.removeChild(z);d.documentElement.style.overflow='';
 [].forEach.call(d.querySelectorAll('[aria-hidden="true"]'),function(x){if(x.tagName==='MAIN'||x.tagName==='NAV'||x.tagName==='FOOTER'){x.inert=false;x.removeAttribute('aria-hidden')}})}catch(x){}}
 })();
-</script>
+  </script>
 </body>
 </html>
