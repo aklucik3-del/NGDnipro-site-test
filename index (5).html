@@ -1,0 +1,1187 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<link rel="icon" type="image/png" href="favicon.png">
+  <meta property="og:title" content="ХЄЦУ — «Нове Покоління» — Дніпро | Офіційний сайт">
+<meta property="og:site_name" content="ХЄЦУ — Нове Покоління">
+<meta charset="UTF-8">
+<meta name="google-site-verification" content="cMtJMBX0PDNgitilrx10joX3PjkbL7Un9JiaViBjXRg" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>ХЄЦУ-«Нове Покоління» — Дніпро | Офіційний сайт</title>
+<meta name="description" content="Сучасний міжконфесійний християнський рух повного Євангелія. Дніпро.">
+<link rel="canonical" href="https://aklucik3-del.github.io/NGDnipro/" />
+<link rel="sitemap" type="application/xml" title="Sitemap" href="https://aklucik3-del.github.io/NGDnipro/sitemap.xml" />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<style>
+:root{--bg:#0b0610;--cy:#ffb347;--bl:#ff7a2f;--pu:#d6285a;--pk:#ff5a36;--go:#ffd166;--tx:#f6e9dc;--mu:#b9a595;--ease:cubic-bezier(.22,1,.36,1);
+--glass:linear-gradient(145deg,rgba(255,255,255,.10),rgba(255,255,255,.02) 45%,rgba(255,179,71,.04));--line:rgba(255,190,120,.22)}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{font-family:'Montserrat',sans-serif;background:var(--bg);color:var(--tx);line-height:1.7;overflow-x:hidden}
+body.lock{overflow:hidden}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--cy);outline-offset:3px}
+
+/* ATMOSPHERE */
+.bg{position:fixed;inset:0;z-index:0;pointer-events:none;overflow:hidden;background:radial-gradient(120% 80% at 50% 0,#2a1223 0,var(--bg) 60%)}
+.blob{position:absolute;border-radius:50%;will-change:transform;opacity:.55}
+.b1{width:60vmax;height:60vmax;left:-20vmax;top:-15vmax;background:radial-gradient(circle,rgba(255,122,47,.55),transparent 65%);animation:drift1 38s ease-in-out infinite alternate}
+.b2{width:55vmax;height:55vmax;right:-20vmax;top:25vh;background:radial-gradient(circle,rgba(214,40,90,.5),transparent 65%);animation:drift2 46s ease-in-out infinite alternate}
+.b3{width:45vmax;height:45vmax;left:15vw;bottom:-25vmax;background:radial-gradient(circle,rgba(255,90,54,.35),transparent 65%);animation:drift1 52s ease-in-out infinite alternate-reverse}
+@keyframes drift1{to{transform:translate(12vw,10vh) scale(1.15)}}
+@keyframes drift2{to{transform:translate(-14vw,-8vh) scale(1.1)}}
+.grid-lines{position:absolute;inset:0;background-image:linear-gradient(rgba(255,170,100,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(255,170,100,.045) 1px,transparent 1px);background-size:70px 70px;-webkit-mask-image:radial-gradient(ellipse at 50% 30%,#000,transparent 75%);mask-image:radial-gradient(ellipse at 50% 30%,#000,transparent 75%)}
+.particles{position:fixed;inset:0;z-index:1;pointer-events:none;overflow:hidden}
+.pt{position:absolute;bottom:0;border-radius:50%;background:radial-gradient(circle,rgba(255,179,71,.9),rgba(255,179,71,0) 70%);opacity:0;animation:rise linear infinite;will-change:transform,opacity}
+.pt:nth-child(3n){background:radial-gradient(circle,rgba(255,90,54,.9),rgba(255,90,54,0) 70%)}
+.pt:nth-child(5n){background:radial-gradient(circle,rgba(255,209,102,.85),rgba(255,209,102,0) 70%)}
+@keyframes rise{0%{transform:translateY(0) scale(.3);opacity:0}15%{opacity:.7}85%{opacity:.6}100%{transform:translateY(-110vh) scale(2.2);opacity:0}}
+main,footer{position:relative;z-index:2}
+
+/* NAV */
+.nav{position:fixed;top:14px;left:50%;transform:translateX(-50%);width:min(1180px,calc(100% - 24px));z-index:1000;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:10px 14px 10px 22px;border-radius:60px;background:rgba(22,9,16,.35);border:1px solid var(--line);-webkit-backdrop-filter:blur(16px) saturate(140%);backdrop-filter:blur(16px) saturate(140%);box-shadow:0 8px 30px rgba(0,0,0,.35),0 0 0 rgba(255,179,71,0);transition:background .6s var(--ease),box-shadow .6s var(--ease),top .6s var(--ease),border-color .6s;animation:navIn 1.2s var(--ease) 1.6s backwards}
+@keyframes navIn{from{opacity:0;transform:translate(-50%,-30px)}}
+.nav.scrolled{top:8px;background:rgba(15,6,12,.72);border-color:rgba(255,179,71,.4);box-shadow:0 10px 40px rgba(0,0,0,.55),0 0 28px rgba(255,179,71,.14)}
+.logo{display:flex;align-items:center;gap:10px;font-weight:800;text-decoration:none;letter-spacing:.5px;white-space:nowrap;font-size:.95rem}
+.logo i{color:var(--cy);filter:drop-shadow(0 0 8px var(--cy))}
+.links{display:flex;gap:2px;list-style:none}
+.links a{display:block;padding:8px 14px;border-radius:30px;text-decoration:none;font-size:.85rem;font-weight:600;color:#ecd9c6;transition:background .4s var(--ease),color .4s,box-shadow .4s}
+.links a.on{background:rgba(255,179,71,.12);color:#fff;box-shadow:0 0 18px rgba(255,179,71,.25)}@media(hover:hover) and (pointer:fine){.links a:hover{background:rgba(255,179,71,.12);color:#fff;box-shadow:0 0 18px rgba(255,179,71,.25)}}
+.socials{display:flex;gap:8px}
+.soc{width:38px;height:38px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.06);border:1px solid var(--line);color:#fff;text-decoration:none;cursor:pointer;font-size:1rem;transition:transform .45s var(--ease),background .45s,box-shadow .45s,border-color .45s}
+@media(hover:hover) and (pointer:fine){.soc:hover{transform:translateY(-3px)}}
+@media(hover:hover) and (pointer:fine){.soc.fb:hover{background:#1877f2;box-shadow:0 6px 20px rgba(24,119,242,.6)}}
+@media(hover:hover) and (pointer:fine){.soc.tg:hover{background:#0a8fd1;box-shadow:0 6px 20px rgba(0,136,204,.6)}}
+@media(hover:hover) and (pointer:fine){.soc.ig:hover{background:linear-gradient(45deg,#f9a03c,#d6249f,#285aeb);box-shadow:0 6px 20px rgba(214,36,159,.6)}}
+@media(hover:hover) and (pointer:fine){.soc.yt:hover{background:#f00;box-shadow:0 6px 20px rgba(255,0,0,.6)}}
+.burger{display:none;width:44px;height:44px;border-radius:50%;border:1px solid var(--line);background:rgba(255,255,255,.06);color:#fff;cursor:pointer;font-size:1.1rem}
+.mmenu{position:fixed;inset:0;z-index:999;background:radial-gradient(circle at 50% 20%,rgba(255,122,47,.28),transparent 60%),rgba(10,4,9,.96);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;opacity:0;visibility:hidden;transition:opacity .6s var(--ease),visibility .6s}
+.mmenu.open{opacity:1;visibility:visible}
+.mmenu a.ml{font-size:clamp(1.6rem,7vw,2.2rem);font-weight:800;text-decoration:none;padding:8px 24px;opacity:0;transform:translateY(24px);transition:opacity .6s var(--ease),transform .6s var(--ease),color .3s}
+.mmenu.open a.ml{opacity:1;transform:none}
+.mmenu.open a.ml:nth-child(2){transition-delay:.07s}.mmenu.open a.ml:nth-child(3){transition-delay:.14s}.mmenu.open a.ml:nth-child(4){transition-delay:.21s}.mmenu.open a.ml:nth-child(5){transition-delay:.28s}.mmenu.open a.ml:nth-child(6){transition-delay:.35s}
+@media(hover:hover) and (pointer:fine){.mmenu a.ml:hover{color:var(--cy);text-shadow:0 0 20px var(--cy)}}
+.mmenu .socials{margin-top:26px}
+@media(max-width:1020px){.links,.nav>.socials{display:none}.burger{display:block}}
+
+/* LAYOUT */
+section{position:relative;padding:clamp(70px,11vh,120px) 18px}
+.wrap{max-width:1180px;margin:0 auto}
+.sec-head{text-align:center;margin-bottom:clamp(36px,6vw,64px)}
+.sec-head h2{font-size:clamp(1.9rem,4.6vw,3rem);font-weight:900;line-height:1.15;background:linear-gradient(120deg,#fff 20%,#ffe0a3 55%,#ffa890);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 18px rgba(255,179,71,.25))}
+.sec-head p{color:var(--mu);margin-top:12px;max-width:620px;margin-inline:auto}
+.sec-head::after{content:'';display:block;width:90px;height:3px;margin:18px auto 0;border-radius:3px;background:linear-gradient(90deg,var(--cy),var(--pk));box-shadow:0 0 14px rgba(255,179,71,.6)}
+.glass{background:var(--glass),rgba(28,12,20,.55);border:1px solid var(--line);border-radius:26px;-webkit-backdrop-filter:blur(14px);backdrop-filter:blur(14px);box-shadow:0 18px 44px rgba(0,0,0,.45),inset 0 1px 0 rgba(255,255,255,.18);transition:transform .6s var(--ease),box-shadow .6s var(--ease),border-color .6s var(--ease)}
+@media(hover:hover) and (pointer:fine){.glass:hover{transform:translateY(-8px);border-color:rgba(255,179,71,.55);box-shadow:0 24px 54px rgba(0,0,0,.5),0 0 34px rgba(255,179,71,.22),inset 0 1px 0 rgba(255,255,255,.3)}}
+.sep{height:1px;background:linear-gradient(90deg,transparent,rgba(255,179,71,.6),rgba(255,90,54,.5),transparent);opacity:.6}
+
+.rv{opacity:0}
+.rv.in{opacity:1}
+.rv.d1{transition-delay:.12s}.rv.d2{transition-delay:.24s}.rv.d3{transition-delay:.36s}
+
+.btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:10px;min-height:52px;padding:14px 30px;border-radius:50px;font:700 1rem 'Montserrat',sans-serif;text-decoration:none;color:#fff;border:1px solid transparent;cursor:pointer;transition:transform .5s var(--ease),box-shadow .5s var(--ease),background .5s}
+.btn.p{background:linear-gradient(120deg,var(--cy),var(--bl) 55%,var(--pu));box-shadow:0 10px 32px rgba(255,179,71,.35)}
+@media(hover:hover) and (pointer:fine){.btn.p:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 16px 44px rgba(255,179,71,.6),0 0 40px rgba(214,40,90,.4)}}
+.btn.g{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.28);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px)}
+@media(hover:hover) and (pointer:fine){.btn.g:hover{transform:translateY(-4px);background:rgba(255,255,255,.12);box-shadow:0 0 26px rgba(255,255,255,.18)}}
+.btn.k{background:linear-gradient(120deg,var(--pk),var(--pu));box-shadow:0 10px 32px rgba(255,90,54,.4)}
+@media(hover:hover) and (pointer:fine){.btn.k:hover{transform:translateY(-4px) scale(1.04);box-shadow:0 16px 44px rgba(255,90,54,.65)}}
+
+/* HERO */
+.hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;justify-content:center;text-align:center;padding:120px 18px 80px;overflow:hidden}
+.hero-cross{position:absolute;left:50%;top:50%;font-size:min(80vmin,720px);color:rgba(255,179,71,.05);transform:translate(-50%,-50%);filter:drop-shadow(0 0 60px rgba(255,179,71,.35));pointer-events:none;animation:crossIn 3s var(--ease) .3s backwards,breathe 9s ease-in-out 3.3s infinite alternate;will-change:transform}
+@keyframes crossIn{from{opacity:0;transform:translate(-50%,-46%) scale(.85)}}
+@keyframes breathe{to{color:rgba(214,40,90,.09);transform:translate(-50%,-50%) scale(1.04)}}
+.hero-glow{position:absolute;left:50%;top:48%;width:90vmin;height:90vmin;transform:translate(-50%,-50%);background:radial-gradient(circle,rgba(255,179,71,.14),rgba(214,40,90,.1) 40%,transparent 68%);pointer-events:none;animation:fadeOnly 2.5s ease .2s backwards}
+@keyframes fadeOnly{from{opacity:0}}
+.waves{position:absolute;left:0;right:0;bottom:0;height:200px;pointer-events:none;opacity:.55}
+.waves svg{position:absolute;bottom:0;width:200%;height:100%;animation:wave 26s linear infinite;will-change:transform}
+.waves svg+svg{animation-duration:38s;animation-direction:reverse;opacity:.6}
+@keyframes wave{to{transform:translateX(-50%)}}
+.hero-in{position:relative;z-index:2;max-width:980px}
+.hero-kicker{display:inline-flex;align-items:center;gap:10px;padding:8px 20px;border-radius:40px;margin-bottom:26px;font-size:.82rem;font-weight:600;color:#ffe3b8;background:rgba(255,179,71,.08);border:1px solid rgba(255,179,71,.35);animation:up 1.4s var(--ease) 1.0s backwards}
+.hero h1{font-size:clamp(2.2rem,7.2vw,5.4rem);font-weight:900;line-height:1.08;letter-spacing:-.5px;text-shadow:0 0 50px rgba(255,179,71,.25);animation:up 1.6s var(--ease) 1.2s backwards}
+.hero h1 .ac{display:block;background:linear-gradient(110deg,var(--cy),#ffb347 40%,#d28bff 70%,var(--pk));background-size:200% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 22px rgba(214,40,90,.5));animation:sheen 10s ease-in-out infinite alternate}
+@keyframes sheen{to{background-position:100% 0}}
+.hero .city{display:block;margin-top:14px;font-size:clamp(1.2rem,3.4vw,2.2rem);font-weight:300;letter-spacing:.5em;color:var(--go);text-shadow:0 0 24px rgba(255,209,102,.5);animation:up 1.6s var(--ease) 1.5s backwards}
+.hero p.lead{max-width:680px;margin:28px auto 38px;font-size:clamp(1rem,2.1vw,1.25rem);font-weight:300;color:#f0dcc8;animation:up 1.6s var(--ease) 1.8s backwards}
+.hero .cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;animation:up 1.6s var(--ease) 2.1s backwards}
+@keyframes up{from{opacity:0;transform:translateY(38px)}}
+.scroll-hint{position:absolute;bottom:26px;left:50%;transform:translateX(-50%);z-index:2;color:var(--mu);font-size:1.2rem;animation:hint 2.6s ease-in-out infinite,fadeOnly 2s 3s backwards}
+@keyframes hint{50%{transform:translate(-50%,8px)}}
+
+/* ABOUT */
+.about{display:grid;grid-template-columns:1.15fr 1fr;gap:clamp(24px,4vw,50px);align-items:center}
+.about-text{padding:clamp(26px,4vw,48px)}
+.about-text h2{font-size:clamp(1.8rem,4vw,2.7rem);font-weight:900;line-height:1.2;margin-bottom:18px;background:linear-gradient(120deg,#fff,#ffe0a3 60%,#ffa890);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.about-text p{color:#ecd9c6;margin-bottom:14px}
+.pillars{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.pillar{padding:26px 18px;text-align:center;--c:var(--cy);animation:float 7s ease-in-out infinite}
+.pillar:nth-child(2){--c:var(--pk);animation-delay:-2s;margin-top:26px}.pillar:nth-child(3){--c:var(--go);animation-delay:-4s;margin-top:-26px}.pillar:nth-child(4){--c:#ff6b4a;animation-delay:-1s}
+@keyframes float{50%{translate:0 -10px}}
+@media(hover:hover) and (pointer:fine){.pillar:hover{border-color:var(--c);box-shadow:0 22px 50px rgba(0,0,0,.5),0 0 36px color-mix(in srgb,var(--c) 45%,transparent)}}
+.pillar i{font-size:2rem;color:var(--c);filter:drop-shadow(0 0 12px var(--c));margin-bottom:12px;transition:transform .6s var(--ease)}
+@media(hover:hover) and (pointer:fine){.pillar:hover i{transform:scale(1.2) rotate(-8deg)}}
+.pillar b{display:block;letter-spacing:3px;font-weight:800;font-size:.95rem}
+@media(max-width:860px){.about{grid-template-columns:1fr}.pillar,.pillar:nth-child(n){margin-top:0}}
+
+/* TIMERS + LIVE */
+.timers{display:grid;grid-template-columns:1fr 1fr;gap:22px}
+.timer{padding:clamp(22px,3vw,34px);text-align:center}
+.timer h3{font-size:1.15rem;font-weight:800;margin-bottom:4px}
+.timer p{color:var(--mu);font-size:.9rem;margin-bottom:20px}
+.timer p.now{color:#ff7a4a;font-weight:800;text-shadow:0 0 14px rgba(255,90,54,.7);animation:pulse 2s ease-in-out infinite alternate}
+@keyframes pulse{to{opacity:.65}}
+.cd{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.cd div{padding:14px 4px;border-radius:16px;background:rgba(0,0,0,.28);border:1px solid rgba(255,179,71,.25)}
+.cd b{display:block;font-size:clamp(1.5rem,3.4vw,2.2rem);font-weight:900;font-variant-numeric:tabular-nums;line-height:1.15;text-shadow:0 0 16px var(--cy)}
+.cd small{font-size:.66rem;letter-spacing:1.5px;text-transform:uppercase;color:#d8bfa5}
+.timers.act .cd b{color:#ff7a4a;text-shadow:0 0 16px var(--pk)}
+@media(max-width:820px){.timers{grid-template-columns:1fr}}
+.live-wrap{margin-top:22px}
+.live-wrap[hidden]{display:none}
+.live-idle[hidden]{display:none}
+.live-card{max-width:620px;margin:0 auto;padding:clamp(14px,3vw,22px);display:flex;flex-direction:column;gap:14px;border-color:rgba(255,45,100,.5);box-shadow:0 18px 44px rgba(0,0,0,.5),0 0 40px rgba(255,45,100,.25)}
+.live-card.enter{animation:up .9s var(--ease) both}
+.live-badge{align-self:flex-start;display:inline-flex;align-items:center;gap:10px;padding:6px 16px 6px 12px;border-radius:30px;background:rgba(255,45,100,.15);border:1px solid rgba(255,45,100,.6);font-weight:800;font-size:.8rem;letter-spacing:1.5px}
+.live-dot{position:relative;width:10px;height:10px;border-radius:50%;background:#ff2d4d;box-shadow:0 0 10px #ff2d4d}
+.live-dot::after{content:'';position:absolute;inset:0;border-radius:50%;background:#ff2d4d;animation:ldp 2s ease-out infinite}
+@keyframes ldp{0%{transform:scale(1);opacity:.7}100%{transform:scale(2.8);opacity:0}}
+.live-thumb{position:relative;display:block;aspect-ratio:16/9;border-radius:18px;overflow:hidden;background:#160a10;border:1px solid rgba(255,255,255,.15)}
+.live-thumb img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .9s var(--ease)}
+@media(hover:hover) and (pointer:fine){.live-card:hover .live-thumb img{transform:scale(1.06)}}
+.live-thumb::after{content:'';position:absolute;inset:0;background:linear-gradient(to top,rgba(10,4,9,.6),transparent 60%)}
+.live-play{position:absolute;z-index:2;top:50%;left:50%;width:68px;height:68px;margin:-34px 0 0 -34px;border-radius:50%;display:grid;place-items:center;padding-left:4px;font-size:1.4rem;background:rgba(22,9,16,.7);border:2px solid var(--pk);box-shadow:0 0 28px rgba(255,90,54,.65)}
+.live-title{font-size:1.2rem;font-weight:700;line-height:1.4;word-break:break-word}
+.live-hint{color:var(--mu);font-size:.88rem;margin-top:-6px}
+.live-idle{max-width:620px;margin:22px auto 0;padding:18px 24px;text-align:center;color:var(--mu);font-size:.95rem;display:flex;gap:12px;align-items:center;justify-content:center}
+.live-idle i{color:var(--pk)}
+
+/* SERVICES */
+.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:980px){.cards{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.cards{grid-template-columns:1fr}}
+.card{position:relative;padding:34px 28px;overflow:hidden;--c:var(--cy)}
+.card::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 0,color-mix(in srgb,var(--c) 28%,transparent),transparent 60%);opacity:.5;transition:opacity .6s;pointer-events:none}
+@media(hover:hover) and (pointer:fine){.card:hover::before{opacity:1}}
+@media(hover:hover) and (pointer:fine){.card:hover{border-color:var(--c);box-shadow:0 24px 54px rgba(0,0,0,.5),0 0 40px color-mix(in srgb,var(--c) 40%,transparent)}}
+.card .ic{position:relative;width:64px;height:64px;border-radius:20px;display:grid;place-items:center;font-size:1.6rem;color:var(--c);margin-bottom:22px;background:color-mix(in srgb,var(--c) 14%,transparent);border:1px solid color-mix(in srgb,var(--c) 45%,transparent);box-shadow:0 0 22px color-mix(in srgb,var(--c) 30%,transparent);transition:transform .6s var(--ease)}
+@media(hover:hover) and (pointer:fine){.card:hover .ic{transform:rotate(-8deg) scale(1.12)}}
+.card h3{position:relative;font-size:1.25rem;font-weight:800;margin-bottom:10px}
+.tm{position:relative;display:inline-block;padding:5px 15px;border-radius:30px;font-size:.82rem;font-weight:700;color:var(--c);background:color-mix(in srgb,var(--c) 12%,transparent);border:1px solid color-mix(in srgb,var(--c) 40%,transparent);margin-bottom:14px}
+.card p{position:relative;color:#ecd9c6;font-size:.95rem}
+.card:nth-child(3n+2){--c:#ffb347}.card:nth-child(3n){--c:#ff6a5a}
+.card .more{position:relative;display:inline-flex;gap:8px;align-items:center;margin-top:18px;font-weight:700;font-size:.9rem;color:var(--c);text-decoration:none}
+.card .more i{transition:transform .5s var(--ease)}@media(hover:hover) and (pointer:fine){.card .more:hover i{transform:translateX(6px)}}
+
+/* HISTORY */
+.tl{position:relative;max-width:960px;margin:0 auto}
+.tl::before{content:'';position:absolute;top:0;bottom:0;left:18px;width:3px;border-radius:3px;background:linear-gradient(var(--cy),var(--pu),var(--pk));box-shadow:0 0 22px var(--cy),0 0 50px rgba(214,40,90,.5)}
+.ti{position:relative;padding-left:56px;margin-bottom:38px}
+.ti .dot{position:absolute;left:7px;top:26px;width:25px;height:25px;border-radius:50%;background:var(--bg);border:3px solid var(--cy);box-shadow:0 0 0 6px rgba(255,179,71,.15),0 0 22px var(--cy);transition:border-color .8s,box-shadow .8s,transform .8s var(--ease)}
+.ti.in .dot{border-color:var(--pk);box-shadow:0 0 0 8px rgba(255,90,54,.15),0 0 26px var(--pk);transform:scale(1.1)}
+.ti .glass{padding:26px 28px}
+.ti h3{font-size:1.2rem;font-weight:800;color:var(--cy);margin-bottom:8px;text-shadow:0 0 14px rgba(255,179,71,.45)}
+.ti p{color:#ecd9c6;font-size:.95rem}
+
+@media(min-width:800px){
+.tl::before{left:50%;translate:-50% 0}
+.ti{width:50%;padding:0 48px 0 0}
+.ti:nth-child(even){margin-left:50%;padding:0 0 0 48px}
+.ti .dot{left:auto;right:-13px}.ti:nth-child(even) .dot{right:auto;left:-13px}
+}
+
+/* YOUTH */
+.youth{overflow:hidden}
+.youth::before{content:'';position:absolute;inset:0;background:radial-gradient(60% 50% at 15% 30%,rgba(255,90,54,.28),transparent 70%),radial-gradient(55% 55% at 90% 70%,rgba(214,40,90,.38),transparent 70%);pointer-events:none}
+.youth .sec-head h2{background:linear-gradient(120deg,#ff9ad0,#fff 40%,#c7a0ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;filter:drop-shadow(0 0 22px rgba(255,90,54,.45))}
+.youth .sec-head::after{background:linear-gradient(90deg,var(--pk),var(--pu));box-shadow:0 0 16px var(--pk)}
+.ycards{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+@media(max-width:900px){.ycards{grid-template-columns:1fr}}
+.yc{padding:34px 28px;border-color:rgba(255,90,54,.4);animation:float 8s ease-in-out infinite}
+.yc:nth-child(2){animation-delay:-3s}.yc:nth-child(3){animation-delay:-5s}
+@media(hover:hover) and (pointer:fine){.yc:hover{border-color:var(--pk);box-shadow:0 24px 54px rgba(0,0,0,.5),0 0 44px rgba(255,90,54,.45)}}
+.yc .ic{font-size:2rem;color:var(--pk);filter:drop-shadow(0 0 14px var(--pk));margin-bottom:16px}
+.yc:nth-child(2) .ic{color:#ff6a5a;filter:drop-shadow(0 0 14px #d6285a)}.yc:nth-child(3) .ic{color:var(--cy);filter:drop-shadow(0 0 14px var(--cy))}
+.yc h3{font-size:1.25rem;font-weight:800;margin-bottom:8px}
+.yc .tm{--c:var(--pk)}
+.yc p{color:#f3dccb;font-size:.95rem}
+.ycta{position:relative;text-align:center;margin-top:44px}
+
+/* DIRECTIONS */
+.dirs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+@media(max-width:980px){.dirs{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.dirs{grid-template-columns:1fr}}
+.dir{padding:28px 24px}
+.dir i.i{font-size:1.5rem;color:var(--cy);filter:drop-shadow(0 0 10px var(--cy));margin-bottom:14px;display:block}
+.dir h3{font-size:1.1rem;font-weight:800;margin-bottom:8px}
+.dir p{color:#ecd9c6;font-size:.9rem}
+.dir:nth-child(even) i.i{color:#ff6a5a;filter:drop-shadow(0 0 10px #d6285a)}
+
+/* SPIRITUAL */
+.spirit{max-width:900px;margin:0 auto;padding:clamp(26px,5vw,52px);position:relative;overflow:hidden;border-color:rgba(255,179,71,.4)}
+.spirit::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 80% 10%,rgba(255,179,71,.18),transparent 50%),radial-gradient(circle at 10% 100%,rgba(255,90,54,.18),transparent 50%);pointer-events:none}
+@media(hover:hover) and (pointer:fine){.spirit:hover{transform:none}}
+.sp-top{position:relative;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:20px}
+.badge{display:inline-flex;gap:10px;align-items:center;padding:8px 20px;border-radius:30px;font-weight:700;font-size:.9rem;color:var(--cy);background:rgba(255,179,71,.1);border:1px solid rgba(255,179,71,.4);box-shadow:0 0 16px rgba(255,179,71,.25)}
+.ib{width:44px;height:44px;border-radius:50%;display:inline-grid;place-items:center;background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.22);color:#fff;cursor:pointer;font-size:1rem;margin-left:8px;transition:transform .45s var(--ease),background .45s,box-shadow .45s}
+@media(hover:hover) and (pointer:fine){.ib:hover{transform:scale(1.1);background:rgba(255,179,71,.25);box-shadow:0 0 20px rgba(255,179,71,.5)}}
+.ib.fav.on{color:var(--pk);border-color:var(--pk);background:rgba(255,90,54,.2);box-shadow:0 0 20px var(--pk)}
+.tabs{position:relative;display:flex;gap:10px;margin-bottom:18px;flex-wrap:wrap}
+.tab{padding:9px 18px;border-radius:30px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.05);color:#ecd9c6;font:600 .85rem 'Montserrat',sans-serif;cursor:pointer;transition:background .4s,box-shadow .4s}
+.tab.on{background:linear-gradient(120deg,var(--cy),var(--pu));color:#fff;border-color:transparent;box-shadow:0 0 18px rgba(255,179,71,.5)}
+.sp-box{position:relative;min-height:170px;display:flex;flex-direction:column;justify-content:center;padding:clamp(20px,3vw,32px);border-radius:22px;background:rgba(0,0,0,.28);border:1px solid rgba(255,255,255,.1)}
+.sp-text{font-size:clamp(1.1rem,2.3vw,1.5rem);font-style:italic;font-weight:500;line-height:1.7;margin-bottom:14px;transition:opacity .45s var(--ease),transform .45s var(--ease),filter .45s}
+.sp-ref{font-weight:800;font-size:1.05rem;width:fit-content;background:linear-gradient(120deg,var(--cy),var(--pk));-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;transition:opacity .45s}
+.sp-box.fade .sp-text{opacity:0;transform:translateY(12px);filter:blur(4px)}.sp-box.fade .sp-ref{opacity:0}
+.sp-foot{position:relative;display:flex;justify-content:space-between;align-items:center;gap:14px;flex-wrap:wrap;margin-top:22px;padding-top:20px;border-top:1px solid rgba(255,255,255,.1);color:var(--mu);font-size:.9rem}
+.sp-foot i.f{color:var(--pk);margin-right:8px}
+.bless{max-width:760px;margin:60px auto 0;text-align:center}
+.btn-neon{position:relative;isolation:isolate;overflow:hidden;display:inline-flex;align-items:center;gap:12px;padding:18px 36px;border-radius:50px;font:800 clamp(.9rem,2.2vw,1.1rem) 'Montserrat',sans-serif;color:#fff;border:2px solid rgba(255,255,255,.8);cursor:pointer;box-shadow:0 0 26px rgba(255,179,71,.5),0 0 54px rgba(214,40,90,.4);transition:transform .5s var(--ease),box-shadow .5s;text-transform:uppercase;letter-spacing:.4px}
+.btn-neon::before{content:'';position:absolute;top:0;bottom:0;left:0;width:300%;z-index:-1;background:linear-gradient(90deg,#ffb347,#d6285a,#ff5a36,#ffb347,#d6285a,#ff5a36,#ffb347,#d6285a,#ff5a36,#ffb347);animation:slide 9s linear infinite;will-change:transform}
+@keyframes slide{to{transform:translateX(-33.333%)}}
+@media(hover:hover) and (pointer:fine){.btn-neon:hover{transform:translateY(-5px) scale(1.04);box-shadow:0 0 36px rgba(255,179,71,.9),0 0 80px rgba(255,90,54,.6)}}
+.bless-box{position:relative;min-height:110px;margin-top:30px}
+.bless-msg{position:absolute;inset:0 0 auto 0;padding:22px 28px;display:flex;align-items:center;justify-content:center;gap:12px;font-size:clamp(1.05rem,2vw,1.3rem);font-weight:600;opacity:0;visibility:hidden;transform:translateY(34px);transition:opacity .5s var(--ease),transform .5s var(--ease),visibility .5s}
+.bless-msg.on{opacity:1;visibility:visible;transform:none}
+.bless-msg.out{opacity:0;transform:translateY(-40px)}
+.bless-msg i{color:var(--pk);flex:none}
+@media(hover:hover) and (pointer:fine){.bless-msg:hover{transform:none}}
+
+/* CONTACTS */
+.contacts{display:grid;grid-template-columns:1fr 1fr;gap:24px}
+@media(max-width:820px){.contacts{grid-template-columns:1fr}}
+.ci{display:flex;flex-direction:column;gap:18px}
+.ci-i{display:flex;gap:16px;padding:24px}
+.ci-i>i{font-size:1.5rem;color:var(--cy);margin-top:4px;filter:drop-shadow(0 0 10px var(--cy))}
+.ci-i.ph>i{color:#00ff88;filter:drop-shadow(0 0 10px #00ff88)}
+.ci-i h4{font-weight:800;margin-bottom:4px}.ci-i p{color:#ecd9c6;font-size:.95rem}
+.ci-i a.tel{font-size:1.3rem;font-weight:800;text-decoration:none;color:#fff}
+.map{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;min-height:300px;padding:24px;text-decoration:none;background:radial-gradient(circle at 50% 35%,rgba(255,179,71,.16),transparent 60%),var(--glass),rgba(28,12,20,.55)}
+.map i{font-size:3.4rem;color:var(--cy);filter:drop-shadow(0 0 16px var(--cy));animation:float 4s ease-in-out infinite}
+
+/* FOOTER */
+footer{position:relative;margin-top:40px;padding:70px 18px 30px;background:linear-gradient(to bottom,rgba(10,4,9,.4),#080307 40%)}
+footer::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cy),var(--pu),var(--pk),transparent);box-shadow:0 0 24px var(--cy),0 0 60px rgba(214,40,90,.6)}
+.f-grid{max-width:1180px;margin:0 auto;display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px}
+@media(max-width:820px){.f-grid{grid-template-columns:1fr;text-align:center}.f-grid .socials{justify-content:center}}
+.f-logo{font-size:1.35rem;font-weight:900;line-height:1.3;margin-bottom:16px}
+.f-logo i{color:var(--cy);filter:drop-shadow(0 0 10px var(--cy));display:block;font-size:1.8rem;margin-bottom:10px}
+.f-grid h5{font-size:.95rem;font-weight:800;margin-bottom:14px;color:#fff}
+.f-grid ul{list-style:none}.f-grid li{margin-bottom:8px}
+.f-grid li a{color:var(--mu);text-decoration:none;font-size:.92rem;transition:color .3s,text-shadow .3s}
+@media(hover:hover) and (pointer:fine){.f-grid li a:hover{color:var(--cy);text-shadow:0 0 12px var(--cy)}}
+.f-end{max-width:1180px;margin:44px auto 0;padding-top:22px;border-top:1px solid rgba(255,255,255,.07);text-align:center;color:#8a7568;font-size:.85rem}
+
+/* TELEGRAM MODAL */
+.tgo{position:fixed;inset:0;z-index:99990;display:flex;align-items:center;justify-content:center;padding:16px;overflow-y:auto;background:radial-gradient(circle at 50% 25%,rgba(255,179,71,.14),transparent 55%),rgba(10,4,9,.82);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);opacity:0;visibility:hidden;transition:opacity .5s var(--ease),visibility .5s}
+.tgo.open{opacity:1;visibility:visible}
+.tgc{position:relative;width:100%;max-width:460px;margin:auto;padding:34px 18px 22px;border-radius:28px;background:linear-gradient(135deg,rgba(34,14,22,.9),rgba(42,14,20,.92));border:1px solid rgba(255,179,71,.45);box-shadow:0 0 40px rgba(255,179,71,.28),0 0 80px rgba(214,40,90,.25),0 24px 60px rgba(0,0,0,.6);transform:scale(.9) translateY(26px);opacity:0;transition:transform .6s var(--ease),opacity .6s var(--ease)}
+.tgo.open .tgc{transform:none;opacity:1}
+.tgx{position:absolute;top:12px;right:12px;width:42px;height:42px;border-radius:50%;display:grid;place-items:center;background:rgba(255,179,71,.1);border:1px solid rgba(255,179,71,.5);color:#fff;font-size:1.5rem;line-height:1;cursor:pointer;transition:transform .45s var(--ease),background .45s,box-shadow .45s}
+@media(hover:hover) and (pointer:fine){.tgx:hover{transform:rotate(90deg);background:var(--bl);box-shadow:0 0 22px var(--cy)}}
+.tgc h2{margin:0 46px 6px;text-align:center;font-size:clamp(1.3rem,5vw,1.6rem);font-weight:800;background:linear-gradient(120deg,var(--cy),#ffc98a,#ffa890);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.tgc>p{text-align:center;color:var(--mu);font-size:.9rem;margin-bottom:20px}
+.tgl{display:flex;flex-direction:column;gap:12px}
+.tgk{display:flex;align-items:center;gap:14px;padding:16px;min-height:78px;border-radius:18px;text-decoration:none;background:rgba(255,255,255,.05);border:1px solid rgba(255,179,71,.3);-webkit-tap-highlight-color:transparent;transition:transform .45s var(--ease),border-color .45s,box-shadow .45s,background .45s}
+.tgk:focus-visible{transform:translateY(-3px);border-color:var(--cy);background:rgba(255,179,71,.09);box-shadow:0 0 28px rgba(255,179,71,.4)}@media(hover:hover) and (pointer:fine){.tgk:hover{transform:translateY(-3px);border-color:var(--cy);background:rgba(255,179,71,.09);box-shadow:0 0 28px rgba(255,179,71,.4)}}
+.tgk:active{transform:scale(.97)}
+.tgk>i{font-size:2.5rem;color:#29b6f6;filter:drop-shadow(0 0 8px rgba(41,182,246,.8));flex:none;transition:transform .45s var(--ease)}
+@media(hover:hover) and (pointer:fine){.tgk:hover>i{transform:scale(1.1) rotate(-6deg)}}
+.tgk b{display:block;font-size:1.1rem;color:#fff}.tgk span{display:block;font-size:.85rem;line-height:1.4;color:#e0c9b0}
+
+.toast{position:fixed;left:50%;bottom:28px;z-index:100000;transform:translate(-50%,100px);padding:12px 26px;border-radius:50px;background:rgba(22,9,16,.92);border:1px solid var(--cy);box-shadow:0 10px 30px rgba(255,179,71,.35);font-weight:600;font-size:.92rem;opacity:0;pointer-events:none;transition:transform .5s var(--ease),opacity .5s}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+@media(max-width:600px){section{padding:64px 14px}.nav{padding:8px 10px 8px 16px}.logo span{font-size:.82rem}.hero .city{letter-spacing:.3em}.btn{width:100%}.hero .cta{width:100%;max-width:340px;margin:0 auto}.btn-neon{padding:16px 24px}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.rv{opacity:1;transform:none}.particles{display:none}}
+
+/* ===== AUTUMN 2026 LAYER: neon + autumn ===== */
+:root{--flow:linear-gradient(100deg,#ffb347,#ff7a2f,#d6285a,#ff5a36,#ff9a2f,#ffd166,#ffb347)}
+@keyframes flow{to{background-position:150% 0}}
+.b3{background:radial-gradient(circle,rgba(255,125,40,.42),transparent 65%)}
+.b4{width:50vmax;height:50vmax;left:32vw;top:-12vmax;background:radial-gradient(circle,rgba(255,190,80,.42),transparent 65%);animation:warm 30s ease-in-out infinite alternate}
+@keyframes warm{from{opacity:.08;transform:translate(0,0)}to{opacity:.6;transform:translate(-8vw,14vh) scale(1.1)}}
+.fog{position:absolute;left:-20%;width:140%;height:45vh;bottom:0;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(200,120,110,.12),transparent 70%);will-change:transform;animation:fogm 60s ease-in-out infinite alternate}
+.fog.f2{bottom:auto;top:38vh;background:radial-gradient(ellipse 50% 50% at 50% 50%,rgba(255,165,90,.09),transparent 70%);animation-duration:85s;animation-direction:alternate-reverse}
+@keyframes fogm{to{transform:translateX(12%)}}
+.xcross{position:absolute;left:50%;top:50%;width:46vmin;height:78vmin;transform:translate(-50%,-50%);filter:drop-shadow(0 0 14px rgba(255,170,60,.6));animation:xb 12s ease-in-out infinite alternate;
+background:linear-gradient(transparent,rgba(255,200,100,.5) 22%,rgba(255,160,60,.5) 78%,transparent) center/2px 100% no-repeat,linear-gradient(90deg,transparent,rgba(255,200,100,.5) 22%,rgba(255,200,100,.5) 78%,transparent) 0 30%/100% 2px no-repeat}
+@keyframes xb{from{opacity:.25}to{opacity:.75}}
+.hero::before{content:'';position:absolute;left:50%;bottom:-20%;width:130vmin;height:80vmin;transform:translateX(-50%);background:radial-gradient(ellipse,rgba(255,150,50,.3),rgba(255,90,54,.12) 45%,transparent 70%);pointer-events:none;animation:wb 14s ease-in-out infinite alternate}
+@keyframes wb{from{opacity:.25}to{opacity:1}}
+.hero-cross{color:rgba(255,190,90,.06);filter:drop-shadow(0 0 60px rgba(255,150,50,.4))}
+@keyframes breathe{to{color:rgba(214,40,90,.1);transform:translate(-50%,-50%) scale(1.04)}}
+.hero h1{text-shadow:0 0 50px rgba(255,170,70,.18)}
+.hero h1 .ac{background:linear-gradient(110deg,#fff,#ffd08a 25%,#ff9a6b 55%,#ffc86b 85%,#fff);background-size:200% 100%;-webkit-background-clip:text;background-clip:text;filter:drop-shadow(0 0 22px rgba(255,170,70,.35))}
+.sec-head h2{background:linear-gradient(120deg,#fff 15%,#ffe0a3 40%,#ff9a8a 65%,#ffd166);-webkit-background-clip:text;background-clip:text}
+.sec-head::after{background:var(--flow);background-size:300% 100%;animation:flow 20s linear infinite;box-shadow:0 0 14px rgba(255,160,60,.6)}
+.btn{overflow:hidden}
+.btn::after{content:'';position:absolute;top:0;bottom:0;left:-60%;width:40%;background:linear-gradient(105deg,transparent,rgba(255,255,255,.4),transparent);transform:skewX(-20deg);transition:left 1s var(--ease);pointer-events:none}
+@media(hover:hover) and (pointer:fine){.btn:hover::after{left:130%}}
+.btn.p{background:linear-gradient(110deg,#ffb347,#ff7a2f,#d6285a,#ff5a36,#ff9a2f,#ffb347);background-size:300% 100%;animation:flow 18s linear infinite}
+.btn.k{background:linear-gradient(110deg,#ff5a36,#d6285a,#ff7a2f,#ffd166,#ff5a36);background-size:300% 100%;animation:flow 18s linear infinite}
+@media(hover:hover) and (pointer:fine){.btn.p:hover{box-shadow:0 16px 44px rgba(255,179,71,.5),0 0 54px rgba(255,150,50,.4)}}
+.glass:not(.bless-msg){position:relative}
+.glass:not(.bless-msg)::after{content:'';position:absolute;inset:0;padding:1.5px;border-radius:inherit;background:var(--flow);background-size:300% 100%;animation:flow 24s linear infinite;-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);mask-composite:exclude;opacity:.5;transition:opacity .7s var(--ease);pointer-events:none}
+@media(hover:hover) and (pointer:fine){.glass:hover::after{opacity:1}}
+@media(hover:hover) and (pointer:fine){.glass:hover{box-shadow:0 24px 54px rgba(0,0,0,.5),0 0 34px rgba(255,179,71,.2),0 0 60px rgba(255,160,60,.16),inset 0 0 70px rgba(255,160,60,.07),inset 0 1px 0 rgba(255,255,255,.3)}}
+.card:nth-child(3n+2){--c:#ffb347}
+.sep{height:70px;filter:drop-shadow(0 0 6px rgba(255,170,60,.6));opacity:.9;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 70' preserveAspectRatio='none'%3E%3Cdefs%3E%3ClinearGradient id='g'%3E%3Cstop offset='0' stop-color='%2300f2fe' stop-opacity='0'/%3E%3Cstop offset='.3' stop-color='%238a2be2'/%3E%3Cstop offset='.6' stop-color='%23ff2d9b'/%3E%3Cstop offset='.8' stop-color='%23ffb347'/%3E%3Cstop offset='1' stop-color='%23ffd166' stop-opacity='0'/%3E%3C/linearGradient%3E%3C/defs%3E%3Cpath d='M0 35C240 5 480 65 720 35S1200 5 1440 35' fill='none' stroke='url(%23g)' stroke-width='2'/%3E%3Cpath d='M0 45C260 15 500 70 760 42S1200 12 1440 42' fill='none' stroke='url(%23g)' stroke-width='1' opacity='.5'/%3E%3C/svg%3E") center/100% 100% no-repeat}
+#services{background:radial-gradient(60% 45% at 85% 20%,rgba(255,140,50,.10),transparent 70%)}
+#history{background:radial-gradient(60% 45% at 10% 40%,rgba(255,170,70,.10),transparent 70%)}
+#directions{background:radial-gradient(60% 45% at 80% 70%,rgba(224,69,43,.09),transparent 70%)}
+#inspiration{background:radial-gradient(60% 50% at 50% 30%,rgba(255,190,80,.11),transparent 70%)}
+footer::before{background:linear-gradient(90deg,transparent,var(--cy),var(--pu),var(--pk),#ff9a2f,#ffd166,transparent)}
+.leaves{position:fixed;inset:0;z-index:5;pointer-events:none;overflow:hidden}
+.lf{position:absolute;top:-12vh;left:var(--x);width:var(--s);height:var(--s);opacity:.9;will-change:transform;animation:lfall var(--d) linear var(--dl) infinite,lsway var(--w) ease-in-out var(--dl) infinite alternate,lspin var(--r) ease-in-out var(--dl) infinite alternate}
+.lf svg{display:block;width:100%;height:100%;overflow:visible}
+.lf.g::before{content:'';position:absolute;inset:-70%;border-radius:50%;background:radial-gradient(circle,var(--gc),transparent 65%);opacity:.55}
+@keyframes lfall{from{translate:0 0}to{translate:var(--dr) 124vh}}
+@keyframes lsway{from{transform:translateX(calc(var(--sw)*-1))}to{transform:translateX(var(--sw))}}
+@keyframes lspin{from{rotate:-70deg;scale:1 1}to{rotate:80deg;scale:.6 1}}
+.low .glass{-webkit-backdrop-filter:none;backdrop-filter:none}
+.low .glass::after,.low .fog{animation:none}
+.low .fog.f2{display:none}
+@media(prefers-reduced-motion:reduce){.leaves,.fog{display:none}.btn.p,.btn.k,.glass::after{animation:none!important}}
+
+/* ===== PERFORMANCE LAYER ===== */
+.glass{-webkit-backdrop-filter:none;backdrop-filter:none;background:var(--glass),rgba(28,12,20,.76)}
+.map{background:radial-gradient(circle at 50% 35%,rgba(255,179,71,.16),transparent 60%),var(--glass),rgba(28,12,20,.76)}
+.nav{-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+@keyframes breathe{from{opacity:1}to{opacity:.55;transform:translate(-50%,-50%) scale(1.04)}}
+.hero h1 .ac{filter:none}
+section:not(#home):not(#about),footer{content-visibility:auto;contain-intrinsic-size:auto 800px}
+.off,.off *,.off::before,.off::after,.off *::before,.off *::after{animation-play-state:paused!important}
+.scrolling .glass::after,.scrolling .btn.p,.scrolling .btn.k,.scrolling .hero h1 .ac,.scrolling .sec-head::after{animation-play-state:paused}
+body.lock .bg *,body.lock .leaves *,body.lock .particles *,body.lock main *,body.lock main *::before,body.lock main *::after{animation-play-state:paused!important}
+.low .hero-cross,.low .xcross,.low .sep{filter:none}
+.low .hero h1 .ac,.low .btn.p,.low .btn.k{animation:none}
+.low .nav{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(15,6,12,.86)}
+.low .b4,.low .fog{display:none}
+
+/* ===== AUTUMN 3: toggles both ways, card leaves, original animations back ===== */
+.rv{translate:-90px 0;transition:opacity 1.2s var(--ease),translate 1.2s var(--ease),transform .6s var(--ease),box-shadow .6s var(--ease),border-color .6s var(--ease)}
+@media(max-width:767px){.rv{translate:-40px 0}}
+.rv.in{translate:none}
+.rv.d1{transition-delay:.12s,.12s,0s,0s,0s}.rv.d2{transition-delay:.24s,.24s,0s,0s,0s}.rv.d3{transition-delay:.36s,.36s,0s,0s,0s}
+.ti.rv{translate:-60px 0}
+@media(min-width:800px){.ti:nth-child(even).rv{translate:60px 0}}
+.ti.rv.in,.ti:nth-child(even).rv.in{translate:none}
+.bg::after{content:'';position:absolute;left:0;right:0;bottom:0;height:35vh;background:linear-gradient(to top,rgba(255,110,40,.15),transparent)}
+.sec-head::before{content:'🍂';display:block;font-size:1.7rem;line-height:1;margin-bottom:8px;transform-origin:50% 0;filter:drop-shadow(0 0 10px rgba(255,150,50,.7));animation:lsw 6s ease-in-out infinite alternate}
+.youth .sec-head::before{content:'🍁'}
+@keyframes lsw{from{transform:rotate(-14deg)}to{transform:rotate(14deg)}}
+.sec-head::after{animation:flow 20s linear infinite,expandBar 4s ease-in-out infinite alternate}
+@keyframes expandBar{from{transform:scaleX(.5)}to{transform:scaleX(1)}}
+.logo i{animation:pulseIc 3.5s ease-in-out infinite}
+@keyframes pulseIc{50%{transform:scale(1.2)}}
+.logo{transition:transform .6s var(--ease)}@media(hover:hover) and (pointer:fine){.logo:hover{transform:scale(1.04) translateX(4px)}}
+.ci-i.ph>i{animation:pulseIc 3s ease-in-out infinite alternate}
+/* leaves on cards */
+.cl{position:absolute;width:var(--ls);height:var(--ls);top:-8px;right:-6px;z-index:3;pointer-events:none;rotate:var(--lr);transition:transform .9s var(--ease)}
+.cl.bl{top:auto;right:auto;bottom:-8px;left:-6px}
+.cl::before{content:'';position:absolute;inset:-55%;border-radius:50%;background:radial-gradient(circle,var(--lc),transparent 62%);opacity:.3;transition:opacity .8s var(--ease)}
+.cl svg{position:absolute;inset:0;width:100%;height:100%}
+.cl svg+svg{opacity:0;animation:lcx 7s ease-in-out var(--ld) infinite alternate}
+@keyframes lcx{to{opacity:1}}
+.glass.is-on .cl,.ti.is-on .cl{transform:rotate(16deg) scale(1.25) translate(-3px,3px)}@media(hover:hover) and (pointer:fine){.glass:hover .cl{transform:rotate(16deg) scale(1.25) translate(-3px,3px)}}
+.glass.is-on .cl::before{opacity:.65}@media(hover:hover) and (pointer:fine){.glass:hover .cl::before{opacity:.65}}
+.scrolling .cl svg+svg{animation-play-state:paused}
+/* click toggles (two-way): click once = on, click again = back */
+.glass.is-on{transform:translateY(-12px) scale(1.03);border-color:var(--pk);box-shadow:0 24px 52px rgba(255,90,54,.38),0 0 36px rgba(255,150,50,.3),inset 0 1px 0 rgba(255,255,255,.4)}
+.glass.is-on::after{opacity:1}
+.card.is-on .ic{transform:rotate(15deg) scale(1.2);background:linear-gradient(135deg,var(--pk),var(--cy));color:#fff}
+.card.is-on .tm{background:var(--pk);color:#fff;border-color:var(--pk)}
+.yc .ic{display:inline-block;transition:transform .6s var(--ease)}.yc.is-on .ic{transform:rotate(-12deg) scale(1.2)}
+.pillar.is-on i{transform:scale(1.3) rotate(-12deg)}
+.dir i.i{transition:transform .6s var(--ease),color .6s}.dir.is-on i.i{transform:rotate(-15deg) scale(1.3);color:var(--pk)}
+.ti.in .dot{border-color:var(--cy);box-shadow:0 0 0 6px rgba(255,179,71,.15),0 0 22px var(--cy);transform:none}
+.ti.is-on .dot{border-color:var(--pk);box-shadow:0 0 0 10px rgba(255,90,54,.2),0 0 28px var(--pk);transform:scale(1.45) rotate(180deg)}
+.ti.is-on>.glass{transform:translateY(-10px) scale(1.02);border-color:var(--pk);box-shadow:0 22px 48px rgba(255,90,54,.38),0 0 30px rgba(255,150,50,.3),inset 0 1px 0 rgba(255,255,255,.4)}
+.cd div{cursor:pointer;transition:transform .6s var(--ease),border-color .6s,box-shadow .6s}
+.cd div.is-on{transform:translateY(-5px) scale(1.06);border-color:var(--pk);box-shadow:0 14px 34px rgba(255,90,54,.3),0 0 24px rgba(255,90,54,.4)}
+.cd div.is-on b{text-shadow:0 0 16px var(--pk),0 0 30px rgba(255,90,54,.7)}
+.ci-i>i{transition:transform .6s var(--ease),color .6s}
+.ci-i.is-on{transform:translateX(10px) scale(1.02)}.ci-i.is-on>i{transform:scale(1.3) rotate(-10deg);color:var(--pk)}
+.map.is-on{transform:translateY(-8px)}
+/* 3D rotating cross (from the first version), click toggles speed/colour */
+.rotating-cross-badge{position:fixed;bottom:clamp(20px,4vw,30px);right:clamp(20px,4vw,30px);z-index:900;width:clamp(60px,7vw,72px);height:clamp(60px,7vw,72px);border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,rgba(70,28,16,.92),rgba(22,9,16,.92));border:2px solid var(--cy);box-shadow:0 12px 30px rgba(255,150,50,.45),inset 0 2px 6px rgba(255,255,255,.3);cursor:pointer;perspective:1200px;transition:transform .6s var(--ease),box-shadow .6s var(--ease),border-color .6s var(--ease)}
+.rotating-cross-badge i{font-size:clamp(1.6rem,2.5vw,2rem);color:var(--cy);animation:spin3D 5s linear infinite;will-change:transform;text-shadow:0 1px 0 #b36b00,0 2px 0 #8a5200,0 3px 0 #5e3800,0 4px 0 #3a2200,0 5px 14px rgba(255,170,60,.8),0 0 24px rgba(255,170,60,.9)}
+@keyframes spin3D{0%{transform:rotateY(0) rotateX(10deg)}50%{transform:rotateY(180deg) rotateX(-10deg)}100%{transform:rotateY(360deg) rotateX(10deg)}}
+.rotating-cross-badge.is-on{transform:scale(1.15) translateY(-4px);border-color:var(--pk);box-shadow:0 16px 40px rgba(255,90,54,.65),inset 0 2px 8px rgba(255,255,255,.5)}
+.rotating-cross-badge.is-on i{color:var(--pk);animation-duration:2s;text-shadow:0 1px 0 #a02a10,0 2px 0 #801f0c,0 3px 0 #5e1608,0 4px 0 #3a0e05,0 5px 14px rgba(255,90,54,.9),0 0 28px rgba(255,90,54,1)}
+body.lock .rotating-cross-badge i{animation-play-state:paused}
+
+/* ===== PERFORMANCE 2 ===== */
+/* gradient borders without masks/pseudo-layers: static, painted once with the card */
+.glass::after,.glass:not(.bless-msg)::after{display:none!important}
+.glass{border:1.5px solid transparent;background:var(--glass) padding-box,linear-gradient(rgba(26,11,19,.94),rgba(26,11,19,.94)) padding-box,var(--flow) border-box;background-size:auto,auto,300% 100%;background-position:0 0,0 0,var(--bp,0%) 0;box-shadow:0 12px 28px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.14)}
+.glass:nth-child(2n){--bp:40%}.glass:nth-child(3n){--bp:80%}
+.map{background:radial-gradient(circle at 50% 35%,rgba(255,179,71,.16),transparent 60%) padding-box,var(--glass) padding-box,linear-gradient(rgba(26,11,19,.94),rgba(26,11,19,.94)) padding-box,var(--flow) border-box;background-size:auto,auto,auto,300% 100%;background-position:0 0,0 0,0 0,50% 0}
+/* no live backdrop blur anywhere (it re-blurs under moving leaves every frame) */
+.nav{-webkit-backdrop-filter:none;backdrop-filter:none;background:rgba(15,6,12,.72)}
+.nav.scrolled{background:rgba(12,5,10,.92)}
+.btn.g{-webkit-backdrop-filter:none;backdrop-filter:none}
+.tgo{-webkit-backdrop-filter:none;backdrop-filter:none;background:radial-gradient(circle at 50% 25%,rgba(255,179,71,.14),transparent 55%),rgba(10,4,9,.92)}
+/* repaint-heavy animations -> compositor-only (transform) */
+.btn.p,.btn.k{isolation:isolate;animation:none;background:#b4421a}
+.btn.p::before,.btn.k::before{content:'';position:absolute;top:0;bottom:0;left:0;width:300%;z-index:-1;pointer-events:none;will-change:transform;animation:slide 22s linear infinite}
+.btn.p::before{background:linear-gradient(90deg,#ffb347,#ff7a2f,#d6285a,#ff5a36,#ffb347,#ff7a2f,#d6285a,#ff5a36,#ffb347,#ff7a2f,#d6285a,#ff5a36,#ffb347)}
+.btn.k::before{background:linear-gradient(90deg,#ff5a36,#d6285a,#ff7a2f,#ffd166,#ff5a36,#d6285a,#ff7a2f,#ffd166,#ff5a36,#d6285a,#ff7a2f,#ffd166,#ff5a36)}
+.sec-head::after{animation:expandBar 4s ease-in-out infinite alternate}
+.hero h1 .ac{animation:none}
+.sec-head h2,.about-text h2{filter:none}
+.sep{filter:none}
+.hero-cross{font-size:min(62vmin,540px)}
+#hin{will-change:transform,opacity}.hero-glow{will-change:transform}
+@media(max-width:700px){.b3,.b4,.fog.f2,.waves svg+svg,.bg::after{display:none}.blob{opacity:.45}.hero-cross,.xcross{filter:none}}
+.low .cl svg+svg{animation:none}
+.low .lf.g::before,.low .waves svg+svg,.low .bg::after{display:none}
+.low .btn.p::before,.low .btn.k::before{animation:none}
+.ultra .pillar,.ultra .yc,.ultra .sec-head::before,.ultra .waves svg,.ultra .rotating-cross-badge i,.ultra .hero-cross{animation:none}
+.ultra .fog,.ultra .b2,.ultra .b3,.ultra .waves,.ultra .xcross,.ultra .cl::before,.ultra .lf::before,.ultra .particles{display:none}
+
+/* Telegram-значок на молодіжних картках */
+.tgb{position:relative;display:inline-grid;place-items:center;width:48px;height:48px;margin-top:18px;border-radius:50%;color:#fff;font-size:1.55rem;text-decoration:none;background:linear-gradient(135deg,#ffb347,#ff7a2f 55%,#d6285a);box-shadow:0 6px 18px rgba(255,122,47,.5),0 0 0 2px rgba(255,209,102,.35),inset 0 1px 0 rgba(255,255,255,.4);transition:transform .5s var(--ease),box-shadow .5s var(--ease);-webkit-tap-highlight-color:transparent}
+.tgb::after{content:'🍂';position:absolute;top:-10px;right:-8px;font-size:.95rem;line-height:1;pointer-events:none}
+.tgb:focus-visible{transform:translateY(-3px) rotate(-8deg) scale(1.08);box-shadow:0 10px 26px rgba(255,90,54,.7),0 0 0 3px rgba(255,209,102,.6)}@media(hover:hover) and (pointer:fine){.tgb:hover{transform:translateY(-3px) rotate(-8deg) scale(1.08);box-shadow:0 10px 26px rgba(255,90,54,.7),0 0 0 3px rgba(255,209,102,.6)}}
+.tgb:active{transform:scale(.94)}
+/* виправлення: іконки не «злітають» — обертання/збільшення навколо власного центру, а не центру блока */
+.dir i.i{display:block;width:fit-content;line-height:1;transform-origin:50% 50%}
+.pillar i{display:inline-block}
+
+/* Повернення «на місце»: після другого кліку (вимкнення) hover миші не тримає картку піднятою, поки курсор не піде */
+.rest.glass,.rest>.glass{transform:none!important;border-color:transparent!important;box-shadow:0 12px 28px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.14)!important}
+.rest .cl{transform:none!important}
+.rest .cl::before{opacity:.3!important}
+.rest.card::before{opacity:.5!important}
+.rest.card .ic,.rest.yc .ic,.rest.pillar i,.rest.dir i.i{transform:none!important}
+
+/* ===== TELEGRAM MODAL: autumn neon ===== */
+.tgo{background:radial-gradient(circle at 50% 22%,rgba(255,150,50,.22),transparent 55%),radial-gradient(circle at 50% 105%,rgba(214,40,90,.18),transparent 50%),rgba(10,4,9,.93)}
+.tgo:not(.open) *,.tgo:not(.open) *::before,.tgo:not(.open) *::after{animation-play-state:paused!important}
+.tgleaves{position:fixed;inset:0;overflow:hidden;pointer-events:none}
+.tgc{z-index:1;overflow:hidden;isolation:isolate;background:none;border:none;box-shadow:0 0 36px rgba(255,150,50,.38),0 0 84px rgba(214,40,90,.3),0 24px 60px rgba(0,0,0,.6)}
+/* neon ring that flows around all four sides: one big rotating conic layer (transform only), masked by the dark inner panel */
+.tgc::before{content:'';position:absolute;top:50%;left:50%;width:230%;aspect-ratio:1/1;z-index:-2;pointer-events:none;will-change:transform;transform:translate(-50%,-50%) rotate(0deg);animation:tgSpin 9s linear infinite;
+background:conic-gradient(rgba(255,179,71,.25) 0deg,rgba(255,122,47,.35) 90deg,#d6285a 170deg,#ff5a36 230deg,#ffb347 290deg,#ffe08a 330deg,rgba(255,179,71,.25) 360deg)}
+.tgc::after{content:'';position:absolute;inset:2px;border-radius:26px;z-index:-1;pointer-events:none;background:radial-gradient(circle at 50% 0,rgba(255,150,60,.2),transparent 55%),radial-gradient(circle at 100% 100%,rgba(214,40,90,.18),transparent 55%),linear-gradient(135deg,rgba(36,14,22,.98),rgba(18,8,14,.99))}
+@keyframes tgSpin{to{transform:translate(-50%,-50%) rotate(360deg)}}
+.tgc>*:not(.tgx){position:relative}
+.tgx{z-index:3}
+.tgtop{text-align:center;font-size:1.9rem;line-height:1;margin:0 0 4px;transform-origin:50% 0;filter:drop-shadow(0 0 10px rgba(255,150,50,.75));animation:lsw 6s ease-in-out infinite alternate}
+.tgk{border:1.5px solid transparent;background:linear-gradient(rgba(38,15,22,.93),rgba(38,15,22,.93)) padding-box,var(--flow) border-box;background-size:auto,300% 100%;background-position:0 0,var(--bp,0%) 0}
+.tgk:nth-child(2){--bp:40%}.tgk:nth-child(3){--bp:80%}
+.tgk>i{position:relative;display:grid;place-items:center;width:54px;height:54px;border-radius:50%;font-size:1.75rem;color:#fff;filter:none;background:linear-gradient(135deg,#ffb347,#ff7a2f 55%,#d6285a);box-shadow:0 5px 16px rgba(255,122,47,.55),0 0 0 2px rgba(255,209,102,.35),inset 0 1px 0 rgba(255,255,255,.4)}
+.tgk>i::after{content:'🍂';position:absolute;top:-8px;right:-7px;font-size:.9rem;line-height:1;pointer-events:none}
+.tgk:nth-child(2)>i{background:linear-gradient(135deg,#ffd166,#ff9a2f 55%,#ff5a36)}
+.tgk:nth-child(3)>i{background:linear-gradient(135deg,#ff7a2f,#d6285a 60%,#8f1d4a)}
+.tgk b{text-shadow:0 0 12px rgba(255,150,50,.4)}
+.tgk:focus-visible{border-color:transparent;background:linear-gradient(rgba(54,22,26,.94),rgba(54,22,26,.94)) padding-box,var(--flow) border-box;background-size:auto,300% 100%;background-position:0 0,var(--bp,0%) 0;box-shadow:0 0 28px rgba(255,150,50,.5)}
+@media(hover:hover) and (pointer:fine){.tgk:hover{border-color:transparent;background:linear-gradient(rgba(54,22,26,.94),rgba(54,22,26,.94)) padding-box,var(--flow) border-box;background-size:auto,300% 100%;background-position:0 0,var(--bp,0%) 0;box-shadow:0 0 28px rgba(255,150,50,.5)}}
+.tgc h2{filter:drop-shadow(0 0 12px rgba(255,150,50,.35))}
+
+/* ===== EXTRA: wind gust, embers on tap, warm cursor glow ===== */
+.wind-btn{position:fixed;left:clamp(16px,3vw,26px);bottom:clamp(20px,4vw,30px);z-index:900;width:54px;height:54px;border-radius:50%;display:grid;place-items:center;border:1.5px solid transparent;color:#ffd9a0;font-size:1.3rem;cursor:pointer;background:linear-gradient(rgba(34,14,22,.92),rgba(34,14,22,.92)) padding-box,var(--flow) border-box;background-size:auto,300% 100%;box-shadow:0 8px 22px rgba(255,122,47,.4);transition:transform .5s var(--ease),box-shadow .5s var(--ease),color .4s;-webkit-tap-highlight-color:transparent}
+.wind-btn i{transition:transform .9s var(--ease)}
+.wind-btn.blow i{transform:translateX(7px) rotate(-14deg)}
+.wind-btn:active{transform:scale(.92)}
+.wind-btn:disabled{cursor:default}
+@media(hover:hover) and (pointer:fine){.wind-btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(255,90,54,.6);color:#fff}}
+.leaves{transition:transform 1.4s var(--ease)}.leaves.gust{transform:translateX(6vw)}
+.wl{position:absolute;left:-8vw;top:var(--y);width:var(--s);height:var(--s);will-change:transform;animation:wfly var(--t) cubic-bezier(.3,.1,.5,1) forwards,wspin var(--t) linear forwards}
+.wl svg{display:block;width:100%;height:100%}
+@keyframes wfly{from{translate:0 0}to{translate:var(--wx) var(--wy)}}
+@keyframes wspin{to{rotate:var(--wr)}}
+.fx{position:fixed;inset:0;z-index:100001;pointer-events:none;overflow:hidden}
+.em{position:absolute;width:var(--es);height:var(--es);margin:calc(var(--es)/-2) 0 0 calc(var(--es)/-2);border-radius:50%;background:radial-gradient(circle,#fff6d0,var(--ec) 45%,transparent 72%);animation:emb var(--et) ease-out forwards}
+@keyframes emb{from{translate:0 0;opacity:1;scale:1}to{translate:var(--dx) var(--dy);opacity:0;scale:.2}}
+.glowcur{position:fixed;left:0;top:0;width:320px;height:320px;margin:-160px 0 0 -160px;border-radius:50%;pointer-events:none;z-index:4;opacity:0;transition:opacity .6s;will-change:transform;background:radial-gradient(circle,rgba(255,170,70,.15),rgba(255,90,54,.06) 45%,transparent 70%)}
+.low .glowcur,.ultra .glowcur,.ultra .wl{display:none}
+@media(prefers-reduced-motion:reduce){.wind-btn,.glowcur,.fx{display:none}}
+</style>
+</head>
+<body>
+<div class="bg"><div class="grid-lines"></div><div class="blob b1"></div><div class="blob b2"></div><div class="blob b3"></div><div class="blob b4"></div><div class="fog"></div><div class="fog f2"></div><div class="xcross"></div></div>
+<div class="leaves" id="leaves" aria-hidden="true"></div>
+<div class="glowcur" id="glowCur" aria-hidden="true"></div>
+<div class="fx" id="fx" aria-hidden="true"></div>
+<button type="button" class="wind-btn" id="windBtn" aria-label="Подув осіннього вітру" title="Подув осіннього вітру"><i class="fa-solid fa-wind"></i></button>
+<div class="particles" id="pts" aria-hidden="true"></div>
+
+<div class="rotating-cross-badge" title="Об'ємний 3D хрест"><i class="fa-solid fa-cross"></i></div>
+<nav class="nav" id="nav">
+  <a class="logo" href="#home"><i class="fa-solid fa-cross"></i><span>НОВЕ ПОКОЛІННЯ</span></a>
+  <ul class="links">
+    <li><a href="#home">Головна</a></li><li><a href="#about">Про церкву</a></li><li><a href="#history">Історія</a></li><li><a href="#services">Служіння</a></li><li><a href="#youth">Молодь</a></li><li><a href="#contacts">Контакти</a></li>
+  </ul>
+  <div class="socials">
+    <a class="soc fb" href="https://www.facebook.com/ngdnipro" target="_blank" rel="noopener" title="Facebook" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+    <a class="soc tg" href="https://t.me/rspwn_events" target="_blank" rel="noopener noreferrer" title="Telegram" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+    <a class="soc ig" href="https://www.instagram.com/ngdnipro/" target="_blank" rel="noopener" title="Instagram" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a class="soc yt" href="https://youtube.com/@dngvideochannel?si=CuM-oSQEuHay1iKq" target="_blank" rel="noopener" title="YouTube" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+  </div>
+  <button class="burger" id="burger" aria-label="Меню" aria-expanded="false"><i class="fa-solid fa-bars"></i></button>
+</nav>
+<div class="mmenu" id="mmenu">
+  <a class="ml" href="#home">Головна</a><a class="ml" href="#about">Про церкву</a><a class="ml" href="#history">Історія</a><a class="ml" href="#services">Служіння</a><a class="ml" href="#youth">Молодь</a><a class="ml" href="#contacts">Контакти</a>
+  <div class="socials">
+    <a class="soc fb" href="https://www.facebook.com/ngdnipro" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+    <a class="soc tg" href="https://t.me/rspwn_events" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+    <a class="soc ig" href="https://www.instagram.com/ngdnipro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+    <a class="soc yt" href="https://youtube.com/@dngvideochannel?si=CuM-oSQEuHay1iKq" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+  </div>
+</div>
+
+<main>
+<section class="hero" id="home">
+  <i class="fa-solid fa-cross hero-cross" id="hcross" aria-hidden="true"></i>
+  <div class="hero-glow" id="hglow"></div>
+  <div class="waves" aria-hidden="true">
+    <svg viewBox="0 0 1440 200" preserveAspectRatio="none"><path d="M0 100C240 40 480 160 720 100S1200 40 1440 100V200H0Z" fill="none" stroke="rgba(255,179,71,.6)" stroke-width="1.5"/></svg>
+    <svg viewBox="0 0 1440 200" preserveAspectRatio="none"><path d="M0 120C240 170 480 70 720 120S1200 170 1440 120V200H0Z" fill="none" stroke="rgba(255,90,54,.5)" stroke-width="1.5"/></svg>
+  </div>
+  <div class="hero-in" id="hin">
+    <div class="hero-kicker"><i class="fa-solid fa-circle" style="font-size:.5rem;color:var(--pk)"></i> Міжконфесійний рух повного Євангелія</div>
+    <h1>Християнська Церква<span class="ac">«Нове Покоління»</span><span class="city">Дніпро</span></h1>
+    <p class="lead">Сучасний міжконфесійний християнський рух повного Євангелія. Місце сили, безумовної любові, духовного зростання та реальних змін.</p>
+    <div class="cta">
+      <a href="#services" class="btn p"><span>Розклад служінь</span><i class="fa-solid fa-calendar-days"></i></a>
+      <a href="#about" class="btn g"><span>Дізнатися більше</span><i class="fa-solid fa-chevron-down"></i></a>
+    </div>
+  </div>
+  <i class="fa-solid fa-chevron-down scroll-hint" aria-hidden="true"></i>
+</section>
+
+<div class="sep"></div>
+<section id="about">
+  <div class="wrap about">
+    <div class="glass about-text rv">
+      <h2>Місце, де змінюються життя</h2>
+      <p>Сучасний міжконфесійний християнський рух повного Євангелія. Місце сили, безумовної любові, духовного зростання та реальних змін.</p>
+      <p>Громада продовжує активну духовну, соціальну та адаптаційну роботу, проводячи богослужіння, молитовні зустрічі та молодіжні проекти.</p>
+      <a href="#services" class="btn p" style="margin-top:10px"><span>Приєднатися</span><i class="fa-solid fa-arrow-right"></i></a>
+    </div>
+    <div class="pillars rv d1">
+      <div class="glass pillar"><i class="fa-solid fa-book-bible"></i><b>ВІРА</b></div>
+      <div class="glass pillar"><i class="fa-solid fa-heart"></i><b>ЛЮБОВ</b></div>
+      <div class="glass pillar"><i class="fa-solid fa-anchor"></i><b>НАДІЯ</b></div>
+      <div class="glass pillar"><i class="fa-solid fa-wand-magic-sparkles"></i><b>ЗМІНИ</b></div>
+    </div>
+  </div>
+</section>
+
+<section id="live" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sec-head rv"><h2>Найближчі служіння</h2><p>Час за Києвом (GMT+3)</p></div>
+    <div class="timers rv d1" id="timers">
+      <div class="glass timer" data-i="0">
+        <h3 class="tt"></h3><p class="td"></p>
+        <div class="cd"><div><b>00</b><small>Днів</small></div><div><b>00</b><small>Годин</small></div><div><b>00</b><small>Хвилин</small></div><div><b>00</b><small>Секунд</small></div></div>
+      </div>
+      <div class="glass timer" data-i="1">
+        <h3 class="tt"></h3><p class="td"></p>
+        <div class="cd"><div><b>00</b><small>Днів</small></div><div><b>00</b><small>Годин</small></div><div><b>00</b><small>Хвилин</small></div><div><b>00</b><small>Секунд</small></div></div>
+      </div>
+    </div>
+
+    <!-- СЛОТ 1: під таймером головного богослужіння; СЛОТ 2: під молитовним -->
+    <div class="live-wrap" id="liveSection1" data-slot="1" hidden>
+      <article class="glass live-card" aria-live="polite">
+        <div class="live-badge"><span class="live-dot" aria-hidden="true"></span><span>🔴 ПРЯМИЙ ЕФІР</span></div>
+        <a class="live-thumb" data-role="thumbLink" href="#" target="_blank" rel="noopener noreferrer" aria-label="Відкрити трансляцію на YouTube"><img data-role="thumbImg" src="" alt="" loading="lazy"><span class="live-play" aria-hidden="true"><i class="fa-solid fa-play"></i></span></a>
+        <div class="live-title" data-role="title">Прямий ефір Нового Покоління</div>
+        <div class="live-hint">Дивитися трансляцію на YouTube</div>
+        <a class="btn k" data-role="btn" href="#" target="_blank" rel="noopener noreferrer"><span>Дивитися трансляцію</span><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </article>
+    </div>
+    <div class="live-wrap" id="liveSection2" data-slot="2" hidden>
+      <article class="glass live-card" aria-live="polite">
+        <div class="live-badge"><span class="live-dot" aria-hidden="true"></span><span>🔴 ПРЯМИЙ ЕФІР</span></div>
+        <a class="live-thumb" data-role="thumbLink" href="#" target="_blank" rel="noopener noreferrer" aria-label="Відкрити трансляцію на YouTube"><img data-role="thumbImg" src="" alt="" loading="lazy"><span class="live-play" aria-hidden="true"><i class="fa-solid fa-play"></i></span></a>
+        <div class="live-title" data-role="title">Прямий ефір Нового Покоління</div>
+        <div class="live-hint">Дивитися трансляцію на YouTube</div>
+        <a class="btn k" data-role="btn" href="#" target="_blank" rel="noopener noreferrer"><span>Дивитися трансляцію</span><i class="fa-solid fa-arrow-up-right-from-square"></i></a>
+      </article>
+    </div>
+    <div class="glass live-idle" id="liveIdle"><i class="fa-brands fa-youtube"></i><span>Зараз ефіру немає. Ми повідомимо тут, щойно розпочнеться трансляція.</span></div>
+  </div>
+</section>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head rv"><h2>Служіння</h2><p>Оберіть служіння до душі та приєднуйтесь до нас</p></div>
+    <div class="cards">
+      <div class="glass card rv"><div class="ic"><i class="fa-solid fa-church"></i></div><span class="tm">Неділя • 10:00</span><h3>Недільне Богослужіння</h3><p>Центральне щотижневе зібрання всієї церкви: потужне прославлення Бога, молитва та практична проповідь слова.</p></div>
+      <div class="glass card rv d1"><div class="ic"><i class="fa-solid fa-hands-praying"></i></div><span class="tm">Середа • 18:30</span><h3>Молитовне служіння</h3><p>Спільна молитва за місто, Україну, сім'ї, зцілення та потреби віруючих. Час занурення у Божу присутність.</p></div>
+      <div class="glass card rv d2"><div class="ic"><i class="fa-solid fa-users-rectangle"></i></div><span class="tm">Четвер • 18:30</span><h3>Домашні зібрання</h3><p>Затишні зустрічі в різних районах Дніпра для спілкування, вивчення Біблії та взаємної підтримки у невеликому колі.</p></div>
+      <div class="glass card rv"><div class="ic"><i class="fa-solid fa-bolt"></i></div><span class="tm">Субота / за розкладом</span><h3>Молодіжні зібрання</h3><p>Динамічний простір для молоді: актуальні теми, творчість, нові знайомства, сучасна музика та спілкування.</p><a class="tgb" href="https://t.me/rspwn_events" target="_blank" rel="noopener noreferrer" aria-label="Telegram: Respawn Events" title="Telegram: Respawn Events"><i class="fa-brands fa-telegram"></i></a></div>
+      <div class="glass card rv d1"><div class="ic"><i class="fa-solid fa-child-reaching"></i></div><span class="tm">Субота / за розкладом</span><h3>Підліткові зібрання</h3><p>Спеціальні інтерактивні програми, які допомагають підліткам знаходити відповіді на життєві питання через призму цінностей.</p><a class="tgb" href="https://t.me/rspwn_events" target="_blank" rel="noopener noreferrer" aria-label="Telegram: Respawn Events" title="Telegram: Respawn Events"><i class="fa-brands fa-telegram"></i></a></div>
+      <div class="glass card rv d2"><div class="ic"><i class="fa-solid fa-comments"></i></div><span class="tm">Субота / за розкладом</span><h3>Speaking Club</h3><p>Розмовний англійський клуб для практики мовних навичок у дружній та відкритій атмосфері.</p><a class="tgb" href="https://t.me/rspwn_events" target="_blank" rel="noopener noreferrer" aria-label="Telegram: Respawn Events" title="Telegram: Respawn Events"><i class="fa-brands fa-telegram"></i></a></div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+<section id="history">
+  <div class="wrap">
+    <div class="sec-head rv"><h2>Історія церкви</h2><p>Як розвивався рух «Нове Покоління» у Дніпрі</p></div>
+    <div class="tl">
+      <div class="ti rv"><i class="dot"></i><div class="glass"><h3>Заснування руху</h3><p>Міжнародний християнський рух «Нове Покоління» виник наприкінці 1980-х — на початку 1990-х років. У наступні роки церкви та громади руху з'явилися в різних країнах Східної Європи, у тому числі в Україні.</p></div></div>
+      <div class="ti rv"><i class="dot"></i><div class="glass"><h3>Поява у Дніпрі</h3><p>У Дніпрі громада почала формуватися в середині 90-х років силами місіонерів та активних віруючих, проводячи перші малі групи та євангелізації.</p></div></div>
+      <div class="ti rv"><i class="dot"></i><div class="glass"><h3>Масштабні служіння та зростання</h3><p>Церква зросла у велике об'єднання, яке збирало сотні парафіян на богослужіння у концертних залах та палацах культури міста.</p></div></div>
+      <div class="ti rv"><i class="dot"></i><div class="glass"><h3>Сучасний етап</h3><p>Сьогодні громада продовжує активну духовну, соціальну та адаптаційну роботу, проводячи богослужіння, молитовні зустрічі та молодіжні проекти.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="youth" class="youth">
+  <div class="wrap">
+    <div class="sec-head rv"><h2>Молодь</h2><p>Динамічний простір для молоді та підлітків</p></div>
+    <div class="ycards">
+      <div class="glass yc rv"><div class="ic"><i class="fa-solid fa-bolt"></i></div><span class="tm">Субота / за розкладом</span><h3>Молодіжні зібрання</h3><p>Актуальні теми, творчість, нові знайомства, сучасна музика та спілкування.</p><a class="tgb" href="https://t.me/rspwn_events" target="_blank" rel="noopener noreferrer" aria-label="Telegram: Respawn Events" title="Telegram: Respawn Events"><i class="fa-brands fa-telegram"></i></a></div>
+      <div class="glass yc rv d1"><div class="ic"><i class="fa-solid fa-child-reaching"></i></div><span class="tm">Субота / за розкладом</span><h3>Підліткові зібрання</h3><p>Інтерактивні програми, які допомагають підліткам знаходити відповіді на життєві питання.</p><a class="tgb" href="https://t.me/rspwn_events" target="_blank" rel="noopener noreferrer" aria-label="Telegram: Respawn Events" title="Telegram: Respawn Events"><i class="fa-brands fa-telegram"></i></a></div>
+      <div class="glass yc rv d2"><div class="ic"><i class="fa-solid fa-comments"></i></div><span class="tm">Субота / за розкладом</span><h3>Speaking Club</h3><p>Розмовний англійський клуб для практики мовних навичок у дружній та відкритій атмосфері.</p><a class="tgb" href="https://t.me/rspwn_events" target="_blank" rel="noopener noreferrer" aria-label="Telegram: Respawn Events" title="Telegram: Respawn Events"><i class="fa-brands fa-telegram"></i></a></div>
+    </div>
+    <div class="ycta rv"><button type="button" class="btn k" data-tg><i class="fa-brands fa-telegram"></i><span>Новини для молоді в Telegram</span></button></div>
+  </div>
+</section>
+
+<section id="directions">
+  <div class="wrap">
+    <div class="sec-head rv"><h2>Наші служіння та напрямки</h2><p>Дізнайтеся більше про те, чим живе наша церква</p></div>
+    <div class="dirs">
+      <div class="glass dir rv"><i class="i fa-solid fa-microphone"></i><h3>Група прославлення</h3><p>Це музичне служіння церкви, яке допомагає людям прославляти Бога через спів, музику та поклоніння.</p></div>
+      <div class="glass dir rv d1"><i class="i fa-solid fa-video"></i><h3>Оператори</h3><p>Оператори займаються відеозйомкою богослужінь, конференцій та інших церковних подій, а також допомагають із трансляціями та записами.</p></div>
+      <div class="glass dir rv d2"><i class="i fa-solid fa-lightbulb"></i><h3>Світлооператори</h3><p>Світлооператори відповідають за освітлення, кольори та світлові ефекти під час богослужінь і церковних заходів.</p></div>
+      <div class="glass dir rv"><i class="i fa-solid fa-desktop"></i><h3>Медіа-екран</h3><p>У цьому служінні люди відповідають за візуалізацію церковного екрану під час богослужіння: перемикають слайди, виводять на екран тексти, інформацію про пожертви, оголошення, біблійні вірші та інший необхідний контент. Також медіа допомагає зробити богослужіння зрозумілішим і візуально організованим для людей у залі.</p></div>
+      <div class="glass dir rv d1"><i class="i fa-solid fa-clipboard-user"></i><h3>Група порядку</h3><p>Група порядку допомагає підтримувати порядок, організованість, безпеку та комфорт під час богослужінь і церковних заходів.</p></div>
+      <div class="glass dir rv d2"><i class="i fa-solid fa-book-bible"></i><h3>Проповідники</h3><p>Проповідники проголошують і пояснюють Боже Слово, навчають біблійних істин та допомагають церкві духовно зростати.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="inspiration">
+  <div class="wrap">
+    <div class="glass spirit rv" id="spirit">
+      <div class="sp-top">
+        <div class="badge"><i class="fa-solid fa-quote-left"></i><span>Духовне натхнення</span></div>
+        <div><button class="ib fav" id="favBtn" title="Додати в обране" aria-label="Додати в обране"><i class="fa-regular fa-heart" id="favIcon"></i></button><button class="ib" id="copyBtn" title="Копіювати" aria-label="Копіювати цитату"><i class="fa-regular fa-copy"></i></button></div>
+      </div>
+      <div class="tabs">
+        <button class="tab on" id="tabAll"><i class="fa-solid fa-book-open"></i> Усі вірші</button>
+        <button class="tab" id="tabFavs"><i class="fa-solid fa-heart"></i> Обрані (<span id="favCount">0</span>)</button>
+      </div>
+      <div class="sp-box" id="spBox">
+        <p class="sp-text" id="qText">«Бо Я знаю ті думки, які думаю про вас, говорить Господь, думки про спокій, а не про зло, щоб дати вам майбутнє та надію.»</p>
+        <span class="sp-ref" id="qRef">Ієремія 29:11</span>
+      </div>
+      <div class="sp-foot"><span><i class="fa-solid fa-fire-flame-curved f"></i>Слово сили та віри на кожен день</span><button class="btn p" id="nextBtn" style="min-height:46px;padding:10px 24px"><i class="fa-solid fa-rotate-right"></i><span>Інша цитата</span></button></div>
+    </div>
+
+    <div class="bless rv">
+      <button type="button" class="btn-neon" id="blessBtn"><i class="fa-solid fa-wand-magic-sparkles"></i><span>натисни для посмішки та благословіння🫶</span></button>
+      <div class="bless-box"><div class="glass bless-msg on" id="blessCard"><i class="fa-solid fa-heart"></i><span id="blessText">Нехай Господь благословить тебе і збереже тебе!</span></div></div>
+    </div>
+  </div>
+</section>
+
+<div class="sep"></div>
+<section id="contacts">
+  <div class="wrap">
+    <div class="sec-head rv"><h2>Контакти</h2></div>
+    <div class="contacts">
+      <div class="ci rv">
+        <div class="glass ci-i"><i class="fa-solid fa-location-dot"></i><div><h4>Адреса у Дніпрі</h4><p>вул. Старозаводська, 19а, будова 2<br>(Точні локації залів та домашніх груп уточнюйте за телефоном)</p></div></div>
+        <div class="glass ci-i ph"><i class="fa-solid fa-phone"></i><div><h4>Телефон</h4><a class="tel" href="tel:+380567474737">056 747 4737</a></div></div>
+      </div>
+      <a href="https://maps.google.com/?q=вул.+Старозаводська+19а,+будова+2,+Дніпро" target="_blank" rel="noopener" class="glass map rv d1"><i class="fa-solid fa-map-location-dot"></i><p><strong>вул. Старозаводська, 19а, будова 2</strong><br><small style="color:var(--cy)">Натисніть для відкриття на карті</small></p></a>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="f-grid">
+    <div>
+      <div class="f-logo"><i class="fa-solid fa-cross"></i>Християнська Церква<br>«Нове Покоління»</div>
+      <div class="socials">
+        <a class="soc fb" href="https://www.facebook.com/ngdnipro" target="_blank" rel="noopener" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+        <a class="soc tg" href="https://t.me/rspwn_events" target="_blank" rel="noopener noreferrer" aria-label="Telegram"><i class="fa-brands fa-telegram"></i></a>
+        <a class="soc ig" href="https://www.instagram.com/ngdnipro/" target="_blank" rel="noopener" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+        <a class="soc yt" href="https://youtube.com/@dngvideochannel?si=CuM-oSQEuHay1iKq" target="_blank" rel="noopener" aria-label="YouTube"><i class="fa-brands fa-youtube"></i></a>
+      </div>
+    </div>
+    <div><h5>Навігація</h5><ul><li><a href="#home">Головна</a></li><li><a href="#about">Про церкву</a></li><li><a href="#history">Історія</a></li><li><a href="#services">Служіння</a></li><li><a href="#youth">Молодь</a></li><li><a href="#contacts">Контакти</a></li></ul></div>
+    <div><h5>Контакти</h5><ul><li><a href="https://maps.google.com/?q=вул.+Старозаводська+19а,+будова+2,+Дніпро" target="_blank" rel="noopener">вул. Старозаводська, 19а, будова 2</a></li><li><a href="tel:+380567474737">056 747 4737</a></li></ul></div>
+  </div>
+  <div class="f-end">© <span id="year"></span> Християнська Церква-«Нове Покоління» м. Дніпро. Всі права захищені.<br>Бог любить тебе ✝</div>
+</footer>
+
+<div class="tgo" id="tgo" aria-hidden="true">
+  <div class="tgleaves" id="tgLeaves" aria-hidden="true"></div>
+  <div class="tgc" role="dialog" aria-modal="true" aria-labelledby="tgT">
+    <button type="button" class="tgx" id="tgx" aria-label="Закрити">&times;</button>
+    <div class="tgtop" aria-hidden="true">🍂</div>
+    <h2 id="tgT">Обери Telegram-канал</h2>
+    <p>Обери канал, який хочеш відкрити</p>
+    <div class="tgl">
+      <a class="tgk" href="https://t.me/rspwn_events" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i><div><b>Respawn Events</b><span>Новини, зустрічі та події для молоді й підлітків.</span></div></a>
+      <a class="tgk" href="https://t.me/dng_channel" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i><div><b>Офіційний канал</b><span>трансляції, щоденні вірші, та інше.</span></div></a>
+      <a class="tgk" href="https://t.me/DNG_Worship" target="_blank" rel="noopener noreferrer"><i class="fa-brands fa-telegram"></i><div><b>DNG Worship</b><span>пісні у нашому виконанні</span></div></a>
+    </div>
+  </div>
+</div>
+<div class="toast" id="toast"><i class="fa-solid fa-circle-check" style="color:#00ff88"></i> <span id="toastText"></span></div>
+
+<script>
+(function(){
+var $=function(i){return document.getElementById(i)};
+$('year').textContent=new Date().getFullYear();
+
+/* Autumn leaves: 1 element per leaf, compositor-only animations */
+(function(){var L=$('leaves');if(!L||matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+var w=innerWidth,low=(navigator.hardwareConcurrency||8)<=4||(navigator.deviceMemory||8)<=4;
+if(low)document.body.classList.add('low');
+var m=w<700,n=Math.round((m?6:w<1100?9:14)*(low?.6:1)),r=Math.random,
+C=['#ffd166','#ffb347','#ff9a2f','#ff7a2f','#e0452b','#b3261e','#ffc247'],
+S=['<path d="M12 1C5 6 3 14 12 23C21 14 19 6 12 1Z"/>','<polygon points="12,1 14.5,7 19,4.5 17.5,10.5 23,10 19,14.5 22,18 15.5,17.5 12,23 8.5,17.5 2,18 5,14.5 1,10 6.5,10.5 5,4.5 9.5,7"/>','<path d="M12 2C21 4 22 14 12 22 2 14 3 4 12 2Z"/>'],
+V='<path d="M12 5V23" stroke="rgba(60,10,0,.3)" stroke-width="1" fill="none"/>',f=document.createDocumentFragment();
+for(var i=0;i<n;i++){var c=C[Math.floor(r()*C.length)],d=document.createElement('div'),dur=16+r()*18,sz=(m?13:15)+r()*(m?15:25);
+d.className='lf'+(i%4===0?' g':'');
+d.style.cssText='--x:'+(r()*100).toFixed(1)+'%;--s:'+sz.toFixed(0)+'px;--d:'+dur.toFixed(1)+'s;--dl:'+(r()*12).toFixed(1)+'s;--w:'+(3+r()*4).toFixed(1)+'s;--sw:'+(20+r()*50).toFixed(0)+'px;--dr:'+((r()-.5)*240).toFixed(0)+'px;--r:'+(2.5+r()*3).toFixed(1)+'s;--gc:'+c+'99';
+d.innerHTML='<svg viewBox="0 0 24 24" fill="'+c+'">'+S[Math.floor(r()*3)]+V+'</svg>';
+f.appendChild(d)}
+L.appendChild(f)})();
+
+/* Particles */
+var P=$('pts');var PN=innerWidth<700?4:innerWidth<1100?7:10;for(var i=0;i<PN;i++){var d=document.createElement('div'),s=3+Math.random()*7;d.className='pt';d.style.cssText='width:'+s+'px;height:'+s+'px;left:'+Math.random()*100+'%;animation-duration:'+(18+Math.random()*22)+'s;animation-delay:-'+Math.random()*30+'s';P.appendChild(d)}
+
+/* Nav */
+var nav=$('nav'),mm=$('mmenu'),bg=$('burger');
+
+function menu(o){mm.classList.toggle('open',o);bg.setAttribute('aria-expanded',o);bg.firstChild.className=o?'fa-solid fa-xmark':'fa-solid fa-bars';document.body.classList.toggle('lock',o)}
+bg.addEventListener('click',function(){menu(!mm.classList.contains('open'))});
+mm.querySelectorAll('a.ml').forEach(function(a){a.addEventListener('click',function(){menu(false)})});
+var secs=['home','about','history','services','youth','contacts'].map($),links=document.querySelectorAll('.links a');
+var spy=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)links.forEach(function(a){a.classList.toggle('on',a.getAttribute('href')==='#'+e.target.id)})})},{rootMargin:'-45% 0px -50% 0px'});
+secs.forEach(function(s){s&&spy.observe(s)});
+
+/* Reveal */
+var rv=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('in',e.isIntersecting)})},{threshold:.1,rootMargin:'0px 0px -6% 0px'});
+document.querySelectorAll('.rv').forEach(function(e){rv.observe(e)});
+
+/* Hero parallax */
+var hin=$('hin'),hg=$('hglow'),tick=false,sT=0,navOn=false,H=innerHeight,bd=document.body,PAR=innerWidth>=700;
+addEventListener('resize',function(){H=innerHeight},{passive:true});
+function frame(){tick=false;var y=scrollY,o=y>30;if(o!==navOn){navOn=o;nav.classList.toggle('scrolled',o)}
+if(PAR&&y<H*1.2){hin.style.transform='translate3d(0,'+y*.15+'px,0)';hin.style.opacity=Math.max(0,1-y/(H*.9));hg.style.translate='0 '+y*.25+'px'}}
+addEventListener('scroll',function(){if(!tick){tick=true;requestAnimationFrame(frame)}},{passive:true});frame();
+
+/* Pause animations in sections that are far off-screen */
+var offIO=new IntersectionObserver(function(es){es.forEach(function(e){e.target.classList.toggle('off',!e.isIntersecting)})},{rootMargin:'160px 0px'});
+document.querySelectorAll('section,footer').forEach(function(s){offIO.observe(s)});
+
+/* Auto-lite: up to 2 re-checks; every time fps is low the page is thinned further */
+(function(){var lvl=0,bad=false;document.addEventListener('visibilitychange',function(){bad=true});
+function thin(k){[].forEach.call(document.querySelectorAll('.lf,.pt'),function(e,i){if(k===1?i%2:i>2)e.remove()})}
+function test(){var n=0,t0=0;bad=false;function f(t){if(bad)return;if(!t0)t0=t;n++;if(t-t0<1500)return requestAnimationFrame(f);
+if(n*1000/(t-t0)<48&&lvl<2){lvl++;bd.classList.add('low');if(lvl===2)bd.classList.add('ultra');thin(lvl);setTimeout(test,1500)}}requestAnimationFrame(f)}
+addEventListener('load',function(){setTimeout(test,2000)})})();
+
+/* Timers (Kyiv time) */
+var fmt=new Intl.DateTimeFormat('en-US',{timeZone:'Europe/Kyiv',year:'numeric',month:'numeric',day:'numeric',hour:'numeric',minute:'numeric',second:'numeric',hour12:false});
+function kyiv(){var c={};fmt.formatToParts(new Date()).forEach(function(p){if(p.type!=='literal')c[p.type]=parseInt(p.value,10)});var h=c.hour%24,t=new Date(c.year,c.month-1,c.day,h,c.minute,c.second);return{t:t,y:c.year,m:c.month-1,d:c.day,dow:t.getDay(),cur:h*60+c.minute}}
+function target(u,dow,sh,sm,eh,em){var d=(dow-u.dow+7)%7,st=sh*60+sm,en=eh*60+em;if(d===0){if(u.cur>=en)d=7;else if(u.cur>=st)return null}return new Date(u.y,u.m,u.d+d,sh,sm,0)}
+var TM=[
+{dow:0,a:[10,0,12,0],it:'<i class="fa-regular fa-clock"></i> До недільного богослужіння',id:'Приєднуйтесь до нас у цю неділю о 10:00',at:'<i class="fa-solid fa-church" style="color:#00ff88"></i> Недільне богослужіння',ad:'Служіння триває просто зараз! Ласкаво просимо!'},
+{dow:3,a:[18,30,20,0],it:'<i class="fa-regular fa-clock"></i> До молитовного служіння',id:'Приєднуйтесь до нас у цю середу о 18:30',at:'<i class="fa-solid fa-hands-praying" style="color:#00ff88"></i> Молитовне служіння',ad:'Молитовне служіння триває просто зараз!'}];
+var tv=[].map.call(document.querySelectorAll('.timer'),function(el,i){return{el:el,tt:el.querySelector('.tt'),td:el.querySelector('.td'),n:el.querySelectorAll('.cd b'),s:null,c:TM[i]}});
+function setT(el,v){if(el.textContent!==v)el.textContent=v}
+function upd(){var u=kyiv();tv.forEach(function(v){var c=v.c,t=target(u,c.dow,c.a[0],c.a[1],c.a[2],c.a[3]),st=t?'i':'a';
+if(v.s!==st){v.s=st;v.tt.innerHTML=t?c.it:c.at;v.td.textContent=t?c.id:c.ad;v.td.className='td'+(t?'':' now');v.el.style.borderColor=t?'':'rgba(255,90,54,.6)'}
+if(!t){v.n.forEach(function(n){setT(n,'00')});return}
+var df=Math.max(0,t-u.t),a=[Math.floor(df/864e5),Math.floor(df%864e5/36e5),Math.floor(df%36e5/6e4),Math.floor(df%6e4/1e3)];
+a.forEach(function(x,k){setT(v.n[k],String(x).padStart(2,'0'))})})}
+upd();setInterval(function(){if(!document.hidden)upd()},1000);
+
+/* Helpers */
+function shuffle(a){for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1)),t=a[i];a[i]=a[j];a[j]=t}return a}
+function norm(s){return String(s).toLowerCase().replace(/[«»"'’ʼ.,!?;:—\-\s]+/g,' ').trim()}
+function uniq(a,g){var s={};return a.filter(function(x){var k=norm(g(x));if(s[k])return false;return s[k]=true})}
+var toastT;function toast(m){var t=$('toast');$('toastText').textContent=m;t.classList.add('show');clearTimeout(toastT);toastT=setTimeout(function(){t.classList.remove('show')},2600)}
+
+/* Blessings */
+var blessingsList=[
+"Нехай сьогодні твій день розпочнеться з щирої усмішки та світлого настрою!",
+"Бажаю тобі невичерпної енергії, натхнення та чудового самопочуття на весь день!",
+"Нехай усі перешкоди сьогодні перетворюються на нові можливості для успіху!",
+"Бажаю теплих зустрічей, приємних сюрпризів та яскравих моментів!",
+"Нехай кожен крок сьогодні наближає тебе до заповітної мети!",
+"Бажаю відчувати радість від кожного прожитого моменту та віри у краще!",
+"Нехай у твоєму серці завжди живе спокій, любов та Божий мир!",
+"Нехай Господь благословить твій дім достатком, злагодою та теплом!",
+"Пам'ятай: ти здатний подолати будь-які труднощі, бо з тобою віра!"];
+var extraBlessings=[
+"Нехай Господь благословить тебе і збереже тебе!",
+"Нехай сьогодні Бог пошле тобі причину усміхнутись без жодної причини!",
+"Бажаю тобі ранку, що пахне надією, і вечора, що пахне спокоєм.",
+"Нехай Божа любов огортає тебе, як тепла ковдра в холодний день.",
+"Бог бачить тебе, любить тебе і тримає твоє завтра у Своїх руках.",
+"Нехай усмішка, яку ти даруєш іншим, сьогодні повернеться до тебе вдвічі більшою!",
+"Бажаю тобі тихої радості, яку не можна купити, а можна лише отримати від Бога.",
+"Нехай твоя віра буде як добра кава зранку: бадьорить і підбадьорює!",
+"Бог не забуває жодної твоєї сльози, а сьогодні Він хоче подарувати тобі радість.",
+"Нехай Божий мир оселиться в твоїх думках, як пташка на весняній гілці.",
+"Бажаю тобі не поспішати і не хвилюватися, адже Бог іде попереду.",
+"Нехай твоя надія сьогодні буде сильнішою за будь-який сумнів."];
+var allB=uniq(blessingsList.concat(extraBlessings),function(s){return s}),bag=[],lastB=$('blessText').textContent.trim();
+function nextB(){if(!bag.length){bag=shuffle(allB.slice());if(bag.length>1&&bag[bag.length-1]===lastB){var t=bag[0];bag[0]=bag[bag.length-1];bag[bag.length-1]=t}}return lastB=bag.pop()}
+$('blessBtn').addEventListener('click',function(){var c=$('blessCard');c.classList.remove('on');c.classList.add('out');setTimeout(function(){$('blessText').textContent=nextB();c.classList.remove('out');c.classList.add('on')},420)});
+
+/* Bible quotes + favorites */
+var bibleQuotes=[
+{id:1,text:"«Бо Я знаю ті думки, які думаю про вас, говорить Господь, думки про спокій, а не про зло, щоб дати вам майбутнє та надію.»",ref:"Ієремія 29:11"},
+{id:2,text:"«Все можу в Тім, Хто мене зміцнює, — в Ісусі Христі.»",ref:"До Филип'ян 4:13"},
+{id:3,text:"«Господь — то мій Пастир, я потреби мати не можу!»",ref:"Псалом 22:1"},
+{id:4,text:"«Ні про що не турбуйтесь, але в усьому через молитву й прохання з подякою відкривайте свої бажання перед Богом.»",ref:"До Филип'ян 4:6"},
+{id:5,text:"«Бо так Боже полюбив світ, що дав Сина Свого Однородженого, щоб кожен, хто вірує в Нього, не загинув, але мав життя вічне.»",ref:"Від Івана 3:16"},
+{id:6,text:"«Будь сильний та відважний! Не бійся й не лякайся, бо з тобою Господь, Бог твій, у всьому, де ти ходитимеш.»",ref:"Ісус Навин 1:9"},
+{id:7,text:"«Надейся на Господа всім своїм серцем, а на розум свій не покладайся!»",ref:"Приповісті 3:5"},
+{id:8,text:"«Світло світить у темряві, і темрява не охопила його.»",ref:"Від Івана 1:5"},
+{id:9,text:"«Не бійся, бо Я з тобою; не оглядайся, бо Я Бог твій! Зміцню тебе, і поможу тобі, і підтримаю тебе правицею правди Моєї.»",ref:"Ісая 41:10"},
+{id:11,text:"«Прийдіть до Мене всі струджені та обтяжені, і Я вас заспокою.»",ref:"Від Матвія 11:28"},
+{id:12,text:"«Мир залишаю вам, мир Мій даю вам; не так, як світ дає, Я вам даю. Хай не хвилюється серце ваше й не лякається.»",ref:"Від Івана 14:27"},
+{id:13,text:"«Ми знаємо, що тим, хто любить Бога, хто покликаний за Його постановою, усе допомагає на добре.»",ref:"До Римлян 8:28"},
+{id:15,text:"«А тепер зостаються віра, надія, любов, — ці троє, але любов із них більша.»",ref:"1 до Коринтян 13:13"},
+{id:16,text:"«Віра ж — то ґрунт для сподіваного, доказ для небаченого.»",ref:"До Євреїв 11:1"},
+{id:18,text:"«Всю турботу вашу складіть на Нього, бо Він піклується про вас.»",ref:"1 Петра 5:7"},
+{id:20,text:"«А ті, що надіються на Господа, відновляться в силі, піднімуть крила, мов орли; побіжать — і не потомляться, підуть — і не змучаться.»",ref:"Ісая 40:31"},
+{id:23,text:"«Шукайте ж найперш Царства Божого та правди Його, а це все вам докладеться.»",ref:"Від Матвія 6:33"},
+{id:25,text:"«І ось Я з вами по всі дні до кінця віку.»",ref:"Від Матвія 28:20"},
+{id:31,text:"«Бо Бог нам не дав духа страху, але сили, і любові, і здорового розуму.»",ref:"2 до Тимофія 1:7"},
+{id:35,text:"«Це день, що його Господь учинив, — радіймо й веселімся в ньому!»",ref:"Псалом 117:24"},
+{id:38,text:"«Бо в Бога жодне слово не буде безсилим.»",ref:"Від Луки 1:37"},
+{id:45,text:"«Я вам це сказав, щоб мир ви в Мені мали. На світі матимете скорботу; але будьте відважні: Я світ переміг!»",ref:"Від Івана 16:33"}];
+(function(){var ids={};bibleQuotes=uniq(bibleQuotes,function(q){return q.text}).filter(function(q){if(ids[q.id])return false;return ids[q.id]=true});var f=bibleQuotes[0];bibleQuotes=[f].concat(shuffle(bibleQuotes.slice(1)))})();
+var qi=0,favMode=false,favs=[];try{favs=JSON.parse(localStorage.getItem('ng_fav_quotes')||'[]')}catch(e){}
+var qT=$('qText'),qR=$('qRef'),fBtn=$('favBtn'),fI=$('favIcon'),box=$('spBox');
+function saveFavs(){$('favCount').textContent=favs.length;try{localStorage.setItem('ng_fav_quotes',JSON.stringify(favs))}catch(e){}}
+function list(){return favMode?bibleQuotes.filter(function(q){return favs.indexOf(q.id)>-1}):bibleQuotes}
+function render(q,instant){
+function go(){if(!q){qT.textContent='У вас поки немає збережених віршів. Натисніть на сердечко, щоб додати!';qR.textContent='';fBtn.style.display='none'}else{fBtn.style.display='';qT.textContent=q.text;qR.textContent=q.ref;var f=favs.indexOf(q.id)>-1;fBtn.classList.toggle('on',f);fI.className=f?'fa-solid fa-heart':'fa-regular fa-heart'}box.classList.remove('fade')}
+if(instant)return go();box.classList.add('fade');setTimeout(go,380)}
+$('nextBtn').addEventListener('click',function(){var l=list();if(!l.length)return render(null);var prev=l[qi],n=(qi+1)%l.length;if(n===0&&!favMode&&bibleQuotes.length>1){shuffle(bibleQuotes);if(prev&&bibleQuotes[0].id===prev.id){var t=bibleQuotes[0];bibleQuotes[0]=bibleQuotes[1];bibleQuotes[1]=t}}qi=n;render(list()[qi])});
+fBtn.addEventListener('click',function(){var q=list()[qi];if(!q)return;var k=favs.indexOf(q.id);if(k>-1){favs.splice(k,1);toast('Видалено з обраного')}else{favs.push(q.id);toast('Додано в обране')}saveFavs();if(favMode&&!favs.length)render(null);else render(q,true)});
+$('copyBtn').addEventListener('click',function(){var q=list()[qi];if(!q)return;var t=q.text+' ('+q.ref+')';(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(function(){toast('Цитату скопійовано!')},function(){toast('Не вдалося скопіювати')})});
+function tab(m){favMode=m;$('tabFavs').classList.toggle('on',m);$('tabAll').classList.toggle('on',!m);qi=0;var l=list();render(l.length?l[0]:null)}
+$('tabAll').addEventListener('click',function(){tab(false)});$('tabFavs').addEventListener('click',function(){tab(true)});
+saveFavs();render(bibleQuotes[0],true);
+
+/* Leaves on cards (static; they move only on hover / click, shimmer via opacity) */
+(function(){var r=Math.random,C=['#ffd166','#ffb347','#ff9a2f','#ff7a2f','#ff4d2e','#e0452b','#d6285a','#c97a1e'],
+S=['<path d="M12 1C5 6 3 14 12 23C21 14 19 6 12 1Z"/>','<polygon points="12,1 14.5,7 19,4.5 17.5,10.5 23,10 19,14.5 22,18 15.5,17.5 12,23 8.5,17.5 2,18 5,14.5 1,10 6.5,10.5 5,4.5 9.5,7"/>','<path d="M12 2C21 4 22 14 12 22 2 14 3 4 12 2Z"/>'],
+V='<path d="M12 5V23" stroke="rgba(60,10,0,.3)" stroke-width="1" fill="none"/>',P=function(a){return a[Math.floor(r()*a.length)]};
+function mk(el,bl){var a=P(C),b=P(C),s=P(S),sm=el.classList.contains('pillar'),d=document.createElement('span');d.className='cl'+(bl?' bl':'');
+d.style.cssText='--ls:'+((sm?20:24)+Math.floor(r()*12))+'px;--lr:'+(bl?-140+Math.floor(r()*50):20+Math.floor(r()*60))+'deg;--lc:'+a+';--ld:-'+(r()*7).toFixed(1)+'s';
+d.innerHTML='<svg viewBox="0 0 24 24" fill="'+a+'">'+s+V+'</svg><svg viewBox="0 0 24 24" fill="'+b+'">'+s+V+'</svg>';el.appendChild(d)}
+document.querySelectorAll('.glass:not(.bless-msg):not(.live-idle)').forEach(function(el){mk(el,0);if(el.matches('.about-text,.spirit'))mk(el,1)})})();
+
+/* Leaves inside the Telegram modal (move only while it is open) */
+(function(){var T=document.getElementById('tgLeaves');if(!T)return;var r=Math.random,n=innerWidth<700?5:8,
+C=['#ffd166','#ffb347','#ff9a2f','#ff7a2f','#e0452b','#d6285a'],
+S=['<path d="M12 1C5 6 3 14 12 23C21 14 19 6 12 1Z"/>','<polygon points="12,1 14.5,7 19,4.5 17.5,10.5 23,10 19,14.5 22,18 15.5,17.5 12,23 8.5,17.5 2,18 5,14.5 1,10 6.5,10.5 5,4.5 9.5,7"/>'],f=document.createDocumentFragment();
+for(var i=0;i<n;i++){var c=C[Math.floor(r()*C.length)],d=document.createElement('div'),sz=14+r()*20;d.className='lf'+(i%3===0?' g':'');
+d.style.cssText='--x:'+(r()*100).toFixed(1)+'%;--s:'+sz.toFixed(0)+'px;--d:'+(13+r()*8).toFixed(1)+'s;--dl:-'+(r()*12).toFixed(1)+'s;--w:'+(3+r()*3).toFixed(1)+'s;--sw:'+(20+r()*40).toFixed(0)+'px;--dr:'+((r()-.5)*200).toFixed(0)+'px;--r:'+(2.5+r()*3).toFixed(1)+'s;--gc:'+c+'99';
+d.innerHTML='<svg viewBox="0 0 24 24" fill="'+c+'">'+S[i%2]+'</svg>';f.appendChild(d)}
+T.appendChild(f)})();
+
+/* Extra: wind gust button, embers on tap, warm cursor glow */
+(function(){if(matchMedia('(prefers-reduced-motion:reduce)').matches)return;
+var L=$('leaves'),FX=$('fx'),G=$('glowCur'),W=$('windBtn'),B=document.body,r=Math.random,
+C=['#ffd166','#ffb347','#ff9a2f','#ff7a2f','#e0452b','#d6285a'],
+S=['<path d="M12 1C5 6 3 14 12 23C21 14 19 6 12 1Z"/>','<polygon points="12,1 14.5,7 19,4.5 17.5,10.5 23,10 19,14.5 22,18 15.5,17.5 12,23 8.5,17.5 2,18 5,14.5 1,10 6.5,10.5 5,4.5 9.5,7"/>'],cd=false;
+W.addEventListener('click',function(){if(cd)return;cd=true;W.disabled=true;W.classList.add('blow');L.classList.add('gust');
+setTimeout(function(){L.classList.remove('gust')},1100);toast('Осінній вітер 🍃');
+var n=B.classList.contains('ultra')?4:B.classList.contains('low')?8:innerWidth<700?8:14;
+for(var i=0;i<n;i++){var c=C[Math.floor(r()*C.length)],d=document.createElement('div');d.className='wl';
+d.style.cssText='--y:'+(3+r()*85).toFixed(0)+'vh;--s:'+(16+r()*22).toFixed(0)+'px;--t:'+(2.4+r()*2.2).toFixed(1)+'s;--wx:'+Math.round(innerWidth*1.2)+'px;--wy:'+Math.round(r()*140-40)+'px;--wr:'+Math.round(360+r()*540)+'deg;animation-delay:'+(r()*.5).toFixed(2)+'s';
+d.innerHTML='<svg viewBox="0 0 24 24" fill="'+c+'">'+S[i%2]+'</svg>';
+d.addEventListener('animationend',function(e){if(e.animationName==='wfly')this.remove()});L.appendChild(d)}
+setTimeout(function(){cd=false;W.disabled=false;W.classList.remove('blow')},3200)});
+var ec=['#ffd166','#ffb347','#ff7a2f','#ff5a36'];
+document.addEventListener('click',function(e){if(B.classList.contains('ultra')||FX.childElementCount>36)return;var x=e.clientX,y=e.clientY;if(!x&&!y)return;
+for(var i=0;i<7;i++){var s=document.createElement('span'),a=r()*6.283,k=24+r()*46;s.className='em';
+s.style.cssText='left:'+x+'px;top:'+y+'px;--es:'+(3+r()*5).toFixed(1)+'px;--ec:'+ec[i%4]+';--dx:'+Math.round(Math.cos(a)*k)+'px;--dy:'+Math.round(Math.sin(a)*k-30)+'px;--et:'+(.6+r()*.5).toFixed(2)+'s';
+s.addEventListener('animationend',function(){this.remove()});FX.appendChild(s)}},{passive:true});
+if(G&&matchMedia('(hover:hover) and (pointer:fine)').matches){var gx=0,gy=0,gt=false;
+document.addEventListener('pointermove',function(e){gx=e.clientX;gy=e.clientY;G.style.opacity=1;if(!gt){gt=true;requestAnimationFrame(function(){gt=false;G.style.transform='translate3d('+gx+'px,'+gy+'px,0)'})}},{passive:true});
+document.documentElement.addEventListener('mouseleave',function(){G.style.opacity=0})}
+})();
+
+/* Click toggles, both ways */
+document.querySelectorAll('.rotating-cross-badge,.ti,.cd>div,.card,.ci-i,.map,.dir,.spirit,.pillar,.yc,.timer,.about-text').forEach(function(el){el.addEventListener('mouseleave',function(){el.classList.remove('rest')});el.addEventListener('click',function(e){var i=e.target.closest('button,a');if(i&&i!==el&&el.contains(i))return;if(el.classList.contains('rv')&&!el.classList.contains('in'))return;var on=el.classList.toggle('is-on');el.classList.toggle('rest',!on)})});
+
+/* Telegram modal (за кліком, не автоматично) */
+var ov=$('tgo'),cl=$('tgx'),last=null;
+function openTg(){last=document.activeElement;ov.classList.add('open');ov.setAttribute('aria-hidden','false');document.body.classList.add('lock');try{cl.focus({preventScroll:true})}catch(e){}}
+function closeTg(){if(!ov.classList.contains('open'))return;ov.classList.remove('open');ov.setAttribute('aria-hidden','true');if(!mm.classList.contains('open'))document.body.classList.remove('lock');if(last&&last.focus)try{last.focus({preventScroll:true})}catch(e){}}
+document.querySelectorAll('.soc.tg,[data-tg]').forEach(function(b){b.addEventListener('click',function(e){e.preventDefault();menu(false);openTg()})});
+cl.addEventListener('click',closeTg);
+ov.addEventListener('click',function(e){if(e.target===ov)closeTg()});
+ov.querySelectorAll('.tgk').forEach(function(a){a.addEventListener('click',function(){setTimeout(closeTg,200)})});
+document.addEventListener('keydown',function(e){if(e.key==='Escape'||e.key==='Esc'){closeTg();menu(false)}
+if(e.key==='Tab'&&ov.classList.contains('open')){var f=ov.querySelectorAll('a,button'),a=f[0],z=f[f.length-1];if(e.shiftKey&&document.activeElement===a){e.preventDefault();z.focus()}else if(!e.shiftKey&&document.activeElement===z){e.preventDefault();a.focus()}}});
+})();
+</script>
+
+<!-- YouTube LIVE через Cloudflare Worker (логіка збережена без змін) -->
+<script>
+(function () {
+    var WORKER_URL = 'https://ngdnipro-live.aklucik3.workers.dev/';
+    var CHECK_INTERVAL_MS = 30 * 1000;
+    var STORE_KEY = 'ng_live_queue_v2';
+    var MAX_REMEMBERED = 60;
+    var DEFAULT_TITLE = 'Прямий ефір Нового Покоління';
+    var idle = document.getElementById('liveIdle');
+
+    var slots = {};
+    [1, 2].forEach(function (n) {
+        var section = document.getElementById('liveSection' + n);
+        if (!section) return;
+        slots[n] = {
+            section: section,
+            card: section.querySelector('.live-card'),
+            thumbLink: section.querySelector('[data-role="thumbLink"]'),
+            thumbImg: section.querySelector('[data-role="thumbImg"]'),
+            title: section.querySelector('[data-role="title"]'),
+            btn: section.querySelector('[data-role="btn"]'),
+            videoId: null
+        };
+    });
+    if (!slots[1] || !slots[2]) return;
+
+    var busy = false, lastCheck = 0;
+
+    function loadState() {
+        try {
+            var s = JSON.parse(localStorage.getItem(STORE_KEY));
+            if (s && typeof s.count === 'number' && s.assignments && typeof s.assignments === 'object') {
+                if (!Array.isArray(s.order)) s.order = Object.keys(s.assignments);
+                return s;
+            }
+        } catch (e) {}
+        return { count: 0, assignments: {}, order: [] };
+    }
+    function saveState(s) { try { localStorage.setItem(STORE_KEY, JSON.stringify(s)); } catch (e) {} }
+
+    // Відомий videoId → той самий слот; новий → непарний у слот 1 (головне), парний у слот 2 (молитовне)
+    function resolveSlot(videoId) {
+        var s = loadState();
+        if (Object.prototype.hasOwnProperty.call(s.assignments, videoId)) return s.assignments[videoId];
+        s.count += 1;
+        var slot = (s.count % 2 === 1) ? 1 : 2;
+        s.assignments[videoId] = slot;
+        s.order.push(videoId);
+        while (s.order.length > MAX_REMEMBERED) delete s.assignments[s.order.shift()];
+        saveState(s);
+        return slot;
+    }
+
+    function isValidVideoId(id) { return typeof id === 'string' && /^[A-Za-z0-9_-]{11}$/.test(id); }
+    function buildWatchUrl(data) {
+        if (typeof data.url === 'string' && /^https:\/\//i.test(data.url)) return data.url;
+        return 'https://www.youtube.com/watch?v=' + encodeURIComponent(data.videoId);
+    }
+    function setThumb(slot, videoId) {
+        var img = slot.thumbImg, tried = false;
+        img.onerror = null; img.onload = null;
+        function fallback() { if (tried) return; tried = true; img.src = 'https://img.youtube.com/vi/' + videoId + '/hqdefault.jpg'; }
+        img.onload = function () { if (!tried && img.naturalWidth > 0 && img.naturalWidth <= 120) fallback(); };
+        img.onerror = fallback;
+        img.src = 'https://img.youtube.com/vi/' + videoId + '/maxresdefault.jpg';
+    }
+    function playEnter(slot) { slot.card.classList.remove('enter'); void slot.card.offsetWidth; slot.card.classList.add('enter'); }
+    function hideSlot(slot) { if (!slot.section.hidden) slot.section.hidden = true; slot.card.classList.remove('enter'); slot.videoId = null; }
+    function showInSlot(n, data) {
+        var slot = slots[n], other = slots[n === 1 ? 2 : 1];
+        hideSlot(other);
+        if (idle) idle.hidden = true;
+        var title = (typeof data.title === 'string' && data.title.trim()) ? data.title.trim() : DEFAULT_TITLE;
+        var url = buildWatchUrl(data), isNew = slot.videoId !== data.videoId;
+        if (isNew) {
+            slot.title.textContent = title; slot.thumbImg.alt = title;
+            slot.thumbLink.href = url; slot.btn.href = url;
+            setThumb(slot, data.videoId); slot.videoId = data.videoId;
+        } else if (slot.title.textContent !== title) {
+            slot.title.textContent = title; slot.thumbImg.alt = title;
+        }
+        if (slot.section.hidden) { slot.section.hidden = false; playEnter(slot); }
+        else if (isNew) playEnter(slot);
+    }
+    function hideAll() { hideSlot(slots[1]); hideSlot(slots[2]); if (idle) idle.hidden = false; }
+
+    function handleWorkerData(data) {
+        if (!data || typeof data !== 'object') return;
+        if (data.live === true && isValidVideoId(data.videoId)) showInSlot(resolveSlot(data.videoId), data);
+        else if (data.live === false) hideAll();
+    }
+    function checkLive() {
+        if (busy) return;
+        busy = true; lastCheck = Date.now();
+        fetch(WORKER_URL, { cache: 'no-store' })
+            .then(function (r) { if (!r.ok) throw new Error('Worker ' + r.status); return r.json(); })
+            .then(handleWorkerData)
+            .catch(function (err) { if (window.console && console.warn) console.warn('Перевірка YouTube LIVE не вдалася:', err); })
+            .then(function () { busy = false; });
+    }
+    checkLive();
+    setInterval(function () { if (!document.hidden) checkLive(); }, CHECK_INTERVAL_MS);
+    document.addEventListener('visibilitychange', function () {
+        if (!document.hidden && Date.now() - lastCheck >= CHECK_INTERVAL_MS) checkLive();
+    });
+})();
+</script>
+<!-- ===== ❄ WINTER UPGRADE v2: заменяє попередній блок, вставити перед </body> ===== -->
+<style id="ngWinterCss">
+/* --- кнопка зимового вітру (місце і принцип як у осінньої: ліво-низ, клік = пориви) --- */
+.wind-btn{position:fixed;left:calc(env(safe-area-inset-left,0px) + clamp(16px,3vw,26px));bottom:calc(env(safe-area-inset-bottom,0px) + clamp(20px,4vw,30px));z-index:950;width:54px;height:54px;padding:0;border-radius:50%;display:grid;place-items:center;border:1.5px solid transparent;cursor:pointer;background:linear-gradient(rgba(9,19,46,.92),rgba(9,19,46,.92)) padding-box,var(--flow) border-box;background-size:auto,300% 100%;box-shadow:0 8px 22px rgba(80,130,255,.35),0 0 20px rgba(255,200,110,.18);animation:wbFloat 5s ease-in-out infinite,ngNeon 11s ease-in-out infinite;transition:transform .5s var(--ease),box-shadow .5s var(--ease);touch-action:manipulation;-webkit-tap-highlight-color:transparent}
+.wind-btn svg{width:30px;height:30px;overflow:visible;filter:drop-shadow(0 0 4px rgba(155,216,255,.85)) drop-shadow(0 0 8px rgba(255,200,110,.4));transition:transform .9s var(--ease)}
+.wind-btn.blow svg{transform:rotate(120deg) scale(1.12)}
+@keyframes wbFloat{50%{translate:0 -6px}}
+.wind-btn:active{transform:scale(.92)}
+.wind-btn:disabled{cursor:default}
+@media(hover:hover) and (pointer:fine){.wind-btn:hover{transform:translateY(-3px);box-shadow:0 12px 28px rgba(110,150,255,.5),0 0 28px rgba(255,200,110,.28)}}
+#windLayer{position:fixed;inset:0;z-index:5;pointer-events:none;overflow:hidden}
+#snow{transition:transform 1.4s var(--ease)}#snow.gust{transform:translateX(6vw)}
+.wl{position:absolute;left:-8vw;top:var(--y);width:var(--s);height:var(--s);will-change:transform;animation:wfly var(--t) cubic-bezier(.3,.1,.5,1) forwards,wspin var(--t) linear forwards,wfade var(--t) ease both}
+.wl svg{display:block;width:100%;height:100%;overflow:visible}
+.wk{position:absolute;left:-35%;top:var(--y);width:var(--w);height:2px;border-radius:2px;background:linear-gradient(90deg,transparent,rgba(190,225,255,.55),rgba(255,220,150,.5),transparent);animation:wkm var(--t) cubic-bezier(.3,.1,.5,1) both}
+@keyframes wfly{from{translate:0 0}to{translate:var(--wx) var(--wy)}}
+@keyframes wspin{to{rotate:var(--wr)}}
+@keyframes wfade{0%{opacity:0}12%{opacity:.95}85%{opacity:.9}100%{opacity:0}}
+@keyframes wkm{from{translate:0 0;opacity:0}20%{opacity:.8}to{translate:var(--wx) var(--wy);opacity:0}}
+@media(prefers-reduced-motion:reduce){.wind-btn,#windLayer{display:none}}
+
+/* --- спільний тихий неон --- */
+:root{--nc:rgba(155,216,255,.22);--nw:rgba(255,200,110,.20);--nv:rgba(150,130,255,.16)}
+@keyframes ngNeon{0%,100%{box-shadow:0 12px 28px rgba(0,0,0,.4),0 0 20px var(--nc),0 0 3px var(--nc),inset 0 1px 0 rgba(200,230,255,.16)}
+50%{box-shadow:0 12px 28px rgba(0,0,0,.4),0 0 24px var(--nw),0 0 6px var(--nv),inset 0 1px 0 rgba(255,236,190,.2)}}
+.glass:not(:hover):not(.is-on):not(.rest):not(.live-card),.tgk,.btn.p,.btn.k,.btn.g,.tgb,.badge,.tgx{animation:ngNeon 11s ease-in-out infinite}
+.glass:nth-child(2n),.tgk:nth-child(2){animation-delay:-3.5s}
+.glass:nth-child(3n),.tgk:nth-child(3){animation-delay:-7s}
+.scrolling .glass,.scrolling .tgk,.scrolling .btn,.scrolling .tgb,.scrolling .badge,.scrolling .wind-btn{animation-play-state:paused}
+
+/* --- Telegram-вибір: єдина система кнопок --- */
+.tgl .tgk>i,.tgl .tgk:nth-child(n)>i{background:linear-gradient(135deg,#8fd0ff,#5b7cff 55%,#7a63ff);box-shadow:0 5px 16px rgba(80,130,255,.5),0 0 0 2px rgba(155,216,255,.35),inset 0 1px 0 rgba(255,255,255,.4)}
+.tgl .tgk:nth-child(2)>i{background:linear-gradient(135deg,#b9e4ff,#6f8dff 55%,#b7a6ff)}
+.tgl .tgk:nth-child(3)>i{background:linear-gradient(135deg,#9bd8ff,#6f8dff 55%,#4b3fb0)}
+.tgl .tgk{min-height:78px;touch-action:manipulation}
+.tgl .tgk:active{transform:scale(.97)}
+@media(hover:hover) and (pointer:fine){.tgl .tgk:nth-child(n):hover{box-shadow:0 0 26px rgba(155,216,255,.4),0 0 40px rgba(255,200,110,.16)}}
+
+/* --- «Новинки» --- */
+[data-ng-nov]{transition:transform .35s var(--ease)}[data-ng-nov]:active{transform:scale(.95)}
+
+/* --- режим оптимізації (дизайн не змінюється) --- */
+.tabhid *,.tabhid *::before,.tabhid *::after{animation-play-state:paused!important}
+
+/* --- вікно «Оптимізувати сайт?» --- */
+#ngOpt{position:fixed;inset:0;z-index:100005;display:grid;place-items:center;overflow-y:auto;padding:calc(env(safe-area-inset-top,0px) + 16px) 16px calc(env(safe-area-inset-bottom,0px) + 16px);background:radial-gradient(circle at 50% 20%,rgba(90,130,255,.28),transparent 55%),radial-gradient(circle at 50% 110%,rgba(255,200,110,.14),transparent 50%),rgba(3,8,24,.95);animation:ngFade .6s var(--ease) both}
+#ngOpt.out{opacity:0;transition:opacity .4s var(--ease);pointer-events:none}
+#ngOpt::before{content:'';position:absolute;left:0;right:0;top:-200px;bottom:0;pointer-events:none;background-image:radial-gradient(circle at 20px 30px,#fff 0,#fff 1.4px,transparent 2.6px),radial-gradient(circle at 95px 125px,rgba(255,255,255,.85) 0,rgba(255,255,255,.85) 1.8px,transparent 3px),radial-gradient(circle at 155px 70px,rgba(255,235,190,.9) 0,rgba(255,235,190,.9) 1.2px,transparent 2.4px);background-size:200px 200px;animation:ngSnow 16s linear infinite;will-change:transform}
+.ngo-box{position:relative;width:min(440px,100%);margin:auto;padding:34px 24px 26px;text-align:center;border-radius:28px;border:1.5px solid transparent;background:linear-gradient(rgba(9,19,46,.94),rgba(9,19,46,.94)) padding-box,var(--flow) border-box;background-size:auto,300% 100%;animation:ngPop .7s var(--ease) both,ngNeon 11s ease-in-out infinite}
+.ngo-box .fl0{font-size:2rem;line-height:1;margin-bottom:6px;filter:drop-shadow(0 0 10px rgba(155,216,255,.8))}
+.ngo-box h2{font-size:clamp(1.4rem,6vw,1.8rem);font-weight:900;margin-bottom:8px;background:linear-gradient(120deg,#9bd8ff,#fff,#ffdc94);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent}
+.ngo-box p{color:#c6dbf5;font-size:.92rem;margin-bottom:22px}
+.ngo-act{display:flex;flex-direction:column;gap:12px}
+.ngo-b{min-height:52px;padding:12px 24px;border-radius:50px;font:800 1rem 'Montserrat',sans-serif;color:#fff;cursor:pointer;border:1.5px solid rgba(190,225,255,.55);touch-action:manipulation;-webkit-tap-highlight-color:transparent;transition:transform .45s var(--ease),box-shadow .45s var(--ease)}
+.ngo-b.y{background:linear-gradient(120deg,#3d7bd9,#6f5cff 60%,#8b6df0);box-shadow:0 0 22px rgba(110,150,255,.5),0 0 44px rgba(255,200,110,.2)}
+.ngo-b.n{background:rgba(155,216,255,.07);border-color:rgba(255,220,148,.55);box-shadow:0 0 18px rgba(255,200,110,.22)}
+@media(hover:hover) and (pointer:fine){.ngo-b:hover{transform:translateY(-3px);box-shadow:0 0 30px rgba(155,216,255,.55),0 0 50px rgba(255,200,110,.25)}}
+.ngo-b:active{transform:scale(.96)}
+@keyframes ngFade{from{opacity:0}}
+@keyframes ngPop{from{opacity:0;transform:translateY(26px) scale(.94)}}
+@keyframes ngSnow{to{transform:translateY(200px)}}
+@media(prefers-reduced-motion:reduce){#ngOpt::before{animation:none}}
+</style>
+
+<script id="ngWinterJs">
+(function(){
+if(window.__ngWinter)return;window.__ngWinter=1;
+var d=document,B=d.body,RM=matchMedia('(prefers-reduced-motion:reduce)').matches,R=Math.random;
+
+/* ========== 1. Кнопка зимового вітру: клік = порив, сніжинки летять кілька секунд ========== */
+try{(function(){
+if(RM||d.getElementById('windBtn'))return;
+var A='';for(var i=0;i<6;i++)A+='<path transform="rotate('+i*60+')" d="M0 0V-10M0 -6L-3 -9M0 -6L3 -9"/>';
+function flake(c){return '<svg viewBox="-12 -12 24 24" fill="none" stroke="'+c+'" stroke-width="1.4" stroke-linecap="round" aria-hidden="true">'+A+'<circle r="1.3" fill="'+c+'" stroke="none"/></svg>'}
+var b=d.createElement('button');b.id='windBtn';b.className='wind-btn';b.type='button';
+b.setAttribute('aria-label','Подув зимового вітру');b.title='Подув зимового вітру';
+b.innerHTML='<svg viewBox="-20 -20 40 40" fill="none" stroke="url(#wbG)" stroke-width="1.8" stroke-linecap="round" aria-hidden="true"><defs><linearGradient id="wbG" gradientUnits="userSpaceOnUse" x1="-17" y1="-17" x2="17" y2="17"><stop offset="0" stop-color="#fff"/><stop offset=".55" stop-color="#bfe6ff"/><stop offset="1" stop-color="#ffdc94"/></linearGradient></defs>'
++(function(){var s='';for(var k=0;k<6;k++)s+='<path transform="rotate('+k*60+')" d="M0 0V-17M0 -11L-5 -16M0 -11L5 -16M0 -6L-3.5 -9.5M0 -6L3.5 -9.5"/>';return s})()+'<circle r="2.2" fill="#fff" stroke="none"/></svg>';
+B.appendChild(b);
+var C=['#ffffff','#e3f3ff','#bfe6ff','#9bd8ff','#ffe3a6'],L=null,cd=false,tt;
+function layer(){if(L&&L.parentNode)return L;L=d.createElement('div');L.id='windLayer';L.setAttribute('aria-hidden','true');B.appendChild(L);return L}
+function note(m){var t=d.getElementById('toast'),x=d.getElementById('toastText');if(!t||!x)return;x.textContent=m;t.classList.add('show');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('show')},2200)}
+function gone(e){if(e.animationName==='wfly'||e.animationName==='wkm')this.remove()}
+b.addEventListener('click',function(){
+if(cd)return;cd=true;b.disabled=true;b.classList.add('blow');
+var sn=d.getElementById('snow');if(sn){sn.classList.add('gust');setTimeout(function(){sn.classList.remove('gust')},1100)}
+note('Зимовий вітер ❄️');
+var lay=layer(),W=innerWidth,n=B.classList.contains('ultra')?4:B.classList.contains('low')?8:W<700?10:18,i,e;
+for(i=0;i<(W<700?3:5);i++){e=d.createElement('div');e.className='wk';
+e.style.cssText='--y:'+(6+R()*84).toFixed(0)+'vh;--w:'+(22+R()*20).toFixed(0)+'vw;--t:'+(1.8+R()*1.2).toFixed(1)+'s;--wx:'+Math.round(W*1.5)+'px;--wy:'+Math.round(R()*50-10)+'px;animation-delay:'+(R()*.6).toFixed(2)+'s';
+e.addEventListener('animationend',gone);lay.appendChild(e)}
+for(i=0;i<n;i++){e=d.createElement('div');e.className='wl';
+e.style.cssText='--y:'+(3+R()*88).toFixed(0)+'vh;--s:'+(10+R()*22).toFixed(0)+'px;--t:'+(2.6+R()*2.4).toFixed(1)+'s;--wx:'+Math.round(W*1.2)+'px;--wy:'+Math.round(R()*160-30)+'px;--wr:'+Math.round(180+R()*360)+'deg;animation-delay:'+(R()*.5).toFixed(2)+'s';
+e.innerHTML=flake(C[i%C.length]);e.addEventListener('animationend',gone);lay.appendChild(e)}
+setTimeout(function(){cd=false;b.disabled=false;b.classList.remove('blow')},3200);
+setTimeout(function(){if(L&&!L.childElementCount){L.remove();L=null}},9000)});
+})()}catch(e){if(window.console)console.warn('wind',e)}
+
+/* ========== 2. Кнопка «Новинки» -> t.me/rspwn_events ========== */
+try{(function(){var U='https://t.me/rspwn_events';
+[].forEach.call(d.querySelectorAll('a,button'),function(e){if(e.hasAttribute('data-ng-nov'))return;
+var t=(e.textContent||'').replace(/\s+/g,' ').trim().toLowerCase();if(t.indexOf('новинки')<0||t.length>40)return;
+e.setAttribute('data-ng-nov','1');
+if(e.tagName==='A'){e.href=U;e.target='_blank';e.rel='noopener noreferrer'}
+else e.addEventListener('click',function(ev){ev.preventDefault();var w=window.open(U,'_blank','noopener');if(!w)location.href=U})})})()}catch(e){}
+
+/* ========== 3. Режим оптимізації ========== */
+var optOn=false;
+function enableOpt(){if(optOn)return;optOn=true;B.classList.add('opt');
+var st=0;addEventListener('scroll',function(){if(!st)B.classList.add('scrolling');clearTimeout(st);st=setTimeout(function(){st=0;B.classList.remove('scrolling')},160)},{passive:true});
+function vis(){B.classList.toggle('tabhid',d.hidden)}d.addEventListener('visibilitychange',vis);vis()}
+
+/* ========== 4. Вікно «Оптимізувати сайт?» (щоразу, без збереження) ========== */
+try{(function(){
+if(d.getElementById('ngOpt'))return;
+var lockEls=[].slice.call(d.querySelectorAll('main,nav,footer,.wscene,.rotating-cross-badge,#windBtn')),prevOv=d.documentElement.style.overflow,done=false;
+var o=d.createElement('div');o.id='ngOpt';o.setAttribute('role','dialog');o.setAttribute('aria-modal','true');o.setAttribute('aria-labelledby','ngOptT');
+o.innerHTML='<div class="ngo-box"><div class="fl0" aria-hidden="true">❄️</div><h2 id="ngOptT">Оптимізувати сайт?</h2><p>Дизайн, неон і всі функції залишаться. Зменшимо зайве навантаження на пристрій.</p><div class="ngo-act"><button type="button" class="ngo-b y" id="ngY">Оптимізувати</button><button type="button" class="ngo-b n" id="ngN">Пропустити</button></div></div>';
+B.appendChild(o);
+lockEls.forEach(function(e){try{e.inert=true}catch(x){}e.setAttribute('aria-hidden','true')});
+d.documentElement.style.overflow='hidden';
+try{if(d.activeElement&&d.activeElement.blur)d.activeElement.blur()}catch(x){}
+var y=d.getElementById('ngY'),n=d.getElementById('ngN');try{y.focus({preventScroll:true})}catch(x){}
+function close(optimize){if(done)return;done=true;
+try{if(optimize)enableOpt()}catch(x){if(window.console)console.warn('opt',x)}
+lockEls.forEach(function(e){try{e.inert=false}catch(x){}e.removeAttribute('aria-hidden')});
+d.documentElement.style.overflow=prevOv;d.removeEventListener('keydown',key,true);
+o.classList.add('out');setTimeout(function(){if(o.parentNode)o.parentNode.removeChild(o)},450)}
+function key(e){if(e.key==='Tab'){e.preventDefault();var a=d.activeElement===y?n:y;a.focus()}else if(e.key==='Escape'){e.preventDefault();e.stopPropagation()}}
+d.addEventListener('keydown',key,true);
+y.addEventListener('click',function(){close(true)});n.addEventListener('click',function(){close(false)});
+})()}catch(e){
+try{var z=d.getElementById('ngOpt');if(z)z.parentNode.removeChild(z);d.documentElement.style.overflow='';
+[].forEach.call(d.querySelectorAll('[aria-hidden="true"]'),function(x){if(x.tagName==='MAIN'||x.tagName==='NAV'||x.tagName==='FOOTER'){x.inert=false;x.removeAttribute('aria-hidden')}})}catch(x){}}
+})();
+</script>
+</body>
+</html>
