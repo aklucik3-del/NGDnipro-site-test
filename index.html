@@ -504,6 +504,135 @@ body.lock .rotating-cross-badge i{animation-play-state:paused}
 section{padding-left:16px;padding-right:16px}.hero{padding-left:16px;padding-right:16px}}
 @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition-duration:.01ms!important;scroll-behavior:auto!important}.js .rv{opacity:1;translate:none}#snow,.wsn{display:none}}
 </style>
+<style id="motion-gsap">
+/* ═══════════════════════════════════════════════════════════════════════════
+   MOTION IV · GSAP ScrollTrigger — кинематографичный 3D scroll-scrub
+   Работает ТОЛЬКО при html.mo (GSAP загрузился и нет prefers-reduced-motion).
+   Без GSAP / при reduce-motion сайт ведёт себя как раньше.
+   Принцип: GSAP крутит только CSS-переменные прогресса (--rp, --hx, --bgp …),
+   а translate / rotate / scale / opacity вычисляются здесь. Свойство transform
+   (наклон и hover карточек) не затрагивается — поэтому конфликтов нет, а
+   состояние на экране = чистая функция позиции скролла (идеальный реверс).
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+/* родитель, в чьей перспективе вращаются карточки (ставится из JS, только desktop) */
+html.mo-full .mo-p{perspective:1300px}
+
+/* ───── базовое 3D-появление всех .rv и footer-блоков ───── */
+html.mo .rv,html.mo .mo-r{
+  --rp:1;--dx:0px;--dy:46px;--dz:-130px;--ax:1 0 0;--ar:12deg;--par:0px;--ex:0;
+  --p1:clamp(0,calc((var(--rp) - .16)/.5),1);
+  --p2:clamp(0,calc((var(--rp) - .32)/.5),1);
+  --p3:clamp(0,calc((var(--rp) - .48)/.5),1);
+  opacity:calc(clamp(0,calc(var(--rp)*1.7),1)*(1 - var(--ex)*.9))!important;
+  translate:calc((1 - var(--rp))*var(--dx)) calc((1 - var(--rp))*var(--dy) + var(--par)) calc((1 - var(--rp))*var(--dz))!important;
+  rotate:var(--ax) calc((1 - var(--rp))*var(--ar))!important;
+  scale:calc(.93 + .07*var(--rp))!important;
+  transition:none!important}
+html.mo .mo-act{will-change:translate,rotate,scale,opacity}
+/* в покое — никаких трансформов (нет лишних композитных слоёв, чёткий текст) */
+html.mo .rv.mo-done:not(.hero-side),html.mo .mo-r.mo-done{translate:none!important;rotate:none!important;scale:none!important;opacity:1!important}
+html.mo .rv.mo-done.mo-par{translate:0 var(--par)!important}
+
+/* варианты направления: чётные/нечётные влетают с разных сторон, с диагональной осью 3D */
+html.mo .stg>.rv:nth-child(odd){--dx:-38px;--ax:1 .32 0}
+html.mo .stg>.rv:nth-child(even){--dx:38px;--ax:1 -.32 0}
+html.mo .sec-head{--dy:34px;--dz:-70px;--ar:7deg}
+html.mo .about-text{--dx:-70px;--dz:-170px;--ax:.12 1 0;--ar:16deg}
+html.mo .ti:nth-child(odd){--dx:-84px;--dz:-100px;--ax:0 1 0;--ar:-18deg}
+html.mo .ti:nth-child(even){--dx:84px;--dz:-100px;--ax:0 1 0;--ar:18deg}
+html.mo .spirit{--dy:80px;--dz:-230px;--ar:14deg}
+html.mo .map{--dx:64px;--ax:0 1 0;--ar:-14deg}
+html.mo .ycta,html.mo .bless{--dy:40px;--dz:-80px}
+html.mo .mo-r{--dy:30px;--dz:-60px;--ar:8deg}
+/* hero: вход по времени, выход — по скроллу (см. ниже) */
+html.mo .hero-kicker,html.mo .hero h1.rv,html.mo .hero p.lead,html.mo .hero .cta{--dy:34px;--dz:-90px;--ar:9deg}
+html.mo .hero-side{--dx:70px;--dy:20px;--dz:-290px;--ax:.2 1 0;--ar:-20deg}
+
+/* мобильные / сенсорные: только лёгкое «всплытие» (translate+opacity+scale), без 3D и боковых сдвигов */
+html.mo-lite :is(.rv,.mo-r){--dx:0px!important;--dz:0px!important;--ar:0deg!important;--dy:34px!important}
+
+/* ───── кинетический текст: буквы привязаны к прогрессу, а не к «одноразовому» .in ───── */
+html.mo .rv [data-k]{--tp:var(--p1)}
+html.mo .ch{
+  --lp:clamp(0,calc((var(--tp,1)*(var(--kn,24) + 9) - var(--i,0))/9),1);
+  opacity:var(--lp)!important;transform:none!important;transition:none!important;animation:none!important;filter:none!important;
+  transform-origin:50% 100%;
+  translate:0 calc((1 - var(--lp))*70%);rotate:1 0 0 calc((1 - var(--lp))*-75deg)}
+html.mo-full .kw{perspective:700px}
+html.mo-lite .ch{rotate:none}
+html.mo .rv.mo-done .ch{translate:none;rotate:none}
+
+/* ───── микроанимации внутри карточек: считаются из того же --rp (окна p1/p2/p3) ───── */
+html.mo :is(.card .ic,.yc .ic,.dir i.i,.pillar>i,.ci-i>i){scale:calc(.3 + .7*var(--p1));rotate:z calc((1 - var(--p1))*-75deg);opacity:var(--p1)}
+html.mo :is(.card,.yc,.dir,.ci-i,.ti) :is(h3,h4){translate:0 calc((1 - var(--p2))*16px);opacity:var(--p2)}
+html.mo :is(.card,.yc,.dir,.ci-i,.ti) p{translate:0 calc((1 - var(--p3))*14px);opacity:var(--p3)}
+html.mo .pillar>b,html.mo .timer h3{translate:0 calc((1 - var(--p2))*14px);opacity:var(--p2)}
+html.mo .sec-head p,html.mo .about-text p{translate:0 calc((1 - var(--p3))*14px);opacity:var(--p3)}
+html.mo .tm{clip-path:inset(-3px calc((1 - var(--p2))*100%) -3px 0);translate:calc((1 - var(--p2))*-16px) 0;opacity:var(--p2)}
+html.mo .tgb{scale:calc(.4 + .6*var(--p3));opacity:var(--p3)}
+html.mo .timer .cd div{scale:calc(.8 + .2*var(--p3));opacity:var(--p3)}
+html.mo .eyebrow::after{transform-origin:0 50%;scale:var(--p1) 1}
+html.mo .sec-head::after{scale:calc(.4 + .6*var(--p2));opacity:var(--p2)}
+html.mo .rv.mo-done :is(.card .ic,.yc .ic,.dir i.i,.pillar>i,.ci-i>i){scale:none;rotate:none;opacity:1}
+html.mo .rv.mo-done :is(.card,.yc,.dir,.ci-i,.ti) :is(h3,h4,p),html.mo .rv.mo-done :is(.pillar>b,.timer h3,.sec-head p,.about-text p){translate:none;opacity:1}
+html.mo .rv.mo-done :is(.tm,.tgb,.timer .cd div){translate:none;scale:none;opacity:1;clip-path:none}
+html.mo .rv.mo-done .eyebrow::after{scale:none}
+html.mo .rv.mo-done.sec-head::after{scale:none;opacity:1}
+
+/* ───── HERO: вход по времени → выход по скроллу (--hx) ───── */
+html.mo .hero-in{translate:0 calc(var(--hx,0)*-60px) calc(var(--hx,0)*-80px);rotate:1 0 0 calc(var(--hx,0)*5deg);scale:calc(1 - var(--hx,0)*.03);opacity:calc(1 - var(--hx,0)*.92)}
+html.mo .hero.hx0 .hero-in{translate:none;rotate:none;scale:none;opacity:1}
+html.mo .hero-side{--ex:var(--hx,0);--par:calc(var(--hx,0)*-110px)}
+html.mo .hero .waves{translate:0 calc(var(--hx,0)*50px)}
+html.mo .hero.hx0 .waves{translate:none}
+html.mo .hero .sh{opacity:clamp(0,calc(1 - var(--hx,0)*9),1)}
+html.mo-lite .hero-in{rotate:none}
+
+/* ───── ГЛУБИНА ФОНА: аврора, сетка, плавающие формы едут с разной скоростью ───── */
+html.mo .bg .grid{transform-origin:50% 0;translate:0 calc(var(--bgp,0)*-110px);scale:calc(1 + var(--bgp,0)*.18)}
+html.mo .au.a1{translate:calc(var(--bgp,0)*12vw) calc(var(--bgp,0)*-16vh)}
+html.mo .au.a2{translate:calc(var(--bgp,0)*-14vw) calc(var(--bgp,0)*20vh)}
+html.mo .au.a3{translate:calc(var(--bgp,0)*10vw) calc(var(--bgp,0)*-26vh)}
+html.mo .fs{transform:translate3d(0,calc(var(--fy,0)*1px),0)}
+
+/* ───── ПЕРЕХОДЫ МЕЖДУ СЕКЦИЯМИ: световой луч пролетает по мере пересечения границы ───── */
+html.mo .sep{--bp:0;scale:calc(.35 + .65*var(--bp)) 1;opacity:calc(.4 + .6*var(--bp))}
+html.mo .sep i{animation:none;translate:calc(-220px + var(--bp,0)*(100vw + 220px)) 0}
+
+/* ───── бегущая строка: дополнительный дрейф от скролла (поверх существующего скью) ───── */
+html.mo .mq-t{translate:calc(var(--mqx,0)*-8vw) 0}
+
+/* ───── точки таймлайна «зажигаются» вместе с линией; обратимо ───── */
+html.mo .ti .dot,html.mo .ti.in .dot{
+  scale:calc(.78 + .22*var(--dl,0));transition:none;animation:none;
+  border-color:color-mix(in srgb,var(--gold) calc(var(--dl,0)*100%),var(--ice));
+  box-shadow:0 0 0 6px color-mix(in srgb,rgba(255,216,138,.14) calc(var(--dl,0)*100%),rgba(139,233,255,.12)),0 0 20px color-mix(in srgb,var(--gold) calc(var(--dl,0)*100%),var(--ice))}
+html.mo .ti.lit .dot{animation:dp 2.6s ease-out infinite}
+
+/* ───── зимняя сцена в футере: «наезд камеры» ───── */
+html.mo .wsc>svg{transform-origin:50% 100%;scale:calc(1 + (1 - var(--sp,1))*.14);translate:0 calc((1 - var(--sp,1))*36px)}
+
+/* ═══════════ 3D-КРИСТАЛЛ (CSS 3D): можно вращать мышью / пальцем ═══════════ */
+.orb i{pointer-events:none;position:relative;z-index:2}
+.g3d{position:absolute;inset:-9%;z-index:1;perspective:900px;cursor:grab;touch-action:pan-y;-webkit-user-select:none;user-select:none;-webkit-tap-highlight-color:transparent;border-radius:50%}
+.g3d.drag{cursor:grabbing}
+.g3d-o{position:absolute;inset:0;transform-style:preserve-3d;will-change:transform}
+.g3d-f{position:absolute;left:50%;top:50%;pointer-events:none}
+.g3d-f svg{display:block;width:100%;height:100%;overflow:visible}
+.g3d-f polygon{vector-effect:non-scaling-stroke;stroke-linejoin:round}
+.g3d-f .fl{fill:var(--fc);fill-opacity:var(--a,.2);stroke:rgba(214,246,255,.92);stroke-width:1.2}
+.g3d-f .gw{fill:none;stroke:var(--fc);stroke-opacity:.22;stroke-width:4}
+.g3d-r{position:absolute;border-radius:50%;border:1.5px solid var(--rc);box-shadow:0 0 12px var(--rg),inset 0 0 12px var(--rg);transform-style:preserve-3d;pointer-events:none;transform:var(--rb) rotateZ(0deg);animation:g3dR var(--rt,18s) linear infinite}
+.g3d-r::before,.g3d-r::after{content:'';position:absolute;border-radius:50%;background:var(--rc);box-shadow:0 0 10px 2px var(--rg)}
+.g3d-r::before{left:50%;top:-4px;width:7px;height:7px;margin-left:-3.5px}
+.g3d-r::after{left:50%;bottom:-3px;width:5px;height:5px;margin-left:-2.5px}
+@keyframes g3dR{to{transform:var(--rb) rotateZ(360deg)}}
+.g3d-s{position:absolute;left:50%;top:50%;border-radius:50%;background:var(--c);box-shadow:0 0 8px 1px var(--c);pointer-events:none}
+.hero.off .g3d-r,.hero.off .g3d-o{animation-play-state:paused!important}
+.ultra .g3d-r{animation:none!important}
+@media(prefers-reduced-motion:reduce){.g3d{display:none}}
+</style>
 </head>
 <body>
 <div class="intro" aria-hidden="true"><svg viewBox="0 0 120 120"><circle class="c" cx="60" cy="60" r="52" pathLength="1"/><path class="x" pathLength="1" d="M60 26V94M36 52H84"/></svg></div>
@@ -1168,6 +1297,216 @@ n=u?Nr.length>>1:Nr.length;cx.globalAlpha=.4;for(i=0;i<n;i++){f=Nr[i];up(f,dt,t,
 cx.globalAlpha=1}
 function go(){if(on)return;on=true;last=performance.now();requestAnimationFrame(loop)}
 d.addEventListener('visibilitychange',function(){if(!d.hidden)go()});go();
+})();
+</script>
+
+<!-- ✦ MOTION IV: GSAP + ScrollTrigger (scroll-scrub, обратимые 3D-анимации) -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+/* ═══ MOTION IV · GSAP ScrollTrigger ═══════════════════════════════════════
+   • Все анимации привязаны к позиции скролла (scrub) → при прокрутке вверх идут строго назад.
+   • GSAP крутит только CSS-переменные (--rp, --hx, --bgp …); см. блок «MOTION IV» в CSS.
+   • start/end считаются через offsetTop (не зависят от трансформов анимируемых элементов).
+   • Если GSAP не загрузился — ничего не делаем: остаётся прежнее поведение сайта.      */
+(function(){
+'use strict';
+var d=document,root=d.documentElement,W=window;
+if(!W.gsap||!W.ScrollTrigger)return;
+var gsap=W.gsap,ST=W.ScrollTrigger;
+try{gsap.registerPlugin(ST);ST.config({ignoreMobileResize:true})}catch(e){return}
+
+function $$(s,r){return [].slice.call((r||d).querySelectorAll(s))}
+function topOf(el){var y=0;while(el){y+=el.offsetTop;el=el.offsetParent}return y}
+function maxS(){return Math.max(0,root.scrollHeight-W.innerHeight)}
+function rowIdx(el){var t=el.offsetTop,k=0;for(var s=el.parentNode.firstElementChild;s&&s!==el;s=s.nextElementSibling){if(s.classList.contains('rv')&&Math.abs(s.offsetTop-t)<8)k++}return k}
+
+var heroPlayed=false,rT=0;
+function refreshSoon(){clearTimeout(rT);rT=setTimeout(function(){ST.refresh()},200)}
+
+/* html{scroll-behavior:smooth} мешает измерениям при refresh — на время отключаем */
+ST.addEventListener('refreshInit',function(){root.style.scrollBehavior='auto'});
+ST.addEventListener('refresh',function(){root.style.scrollBehavior=''});
+/* высота страницы меняется (YouTube-карточка эфира, шрифты) → пересчитать позиции */
+if('ResizeObserver' in W){var ro0=new ResizeObserver(refreshSoon);ro0.observe(d.body)}
+if(d.fonts&&d.fonts.ready)d.fonts.ready.then(refreshSoon);
+W.addEventListener('load',refreshSoon);
+
+/* ───────────────────────── 3D-кристалл (CSS 3D, вращается мышью/пальцем) ───────────────────────── */
+function Crystal(orb){
+  var g=d.createElement('div');g.className='g3d';g.setAttribute('aria-hidden','true');
+  var o=d.createElement('div');o.className='g3d-o';g.appendChild(o);
+  var D=Math.PI/180,faces=[],sparks=[],cols=['#8be9ff','#4d7cff','#a58bff'],s3=1/Math.sqrt(3);
+  function sub(a,b){return [a[0]-b[0],a[1]-b[1],a[2]-b[2]]}
+  function len(a){return Math.sqrt(a[0]*a[0]+a[1]*a[1]+a[2]*a[2])}
+  function nrm(a){var l=len(a)||1;return [a[0]/l,a[1]/l,a[2]/l]}
+  function crs(a,b){return [a[1]*b[2]-a[2]*b[1],a[2]*b[0]-a[0]*b[2],a[0]*b[1]-a[1]*b[0]]}
+  function r4(x){return Math.round(x*1e4)/1e4}
+  /* октаэдр: 8 граней-треугольников */
+  [[1,-1,1],[-1,-1,1],[1,-1,-1],[-1,-1,-1],[1,1,1],[-1,1,1],[1,1,-1],[-1,1,-1]].forEach(function(f){
+    var el=d.createElement('div');el.className='g3d-f';
+    el.innerHTML='<svg viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><polygon class="gw" points="50,0 100,100 0,100"/><polygon class="fl" points="50,0 100,100 0,100"/></svg>';
+    el.style.setProperty('--fc',cols[f[1]<0?(f[0]>0?0:1):2]);
+    o.appendChild(el);faces.push({el:el,f:f,n:[f[0]*s3,f[1]*s3,f[2]*s3]})});
+  /* три гироскопических кольца */
+  [['rotateX(90deg)','#8be9ff','rgba(139,233,255,.55)',6,'22s',0],['rotateY(90deg)','#a58bff','rgba(165,139,255,.5)',15,'30s',1],['rotateX(58deg) rotateY(38deg)','#ffd88a','rgba(255,216,138,.45)',24,'38s',0]].forEach(function(r){
+    var e=d.createElement('div');e.className='g3d-r';
+    e.style.cssText='--rb:'+r[0]+';--rc:'+r[1]+';--rg:'+r[2]+';inset:'+r[3]+'%;--rt:'+r[4]+(r[5]?';animation-direction:reverse':'');
+    o.appendChild(e)});
+  /* искры на сфере (детерминированно) */
+  var seed=7;function rnd(){seed=(seed*16807)%2147483647;return (seed-1)/2147483646}
+  for(var i=0;i<16;i++){var u=rnd()*2-1,t=rnd()*6.283,rr=Math.sqrt(1-u*u),rad=1.08+rnd()*.55,z=2+rnd()*3,s=d.createElement('i');
+    s.className='g3d-s';s.style.cssText='width:'+z.toFixed(1)+'px;height:'+z.toFixed(1)+'px;margin:'+(-z/2).toFixed(1)+'px 0 0 '+(-z/2).toFixed(1)+'px;--c:'+(rnd()<.35?'#ffd88a':'#cfeeff');
+    o.appendChild(s);sparks.push({el:s,p:[rr*Math.cos(t)*rad,u*rad,rr*Math.sin(t)*rad]})}
+  var cross=orb.querySelector('i');orb.insertBefore(g,cross||null);
+
+  function layout(){
+    var R=(g.clientWidth||300)*.27;
+    faces.forEach(function(F){
+      var sx=F.f[0],sy=F.f[1],sz=F.f[2],P0=[0,sy,0],P1=[sx,0,0],P2=[0,0,sz],B=[(P1[0]+P2[0])/2,0,(P1[2]+P2[2])/2],M=[(P0[0]+B[0])/2,(P0[1]+B[1])/2,(P0[2]+B[2])/2],
+          xa=nrm(sub(P2,P1)),ya=nrm(sub(B,P0)),za=crs(xa,ya),w=len(sub(P2,P1))*R,h=len(sub(B,P0))*R,st=F.el.style;
+      st.width=w.toFixed(1)+'px';st.height=h.toFixed(1)+'px';st.marginLeft=(-w/2).toFixed(1)+'px';st.marginTop=(-h/2).toFixed(1)+'px';
+      st.transform='matrix3d('+[xa[0],xa[1],xa[2],0,ya[0],ya[1],ya[2],0,za[0],za[1],za[2],0,M[0]*R,M[1]*R,M[2]*R,1].map(r4).join(',')+')'});
+    sparks.forEach(function(S){S.el.style.transform='translate3d('+(S.p[0]*R).toFixed(1)+'px,'+(S.p[1]*R).toFixed(1)+'px,'+(S.p[2]*R).toFixed(1)+'px)'})}
+  layout();
+  var ro=('ResizeObserver' in W)?new ResizeObserver(layout):null;if(ro)ro.observe(g);
+
+  /* физика: автоповорот + инерция после броска + смещение от скролла (gp) */
+  var S={rx:-16,ry:28,rz:0,wx:0,wy:260,gp:0,gps:0,drag:false,lx:0,ly:0,lt:0,vis:false,raf:0},L=nrm([-.45,-.65,.62]);
+  function rot(n,a,b,c){var x=n[0],y=n[1],z=n[2],t;
+    t=x*Math.cos(c)-y*Math.sin(c);y=x*Math.sin(c)+y*Math.cos(c);x=t;            /* Rz */
+    t=x*Math.cos(b)+z*Math.sin(b);z=-x*Math.sin(b)+z*Math.cos(b);x=t;            /* Ry */
+    t=y*Math.cos(a)-z*Math.sin(a);z=y*Math.sin(a)+z*Math.cos(a);y=t;             /* Rx */
+    return [x,y,z]}
+  function shade(rx,ry,rz){faces.forEach(function(F){var n=rot(F.n,rx*D,ry*D,rz*D),dl=n[0]*L[0]+n[1]*L[1]+n[2]*L[2],
+    a=.07+.48*Math.max(0,dl)+(n[2]>0?.06:0);F.el.style.setProperty('--a',Math.min(.6,a).toFixed(3))})}
+  function apply(){var rx=S.rx+S.gps*40,ry=S.ry+S.gps*260,rz=S.rz+S.gps*35;
+    o.style.transform='rotateX('+rx.toFixed(2)+'deg) rotateY('+ry.toFixed(2)+'deg) rotateZ('+rz.toFixed(2)+'deg)';
+    g.style.scale=(1+S.gps*.14).toFixed(3);shade(rx,ry,rz)}
+  function frame(t){
+    S.raf=0;if(!S.vis||d.hidden)return;S.raf=requestAnimationFrame(frame);
+    if(d.body.classList.contains('ultra')&&!S.drag&&t-S.lt<48)return;
+    var dt=Math.min(.05,Math.max(.001,(t-S.lt)/1000));S.lt=t;
+    S.gps+=(S.gp-S.gps)*(1-Math.exp(-dt*7));
+    if(!S.drag){
+      S.ry+=S.wy*dt;S.rx+=S.wx*dt;
+      var k=1-Math.exp(-dt*1.4);S.wy+=(12-S.wy)*k;S.wx+=(0-S.wx)*k*2;
+      var T=-14+Math.sin(t/2600)*8,df=(((T-S.rx)%360)+540)%360-180;S.rx+=df*(1-Math.exp(-dt*.7))}
+    apply()}
+  function kick(){if(!S.raf&&S.vis&&!d.hidden){S.lt=performance.now();S.raf=requestAnimationFrame(frame)}}
+  function down(e){if(e.pointerType==='mouse'&&e.button!==0)return;S.drag=true;S.lx=e.clientX;S.ly=e.clientY;S.lt=performance.now();S.wx=S.wy=0;g.classList.add('drag');
+    try{g.setPointerCapture(e.pointerId)}catch(_){}kick()}
+  function move(e){if(!S.drag)return;var dx=e.clientX-S.lx,dy=e.clientY-S.ly,now=performance.now(),dt=Math.max(8,now-S.lt)/1000;
+    S.ry+=dx*.55;S.rx-=dy*.55;S.wy=Math.max(-900,Math.min(900,dx*.55/dt));S.wx=Math.max(-900,Math.min(900,-dy*.55/dt));S.lx=e.clientX;S.ly=e.clientY;S.lt=now;apply()}
+  function up(){if(!S.drag)return;S.drag=false;g.classList.remove('drag');S.lt=performance.now();kick()}
+  g.addEventListener('pointerdown',down);g.addEventListener('pointermove',move);g.addEventListener('pointerup',up);g.addEventListener('pointercancel',up);
+  var io=('IntersectionObserver' in W)?new IntersectionObserver(function(es){S.vis=es[0].isIntersecting;if(S.vis)kick()},{rootMargin:'120px'}):null;
+  if(io)io.observe(orb);else{S.vis=true;kick()}
+  d.addEventListener('visibilitychange',kick);
+  apply();
+  return{
+    setGP:function(p){S.gp=p},
+    destroy:function(){if(S.raf)cancelAnimationFrame(S.raf);S.raf=0;S.vis=false;if(io)io.disconnect();if(ro)ro.disconnect();d.removeEventListener('visibilitychange',kick);if(g.parentNode)g.parentNode.removeChild(g)}}}
+
+/* ───────────────────────── сборка всех scroll-анимаций ───────────────────────── */
+function prepare(){
+  $$('[data-k]').forEach(function(el){el.style.setProperty('--kn',el.querySelectorAll('.ch').length)});
+  $$('.f-grid>div,.f-end,.wcap').forEach(function(el){el.classList.add('mo-r')})}
+
+function build(full){
+  var SC=full?.8:.35,crystal=null;
+  root.classList.add('mo',full?'mo-full':'mo-lite');
+  prepare();
+  var hero=d.getElementById('home');
+
+  /* общий помощник: scrub одной переменной */
+  function scrubVar(el,prop,from,to,start,end,sc,ease,extra){
+    var f={},v={ease:ease||'none',scrollTrigger:{trigger:el,start:start,end:end,scrub:sc}};
+    f[prop]=from;v[prop]=to;if(extra)for(var k in extra)v[k]=extra[k];
+    return gsap.fromTo(el,f,v)}
+
+  /* 1 · глубина фона: аврора/сетка плывут на протяжении всей страницы */
+  var bg=d.querySelector('.bg');
+  if(bg)scrubVar(bg,'--bgp',0,1,0,function(){return maxS()},1.4);
+
+  /* 2 · HERO: вход по времени (один раз) → выход по скроллу (обратимо) */
+  if(hero){
+    var base=Math.max(.05,1.0-performance.now()/1000);
+    [['.hero-kicker',0,1.5,'expo.out'],['.hero h1.rv',.1,2.4,'power2.out'],['.hero p.lead',.34,1.7,'expo.out'],['.hero .cta',.46,1.7,'expo.out'],['.hero-side',.22,2.1,'expo.out']].forEach(function(m){
+      var el=d.querySelector(m[0]);if(!el)return;
+      if(heroPlayed){gsap.set(el,{'--rp':1});el.classList.add('mo-done');return}
+      gsap.fromTo(el,{'--rp':0},{'--rp':1,duration:m[2],delay:base+m[1],ease:m[3],onComplete:function(){el.classList.add('mo-done')}})});
+    heroPlayed=true;
+    hero.classList.add('hx0');
+    scrubVar(hero,'--hx',0,1,0,function(){return hero.offsetHeight*.95},.6,'none',{onUpdate:function(){hero.classList.toggle('hx0',this.progress()<=0)}});
+    var orb=hero.querySelector('.orb');
+    if(orb&&!d.body.classList.contains('ultra')){
+      try{crystal=Crystal(orb)}catch(e){crystal=null}
+      if(crystal)ST.create({trigger:hero,start:0,end:function(){return hero.offsetHeight},onUpdate:function(s){crystal.setGP(s.progress)}})}}
+
+  /* 3 · 3D-появление всех карточек/блоков (scrub, реверс бесплатно) */
+  function reveal(el,o){
+    o=o||{};var a=o.a==null?.95:o.a,b=o.b==null?.58:o.b;
+    function pos(){var vh=W.innerHeight,m=maxS(),t=topOf(el),k=o.stg?rowIdx(el):0,s=t-vh*(a-k*.045),e=t-vh*b;
+      s=Math.max(0,Math.min(s,m-70));e=Math.min(m,Math.max(e,s+70));return [s,e]}
+    gsap.fromTo(el,{'--rp':0},{'--rp':1,ease:'power3.out',duration:1,
+      scrollTrigger:{trigger:el,start:function(){return pos()[0]},end:function(){return pos()[1]},scrub:SC,
+        onToggle:function(s){el.classList.toggle('mo-act',s.isActive)}},
+      onUpdate:function(){el.classList.toggle('mo-done',this.progress()>=1)}})}
+  $$('.rv').forEach(function(el){
+    if(hero&&hero.contains(el))return;
+    var o={};if(el.parentNode.classList.contains('stg'))o.stg=1;
+    if(el.classList.contains('sec-head')){o.a=.92;o.b=.5}
+    reveal(el,o)});
+  $$('.mo-r').forEach(function(el){reveal(el,{a:.98,b:.66})});
+  if(full){/* родители с перспективой: 3D-наклон карточек получает настоящую глубину */
+    $$('.rv,.mo-r').forEach(function(el){el.parentNode.classList.add('mo-p')});
+    var hi=d.getElementById('hin');if(hi)hi.classList.add('mo-p')}
+
+  /* 4 · параллакс по слоям (desktop): заголовки, колонки «Молодь», карточка Spirit, карта */
+  function par(el,amp){
+    if(!el)return;el.classList.add('mo-par');
+    gsap.fromTo(el,{'--par':amp},{'--par':-amp,ease:'none',scrollTrigger:{trigger:el,start:function(){return topOf(el)-W.innerHeight},end:function(){return topOf(el)+el.offsetHeight},scrub:1}})}
+  if(full){
+    $$('.sec-head').forEach(function(el){par(el,16)});
+    $$('.ycards>.yc').forEach(function(el,i){par(el,[10,24,38][i%3])});
+    par(d.querySelector('.spirit'),14);par(d.querySelector('.map'),18)}
+
+  /* 5 · переходы между секциями: луч пролетает при пересечении границы */
+  $$('.sep').forEach(function(el){
+    scrubVar(el,'--bp',0,1,function(){return topOf(el)-W.innerHeight},function(){return topOf(el)-W.innerHeight*.22},.6,'power1.inOut')});
+
+  /* 6 · бегущая строка: дрейф от скролла */
+  var mq=d.querySelector('.mq');
+  if(mq)scrubVar(mq,'--mqx',0,1,function(){return topOf(mq)-W.innerHeight},function(){return topOf(mq)+mq.offsetHeight},.5);
+
+  /* 7 · плавающие неоновые формы (desktop): параллакс на своей глубине */
+  if(full)$$('.fs').forEach(function(el){
+    var sec=el.parentNode,k=el.classList.contains('s3')?[160,-160]:el.classList.contains('s2')?[-70,90]:[120,-120];
+    scrubVar(el,'--fy',k[0],k[1],function(){return topOf(sec)-W.innerHeight},function(){return topOf(sec)+sec.offsetHeight},1)});
+
+  /* 8 · таймлайн: точки зажигаются синхронно с растущей линией (обратимо) */
+  $$('.ti').forEach(function(ti){
+    var y=function(){return topOf(ti)+40};
+    scrubVar(ti,'--dl',0,1,function(){return y()-W.innerHeight*.66},function(){return y()-W.innerHeight*.58},.3,'none',
+      {onUpdate:function(){ti.classList.toggle('lit',this.progress()>=1)}})});
+
+  /* 9 · зимняя сцена: «наезд камеры» */
+  var ws=d.querySelector('.wscene');
+  if(ws)scrubVar(ws,'--sp',0,1,function(){return topOf(ws)-W.innerHeight*.9},function(){return Math.min(maxS(),topOf(ws)+ws.offsetHeight*.5)},1,'power1.out');
+
+  refreshSoon();
+  return function(){/* cleanup при смене режима (gsap.matchMedia сам откатывает твины/триггеры) */
+    if(crystal)crystal.destroy();
+    root.classList.remove('mo','mo-full','mo-lite');
+    $$('.mo-p,.mo-act,.mo-done,.mo-par,.hx0,.lit').forEach(function(el){el.classList.remove('mo-p','mo-act','mo-done','mo-par','hx0','lit')})}}
+
+/* режимы: full — десктоп с мышью, lite — телефоны/планшеты; при reduce-motion не включается ничего */
+var mm=gsap.matchMedia();
+mm.add({
+  full:'(prefers-reduced-motion: no-preference) and (min-width: 1021px) and (pointer: fine)',
+  lite:'(prefers-reduced-motion: no-preference) and (max-width: 1020px), (prefers-reduced-motion: no-preference) and (pointer: coarse)'
+},function(ctx){if(!ctx.conditions.full&&!ctx.conditions.lite)return;return build(!!ctx.conditions.full)});
 })();
 </script>
 </body>
