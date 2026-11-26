@@ -630,8 +630,74 @@ html.mo .wsc>svg{transform-origin:50% 100%;scale:calc(1 + (1 - var(--sp,1))*.14)
 @keyframes g3dR{to{transform:var(--rb) rotateZ(360deg)}}
 .g3d-s{position:absolute;left:50%;top:50%;border-radius:50%;background:var(--c);box-shadow:0 0 8px 1px var(--c);pointer-events:none}
 .hero.off .g3d-r,.hero.off .g3d-o{animation-play-state:paused!important}
-.ultra .g3d-r{animation:none!important}
 @media(prefers-reduced-motion:reduce){.g3d{display:none}}
+
+/* ═══════════ 3D-КАРТОЧКИ: нажатие по углу продавливает, перетаскивание вращает ═══════════
+   Добавляем --drx/--dry/--dz3/--dsc к существующему hover-наклону (--rx/--ry): transform один, но слагаемые разные. */
+.glass:not(.bless-msg){
+  transform:perspective(1000px) translateY(var(--ty)) rotateX(calc(var(--rx) + var(--drx,0deg))) rotateY(calc(var(--ry) + var(--dry,0deg))) translateZ(var(--dz3,0px)) scale(var(--dsc,1));
+  touch-action:pan-y pinch-zoom;cursor:grab}
+a.glass:not(.bless-msg){cursor:pointer}
+/* пока карточка зажата/пружинит — старый hover-наклон (он не ограничен по углу) глушим: иначе при drag далеко от карточки он суммируется с моим */
+html .glass.gp{--rx:0deg!important;--ry:0deg!important}
+html .glass.gp{transition:border-color .5s,box-shadow .5s!important;box-shadow:0 10px 24px rgba(0,0,0,.5),0 0 34px rgba(77,124,255,.28),inset 0 0 44px rgba(0,0,0,.28)}
+.glass.gdrag{cursor:grabbing;-webkit-user-select:none;user-select:none}
+.gp-spot{position:absolute;inset:0;border-radius:inherit;pointer-events:none;opacity:var(--gpo,0);transition:opacity .28s;
+  background:radial-gradient(240px circle at var(--gpx,50%) var(--gpy,50%),rgba(255,255,255,.14),rgba(0,0,0,.17) 46%,transparent 72%)}
+
+/* ═══════════ ТЕКСТ: каждая буква анимируется, когда до неё долистали (движок — в JS) ═══════════ */
+/* контейнеры вне .rv (меню, окна): только переменные прогресса, без трансформов */
+html.mo .mo-t{--rp:1;--p1:clamp(0,calc((var(--rp) - .16)/.5),1);--p2:clamp(0,calc((var(--rp) - .32)/.5),1);--p3:clamp(0,calc((var(--rp) - .48)/.5),1)}
+/* --tx: прогресс САМОГО блока (его личный scrub). c — по контейнеру (hero, окна), u — фикс-панель (всегда готово) */
+html.mo :is(.fx-slice,.fx-flip,.fx-rise,.fx-wave,.fx-focus,.fx-scan,.fx-fill){--tx:0}
+html.mo .fx-c{--tx:var(--p2)}
+html.mo .fx-u{--tx:1}
+html.mo .fx-fill{--cw:36}
+html.mo .tw{--wp:clamp(0,calc((var(--tx,1)*(var(--wn,12) + 6) - var(--w,0))/6),1);display:inline-block;position:relative}
+html.mo .twi{display:block}
+/* БУКВЫ: у каждой своя вспышка льда → чёткий текст (inline-спан: вёрстку и кернинг не трогает) */
+html.mo .tc{--lp:clamp(0,calc((var(--tx,1)*(var(--cn,20) + var(--cw,12)) - var(--c,0))/var(--cw,12)),1);opacity:var(--lp)}
+/* дорогая «вспышка льда» (цвет + свечение) — ТОЛЬКО у блока, который анимируется прямо сейчас (.fx-act) */
+html.mo-full .fx-act .tc{color:color-mix(in srgb,#a6ecff calc((1 - var(--lp))*100%),currentColor);
+  text-shadow:0 0 calc((1 - var(--lp))*11px) rgba(139,233,255,calc((1 - var(--lp))*.85))}
+html.mo .fx-fill .tc{opacity:calc(.2 + .8*var(--lp))}
+/* liquid: слова рядом с курсором расступаются и светятся */
+html.mo .tw.lqa{translate:calc(var(--lx,0)*1px) calc(var(--ly,0)*1px);scale:calc(1 + var(--lq,0)*.1);text-shadow:0 0 calc(var(--lq,0)*16px) rgba(139,233,255,calc(var(--lq,0)*.9));color:color-mix(in srgb,#d7f7ff calc(var(--lq,0)*100%),currentColor)}
+/* Состояния слов (маски, клип, blur, 3D) включаются ТОЛЬКО пока блок анимируется (.fx-act = прогресс строго между 0 и 1):
+   у не достигнутых и у завершённых блоков их нет — это резко снижает нагрузку на слабых устройствах. */
+html.mo :is(.fx-rise,.fx-wave) .tw{vertical-align:top}
+html.mo .twt{display:none}
+/* rise / wave («молния»: чётные слова снизу, нечётные сверху) — выезд из-под маски */
+html.mo .fx-act:is(.fx-rise,.fx-wave) .tw{overflow:hidden;padding:0 .05em .2em;margin:0 -.05em -.2em}
+html.mo .fx-act:is(.fx-rise,.fx-wave) .twi{translate:0 calc((1 - var(--wp))*108%*var(--sg,1))}
+html.mo .fx-wave .tw:nth-of-type(even){--sg:-1}
+/* slice — слово разрезано по горизонтали, половинки сходятся с противоположных сторон */
+html.mo .fx-act.fx-slice .twi{clip-path:inset(50% 0 0 0);translate:calc((1 - var(--wp))*.6em) 0}
+html.mo .fx-act.fx-slice .twt{display:block;position:absolute;left:0;top:0;white-space:nowrap;pointer-events:none;clip-path:inset(0 0 50% 0);translate:calc((1 - var(--wp))*-.6em) 0}
+/* flip — слова переворачиваются вокруг нижней кромки */
+html.mo-full .fx-act.fx-flip .tw{perspective:520px}
+html.mo .fx-act.fx-flip .twi{transform-origin:50% 100%;rotate:1 0 0 calc((1 - var(--wp))*-100deg);translate:0 calc((1 - var(--wp))*28%)}
+/* focus — наводка на резкость */
+html.mo-full .fx-act.fx-focus .twi{filter:blur(calc((1 - var(--wp))*8px));translate:0 calc((1 - var(--wp))*.3em)}
+html.mo-lite .fx-act.fx-focus .twi{translate:0 calc((1 - var(--wp))*.3em)}
+/* scan — диагональный световой проход маски: для живых текстов, которые нельзя резать на слова */
+html.mo .fx-scan{-webkit-mask-image:linear-gradient(100deg,#000 calc(var(--tx)*150% - 50%),transparent calc(var(--tx)*150%));mask-image:linear-gradient(100deg,#000 calc(var(--tx)*150% - 50%),transparent calc(var(--tx)*150%))}
+/* блок дошёл до конца своей анимации — снимаем всё (нет лишних слоёв, масок и теней) */
+html.mo .tx-done .tc{opacity:1;color:inherit;text-shadow:inherit}
+html.mo .fx-scan.tx-done{-webkit-mask-image:none;mask-image:none}
+/* скорость скролла → скос и RGB-сдвиг крупных заголовков */
+html.mo-full .xs{transform:skewY(calc(var(--sv,0)*-.55deg));
+  text-shadow:var(--tsb,none),calc(var(--sv,0)*.7px) 0 0 rgba(255,60,110,calc(max(var(--sv,0),var(--sv,0)*-1)*.11)),calc(var(--sv,0)*-.7px) 0 0 rgba(0,220,255,calc(max(var(--sv,0),var(--sv,0)*-1)*.11))}
+
+/* ═══════════ ЭКОНОМИЯ ДЛЯ СЛАБЫХ УСТРОЙСТВ (html.perf-1 / perf-2) ═══════════ */
+html.perf-1 .kbar,html.perf-1 .nav,html.perf-1 .dock,html.perf-1 .mmenu,html.perf-1 .tgo{-webkit-backdrop-filter:none;backdrop-filter:none}
+html.perf-1 .nav,html.perf-1 .nav.scrolled{background:rgba(6,16,40,.94)}
+html.perf-1 .kbar{background:rgba(3,9,23,.96)}
+html.perf-1 .dock{background:rgba(6,16,40,.96)}
+html.perf-1 .mq-t span,html.perf-1 .hero h1 .ln,html.perf-1 .sec-head h2{text-shadow:none}
+html.perf-1 .orb::before{filter:none}
+html.perf-2 .glass{box-shadow:0 8px 18px rgba(0,0,0,.35)}
+html.perf-2 .hero .waves{display:none}
 </style>
 </head>
 <body>
@@ -1300,30 +1366,129 @@ d.addEventListener('visibilitychange',function(){if(!d.hidden)go()});go();
 })();
 </script>
 
-<!-- ✦ MOTION IV: GSAP + ScrollTrigger (scroll-scrub, обратимые 3D-анимации) -->
+<!-- ✦ MOTION IV: GSAP + ScrollTrigger (scroll-scrub, обратимые 3D-анимации, эксклюзивная типографика) -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script>
 /* ═══ MOTION IV · GSAP ScrollTrigger ═══════════════════════════════════════
    • Все анимации привязаны к позиции скролла (scrub) → при прокрутке вверх идут строго назад.
-   • GSAP крутит только CSS-переменные (--rp, --hx, --bgp …); см. блок «MOTION IV» в CSS.
+   • GSAP крутит только CSS-переменные (--rp, --hx, --tx …); см. блок «MOTION IV» в CSS.
    • start/end считаются через offsetTop (не зависят от трансформов анимируемых элементов).
-   • Если GSAP не загрузился — ничего не делаем: остаётся прежнее поведение сайта.      */
+   • Если GSAP не загрузился — scroll-слой не включается: остаётся прежнее поведение сайта.
+   • Cards3D (нажатие/вращение карточек) и Perf (стабилизатор) работают независимо от GSAP.   */
 (function(){
 'use strict';
 var d=document,root=d.documentElement,W=window;
+function $$(s,r){return [].slice.call((r||d).querySelectorAll(s))}
+function safe(f){try{return f()}catch(e){if(W.console)console.warn('[motion]',e)}}
+var RM=W.matchMedia&&W.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* ───────────────────────── PERF: стабилизатор для слабых устройств ─────────────────────────
+   tier 0 — полный; 1 — облегчённый (без 3D-наклонов/параллакса/«жидкого» текста/blur, текст ВСЁ РАВНО анимируется);
+   2 — то же + экономные тени/волны. Текстовые анимации и кристалл НИКОГДА не отключаются стабилизатором.
+   Старт по железу + замер FPS во время скролла; выбор запоминается на 3 дня (ключ ng_perf2).          */
+var Perf={tier:0,restart:null};
+function perfSet(n,save){
+  if(n<=Perf.tier)return;Perf.tier=n;
+  root.classList.add('perf-1');if(n>=2)root.classList.add('perf-2');
+  if(save)safe(function(){localStorage.setItem('ng_perf2',JSON.stringify({t:n,ts:Date.now()}))});
+  if(Perf.restart)Perf.restart()}
+(function(){
+  var nav=W.navigator||{},cn=nav.connection||{},t0=0;
+  safe(function(){var s=JSON.parse(localStorage.getItem('ng_perf2')||'null');if(s&&Date.now()-s.ts<2.592e8)t0=Math.min(2,s.t|0)});
+  if(!t0&&((nav.hardwareConcurrency&&nav.hardwareConcurrency<=2)||(nav.deviceMemory&&nav.deviceMemory<=2)||cn.saveData))t0=1;
+  if(t0)perfSet(t0,false);
+  var P={last:0,n:0,sum:0,bad:0,run:false,at:0,grace:performance.now()+5000};
+  function samp(t){
+    if(Perf.tier>=2||d.hidden){P.run=false;return}
+    if(t-P.at>350){P.run=false;P.n=0;P.sum=0;return}           /* остановились — не меряем */
+    if(P.last&&t>P.grace){P.n++;P.sum+=Math.min(t-P.last,120);
+      if(P.n>=36){var avg=P.sum/P.n;P.n=0;P.sum=0;
+        if(avg>34){if(++P.bad>=3){P.bad=0;P.grace=performance.now()+3500;perfSet(Perf.tier+1,true)}}else P.bad=Math.max(0,P.bad-1)}}
+    P.last=t;requestAnimationFrame(samp)}
+  var lock=0;safe(function(){lock=localStorage.getItem('ng_perf_lock')==='1'});     /* отладка: ng_perf_lock=1 отключает авто-замер */
+  if(!lock)W.addEventListener('scroll',function(){P.at=performance.now();if(!P.run){P.run=true;P.last=0;requestAnimationFrame(samp)}},{passive:true})
+})();
+
+/* ───────────────────────── Cards3D: нажатие по углу «продавливает», перетаскивание вращает ─────────────────────────
+   Вращение мягко упирается в ±LX/±LY° (tanh) — обратная сторона недостижима; после отпускания пружина с лёгким овершутом.
+   Пишет только --drx/--dry/--dz3/--dsc: складывается с существующим hover-наклоном, их transform не перетирается. */
+if(!RM)(function(){
+  var SEL='.glass:not(.bless-msg)',LX=30,LY=38,K=230,C=19,act=[],raf=0,lt=0,press=null;
+  function st(el){return el.__g||(el.__g={el:el,rx:0,ry:0,dz:0,sc:1,vx:0,vy:0,vz:0,vs:0,tx:0,ty:0,tz:0,ts:1,px:0,py:0,spot:null,down:false,moved:false,eng:false,id:0,x0:0,y0:0,w:1,h:1,l:0,t:0,timer:0,touch:false,sup:false})}
+  function wake(S){if(act.indexOf(S)<0)act.push(S);if(!raf){lt=performance.now();raf=requestAnimationFrame(tick)}}
+  function spot(S,x,y){
+    if(!S.spot){S.spot=d.createElement('i');S.spot.className='gp-spot';S.spot.setAttribute('aria-hidden','true');S.el.insertBefore(S.spot,S.el.firstChild)}
+    S.spot.style.setProperty('--gpx',(x-S.l).toFixed(0)+'px');S.spot.style.setProperty('--gpy',(y-S.t).toFixed(0)+'px');S.spot.style.setProperty('--gpo','1')}
+  function engage(S,x,y){
+    if(S.eng)return;S.eng=true;
+    var nx=Math.max(-1,Math.min(1,((x-S.l)/S.w-.5)*2)),ny=Math.max(-1,Math.min(1,((y-S.t)/S.h-.5)*2)),P=S.w>700?4.5:8;
+    S.px=-ny*P;S.py=nx*P;S.tx=S.px;S.ty=S.py;S.tz=-12;S.ts=.985;
+    S.el.classList.add('gp');spot(S,x,y);wake(S)}
+  function release(S,keepClick){
+    clearTimeout(S.timer);S.down=false;S.eng=false;S.tx=S.ty=S.tz=0;S.ts=1;
+    S.el.classList.remove('gdrag');if(S.spot)S.spot.style.setProperty('--gpo','0');
+    if(S.moved&&keepClick){S.sup=true;setTimeout(function(){S.sup=false},350)}
+    safe(function(){S.el.releasePointerCapture(S.id)});if(press===S)press=null;wake(S)}
+  function onDown(e){
+    if(press||(e.pointerType==='mouse'&&e.button!==0))return;
+    var c=e.target.closest&&e.target.closest(SEL);if(!c)return;
+    var it=e.target.closest('a,button,input,textarea,select,label,summary,[data-tg],.tab');if(it&&it!==c)return;
+    var S=st(c),r=c.getBoundingClientRect();
+    S.l=r.left;S.t=r.top;S.w=r.width||1;S.h=r.height||1;S.x0=e.clientX;S.y0=e.clientY;S.id=e.pointerId;S.moved=false;S.eng=false;S.down=true;S.touch=e.pointerType!=='mouse';press=S;
+    if(S.touch)S.timer=setTimeout(function(){if(press===S&&!S.moved)engage(S,S.x0,S.y0)},110);   /* на тач — только удержание, чтобы не мешать скроллу */
+    else engage(S,e.clientX,e.clientY)}
+  function onMove(e){
+    var S=press;if(!S||e.pointerId!==S.id)return;
+    var dx=e.clientX-S.x0,dy=e.clientY-S.y0;
+    if(!S.moved){
+      if(Math.hypot(dx,dy)<6)return;
+      if(S.touch&&Math.abs(dy)>Math.abs(dx)*1.2){release(S,false);return}                       /* это вертикальный скролл */
+      S.moved=true;engage(S,e.clientX,e.clientY);S.el.classList.add('gdrag');
+      safe(function(){S.el.setPointerCapture(S.id)});safe(function(){W.getSelection().removeAllRanges()})}
+    S.ty=LY*Math.tanh(dx*.30/LY)+S.py*.35;S.tx=LX*Math.tanh(-dy*.26/LX)+S.px*.35;
+    spot(S,e.clientX,e.clientY);wake(S)}
+  function onUp(e){var S=press;if(S&&e.pointerId===S.id)release(S,true)}
+  function tick(t){
+    raf=0;var dt=Math.min(.033,Math.max(.001,(t-lt)/1000));lt=t;var keep=[];
+    act.forEach(function(S){
+      function sp(x,v,tg){v+=(K*(tg-x)-C*v)*dt;return [x+v*dt,v]}
+      var a=sp(S.rx,S.vx,S.tx),b=sp(S.ry,S.vy,S.ty),c=sp(S.dz,S.vz,S.tz),s=sp(S.sc,S.vs,S.ts);
+      S.rx=a[0];S.vx=a[1];S.ry=b[0];S.vy=b[1];S.dz=c[0];S.vz=c[1];S.sc=s[0];S.vs=s[1];
+      var el=S.el,rest=!S.down&&!S.eng&&Math.abs(S.rx)<.03&&Math.abs(S.ry)<.03&&Math.abs(S.dz)<.05&&Math.abs(S.sc-1)<.0005&&Math.abs(S.vx)+Math.abs(S.vy)+Math.abs(S.vz)<.08;
+      if(rest){['--drx','--dry','--dz3','--dsc'].forEach(function(p){el.style.removeProperty(p)});el.classList.remove('gp');S.rx=S.ry=S.dz=S.vx=S.vy=S.vz=S.vs=0;S.sc=1}
+      else{el.style.setProperty('--drx',S.rx.toFixed(2)+'deg');el.style.setProperty('--dry',S.ry.toFixed(2)+'deg');el.style.setProperty('--dz3',S.dz.toFixed(1)+'px');el.style.setProperty('--dsc',S.sc.toFixed(4));keep.push(S)}});
+    act=keep;if(act.length)raf=requestAnimationFrame(tick)}
+  d.addEventListener('pointerdown',onDown,{passive:true});
+  d.addEventListener('pointermove',onMove,{passive:true});
+  d.addEventListener('pointerup',onUp,{passive:true});
+  d.addEventListener('pointercancel',function(e){var S=press;if(S&&e.pointerId===S.id)release(S,false)},{passive:true});
+  d.addEventListener('click',function(e){var c=e.target.closest&&e.target.closest(SEL);if(c&&c.__g&&c.__g.sup){e.preventDefault();e.stopPropagation();c.__g.sup=false}},true);
+  d.addEventListener('selectstart',function(e){if(press&&press.moved)e.preventDefault()});
+})();
+
+/* ───────────────────────── 3D-кристалл запускается ВСЕГДА (не зависит от GSAP и от стабилизатора) ───────────────────────── */
+(function(){
+  if(RM)return;var hero=d.getElementById('home'),orb=hero&&hero.querySelector('.orb'),cr=null;
+  if(!orb)return;
+  safe(function(){cr=Crystal(orb)});
+  if(cr)W.addEventListener('scroll',function(){cr.setGP(Math.max(0,Math.min(1,(W.pageYOffset||0)/((hero.offsetHeight||1)))))},{passive:true})
+})();
+
+/* ───────────────────────── GSAP-слой (scroll-scrub) ───────────────────────── */
 if(!W.gsap||!W.ScrollTrigger)return;
 var gsap=W.gsap,ST=W.ScrollTrigger;
-try{gsap.registerPlugin(ST);ST.config({ignoreMobileResize:true})}catch(e){return}
+try{gsap.registerPlugin(ST);ST.config({ignoreMobileResize:true,limitCallbacks:true})}catch(e){return}
 
-function $$(s,r){return [].slice.call((r||d).querySelectorAll(s))}
 function topOf(el){var y=0;while(el){y+=el.offsetTop;el=el.offsetParent}return y}
 function maxS(){return Math.max(0,root.scrollHeight-W.innerHeight)}
 function rowIdx(el){var t=el.offsetTop,k=0;for(var s=el.parentNode.firstElementChild;s&&s!==el;s=s.nextElementSibling){if(s.classList.contains('rv')&&Math.abs(s.offsetTop-t)<8)k++}return k}
+/* диапазон скролла для элемента: start = top − vh·a, end = (top|bottom) − vh·b; всегда достижим и ≥70px */
+function span(el,a,b,wh,k){var vh=W.innerHeight,m=maxS(),t=topOf(el),s=t-vh*(a-(k||0)*.045),e=t+(wh?el.offsetHeight:0)-vh*b;
+  s=Math.max(0,Math.min(s,m-70));e=Math.min(m,Math.max(e,s+70));return [s,e]}
 
 var heroPlayed=false,rT=0;
-function refreshSoon(){clearTimeout(rT);rT=setTimeout(function(){ST.refresh()},200)}
-
+function refreshSoon(){clearTimeout(rT);rT=setTimeout(function(){safe(function(){ST.refresh()})},200)}
 /* html{scroll-behavior:smooth} мешает измерениям при refresh — на время отключаем */
 ST.addEventListener('refreshInit',function(){root.style.scrollBehavior='auto'});
 ST.addEventListener('refresh',function(){root.style.scrollBehavior=''});
@@ -1331,6 +1496,159 @@ ST.addEventListener('refresh',function(){root.style.scrollBehavior=''});
 if('ResizeObserver' in W){var ro0=new ResizeObserver(refreshSoon);ro0.observe(d.body)}
 if(d.fonts&&d.fonts.ready)d.fonts.ready.then(refreshSoon);
 W.addEventListener('load',refreshSoon);
+
+/* ───────────────────────── ТЕКСТ: каждая БУКВА анимируется В МОМЕНТ, КОГДА ДО НЕЁ ДОЛИСТАЛИ ─────────────────────────
+   У каждого текстового блока — СВОЙ scrub-триггер по его собственной позиции (а не по прогрессу карточки).
+   Слой слов (по роли): slice / flip / wave / focus / rise ; слой букв (у всех): вспышка льда → чёткий текст ;
+   fill — Apple-заливка по буквам ; decode — «расшифровка» знаков (короткие подписи) ; scan — диагональная маска (живые тексты).
+   Hero и всплывающие окна идут по времени/открытию; фикс-панель (меню/док/топ-бар) «оживает» при смене раздела.
+   + liquid (слова расступаются у курсора), hover-decode, скос и RGB-сдвиг заголовков от скорости скролла.        */
+var DYN='#kTime,#kTz,#kDate,#kNext,#year,#hcLbl,#hcName,#hcTime,#blessText,#toastText,#favCount,#qText,#qRef,#tgT,.timer h3,.timer p.td,.timer .cd,.live-title';
+var SKIP='script,style,svg,noscript,canvas,[data-k],.tw,.mq,#snow,.g3d,.spot,.gp-spot';
+var SECFX={home:'focus',about:'fill',live:'scan',services:'focus',history:'fill',youth:'wave',directions:'scan',inspiration:'focus',contacts:'wave',footer:'fill',ui:'scan'};
+var GLU='ABCDEFGHJKLMNPRSTUVWXYZ#%&*+<>/=ЖЗФЦШЩЮЯДЛПГБ',GLL='abcdefghkmnoprstuvxyzбвгдежзиклмнопрстуфхцчшщюя',GLD='0123456789';
+function glyph(ch,i,s){
+  if(/[\s.,:;!?«»'"()\-–—…·•×]/.test(ch))return ch;
+  var set=/\d/.test(ch)?GLD:(ch!==ch.toLowerCase()?GLU:GLL);
+  return set.charAt((i*31+s*17+ch.charCodeAt(0))%set.length)}
+function decodeStr(o,p){
+  var n=o.length,lead=p*(n+7),s=Math.floor(p*38),r='';
+  for(var i=0;i<n;i++)r+=i<lead-7?o.charAt(i):glyph(o.charAt(i),i,s);
+  return r}
+/* decode: контейнерный режим (hero, всплывающие окна) */
+function decodeTick(el){
+  var a=el.__dec;if(!a)return;
+  var rp=parseFloat(el.style.getPropertyValue('--rp'));if(isNaN(rp))rp=1;
+  var p=Math.max(0,Math.min(1,(rp-.06)/.55));
+  for(var i=0;i<a.length;i++){var t=a[i];if(!t.n.isConnected)continue;var v=p>=1?t.o:decodeStr(t.o,p);if(t.n.nodeValue!==v)t.n.nodeValue=v}}
+/* decode: СОБСТВЕННЫЙ режим — по --tx самого блока (т.е. по его позиции на экране) */
+function decodeOwn(el){
+  var a=el.__dn;if(!a)return;
+  var tx=parseFloat(el.style.getPropertyValue('--tx'));if(isNaN(tx))tx=1;
+  for(var i=0;i<a.length;i++){var t=a[i];if(!t.n.isConnected)continue;var v=tx>=1?t.o:decodeStr(t.o,tx);if(t.n.nodeValue!==v)t.n.nodeValue=v}}
+function lines(n){var r=d.createRange();r.selectNodeContents(n);return r.getClientRects().length}
+function blockOf(el){while(el&&el!==d.body){var ds=W.getComputedStyle(el).display;if(ds!=='inline'&&ds!=='contents')return el;el=el.parentElement}return d.body}
+function esc(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;')}
+var SPLIT=[],DEC=[],PLAN=[],PEND=[],TXI={orph:[],decode:0,words:0,letters:0,scan:0},LAZY=null;
+function letters(word,cc){var ch=Array.from(word),s='';for(var k=0;k<ch.length;k++)s+='<span class="tc" style="--c:'+(cc.n++)+'">'+esc(ch[k])+'</span>';return s}
+/* разбиваем блок на слова и БУКВЫ (slice: вторая копия слова = верхняя половинка) */
+function splitNodes(E,cls){
+  var el=E.el;if(el.__orig!=null)return;
+  el.__orig=el.innerHTML;var wi=0,cc={n:0},slice=cls==='fx-slice';
+  E.nodes.forEach(function(t){
+    if(!t.parentNode)return;
+    var html=t.nodeValue.split(/(\s+)/).map(function(p){
+      if(!p)return '';if(/^\s+$/.test(p))return p;
+      var L=letters(p,cc);
+      return '<span class="tw" style="--w:'+(wi++)+'"><span class="twi">'+L+'</span>'+(slice?'<span class="twt" aria-hidden="true">'+L+'</span>':'')+'</span>'}).join('');
+    var tmp=d.createElement('span');tmp.innerHTML=html;
+    while(tmp.firstChild)t.parentNode.insertBefore(tmp.firstChild,t);t.parentNode.removeChild(t)});
+  el.style.setProperty('--wn',wi);el.style.setProperty('--cn',cc.n);SPLIT.push(el);TXI.words+=wi;TXI.letters+=cc.n}
+function unsplitAll(){
+  if(LAZY){LAZY.disconnect();LAZY=null}PEND=[];
+  SPLIT.forEach(function(el){if(el.__orig!=null){el.innerHTML=el.__orig;delete el.__orig}});SPLIT=[];
+  PLAN.forEach(function(P){var el=P.el;el.className=el.className.replace(/\b(fx-\w+|tx-done)\b/g,'').replace(/\s+/g,' ').trim();
+    ['--wn','--cn','--tx'].forEach(function(p){el.style.removeProperty(p)});delete el.__dn;delete el.__hd;delete el.__pend});
+  DEC.forEach(function(c){(c.__dec||[]).forEach(function(t){if(t.n.isConnected)t.n.nodeValue=t.o});delete c.__dec});DEC=[];
+  PLAN.forEach(function(P){(P.items||[]).forEach(function(t){if(t.n.isConnected&&t.n.nodeValue!==t.o)t.n.nodeValue=t.o})});PLAN=[];
+  $$('.mo-t').forEach(function(el){el.classList.remove('mo-t','mo-done')})}
+/* лениво режем на буквы блоки, которые подъезжают к экрану (экономия при загрузке и на слабых устройствах) */
+function startLazy(){
+  if(!PEND.length)return;
+  if(!('IntersectionObserver' in W)){PEND.forEach(function(P){splitNodes(P.E,P.cls)});PEND=[];return}
+  LAZY=new IntersectionObserver(function(es){es.forEach(function(e){
+    if(!e.isIntersecting)return;var P=e.target.__pend;LAZY.unobserve(e.target);
+    if(P&&!P.done){P.done=1;safe(function(){splitNodes(P.E,P.cls)})}})},{rootMargin:'200% 0px 200% 0px'});
+  PEND.forEach(function(P){P.E.el.__pend=P;LAZY.observe(P.E.el)})}
+/* собираем текстовые блоки и раздаём эффекты (измеряем в покое, ДО твинов) */
+function planText(full){
+  TXI.orph=[];TXI.decode=TXI.words=TXI.letters=TXI.scan=0;
+  var order=[],map=new Map(),w=d.createTreeWalker(d.body,4,null),n,hc=0;
+  while((n=w.nextNode())){
+    if(!n.nodeValue.trim())continue;var p=n.parentElement;if(!p||p.closest(SKIP))continue;
+    var dyn=p.closest(DYN),key=dyn||blockOf(p),e=map.get(key);
+    if(!e){e={el:key,dyn:!!dyn,nodes:[]};map.set(key,e);order.push(e)}e.nodes.push(n)}
+  order.forEach(function(E){
+    var el=E.el,cont=el.closest('.rv,.mo-r,.mo-t');
+    if(!cont){TXI.orph.push((el.id?'#'+el.id:'')+'.'+(el.className||'')+'<'+el.tagName.toLowerCase()+'> '+E.nodes[0].nodeValue.trim().slice(0,24));return}
+    /* mode: own — по собственной позиции; c — по контейнеру (hero, окна); u — фикс-панель */
+    var mode=/^(kbar|nav|dock)$/.test(cont.id||'')?'u':(el.closest('#home')||cont.classList.contains('mo-t'))?'c':'own',
+        P={el:el,mode:mode,items:[]};PLAN.push(P);
+    if(mode==='c')el.classList.add('fx-c','fx-act');
+    if(mode==='u')el.classList.add('fx-u','tx-done');
+    if(E.dyn){el.classList.add('fx-scan');TXI.scan++;return}
+    var len=E.nodes.map(function(x){return x.nodeValue}).join('').trim().length,
+        head=!!(el.matches('h1,h2,h3,h4,h5,h6,.pillar>b')||el.closest('h1,h2,h3,h4,h5,h6'));
+    if(!head&&len<=26&&E.nodes.every(function(x){return lines(x)<=1})){
+      P.dec=1;var ia=el.closest('a,button,.tm');
+      E.nodes.forEach(function(x){
+        var t={n:x,o:x.nodeValue,k:mode,b:el};P.items.push(t);TXI.decode++;
+        if(mode==='own')(el.__dn=el.__dn||[]).push(t);
+        else if(mode==='c'){cont.__dec=cont.__dec||[];if(DEC.indexOf(cont)<0)DEC.push(cont);cont.__dec.push(t)}
+        if(ia)(ia.__hd=ia.__hd||[]).push(t)});
+      return}
+    var sec=el.closest('section,footer,#kbar,#nav,#dock,#mmenu,#tgo'),sid=!sec?'ui':sec.tagName==='FOOTER'?'footer':(sec.id&&SECFX[sec.id]?sec.id:'ui'),
+        fx=head?((hc++%2)?'flip':'slice'):(SECFX[sid]||'fill');
+    if(!full){if(fx==='flip'||fx==='slice')fx='rise';if(fx==='focus')fx='fill'}
+    P.fill=(fx==='fill');
+    if(fx==='scan'){el.classList.add('fx-scan');TXI.scan++;return}
+    el.classList.add('fx-'+fx);PEND.push({E:E,cls:'fx-'+fx})});
+  startLazy()}
+/* ячейки «готово» для hover/смены раздела */
+function ready(x){
+  if(x.k==='u')return true;
+  if(x.k==='own')return x.b.classList.contains('tx-done');
+  var c=x.b.closest('.rv,.mo-r,.mo-t'),rp=c?parseFloat(c.style.getPropertyValue('--rp')):1;return isNaN(rp)||rp>=1}
+function runDec(t){
+  if(t.__hb||!t.__hd)return;
+  for(var i=0;i<t.__hd.length;i++)if(!ready(t.__hd[i]))return;
+  t.__hb=1;var t0=performance.now(),a=t.__hd;
+  (function step(now){var p=Math.min(1,(now-t0)/520);
+    a.forEach(function(x){if(!x.n.isConnected)return;var v=p>=1?x.o:decodeStr(x.o,p);if(x.n.nodeValue!==v)x.n.nodeValue=v});
+    if(p<1)requestAnimationFrame(step);else t.__hb=0})(t0)}
+
+/* hover-decode: при наведении на кнопку/ссылку/чип знаки «пересобираются» заново */
+(function(){
+  function over(e){if(!root.classList.contains('mo'))return;var t=e.target.closest&&e.target.closest('a,button,.tm');if(t&&t.__hd)runDec(t)}
+  d.addEventListener('mouseover',over,{passive:true});d.addEventListener('focusin',over,{passive:true})
+})();
+
+/* liquid typography: слова рядом с курсором мягко расступаются и подсвечиваются (только десктоп) */
+(function(){
+  var L={blk:null,act:[],mx:-1e4,my:-1e4,raf:0,calm:0,lt:0},R=120;
+  function mv(e){if(e.pointerType!=='mouse'||!root.classList.contains('mo-full'))return;L.mx=e.clientX;L.my=e.clientY;L.calm=0;if(!L.raf){L.lt=performance.now();L.raf=requestAnimationFrame(tick)}}
+  function tick(now){
+    L.raf=0;
+    var dt=Math.min(.1,Math.max(.001,(now-L.lt)/1000||.016)),k=1-Math.pow(.78,dt*60);L.lt=now;
+    var el=d.elementFromPoint(L.mx,L.my),blk=el&&el.closest?el.closest('.fx-fill,.fx-slice,.fx-flip,.fx-rise,.fx-wave,.fx-focus'):null;
+    if(blk&&blk.closest('.glass.gp'))blk=null;
+    if(blk!==L.blk){L.blk=blk;if(blk){blk.__lw=[].slice.call(blk.querySelectorAll('.tw'));blk.__lw.forEach(function(w){if(L.act.indexOf(w)<0)L.act.push(w)})}}
+    var rs=L.act.map(function(w){var r=w.getBoundingClientRect();return [r.left+r.width/2-(w.__x||0),r.top+r.height/2-(w.__y||0)]}),keep=[],mx=0;
+    L.act.forEach(function(w,i){
+      var c=rs[i],dx=c[0]-L.mx,dy=c[1]-L.my,dd=Math.hypot(dx,dy)||1,inb=L.blk&&L.blk.contains(w),f=inb&&dd<R?Math.pow(1-dd/R,2):0,
+          tx=dx/dd*f*15,ty=dy/dd*f*10-f*4,px=w.__x||0,py=w.__y||0,pq=w.__q||0;
+      w.__x=px+(tx-px)*k;w.__y=py+(ty-py)*k;w.__q=pq+(f-pq)*k;
+      mx=Math.max(mx,Math.abs(w.__x-px)+Math.abs(w.__y-py)+Math.abs(w.__q-pq));
+      if(f===0&&Math.abs(w.__x)+Math.abs(w.__y)+w.__q<.09){w.__x=w.__y=w.__q=0;w.style.removeProperty('--lx');w.style.removeProperty('--ly');w.style.removeProperty('--lq');w.classList.remove('lqa')}
+      else{w.style.setProperty('--lx',w.__x.toFixed(2));w.style.setProperty('--ly',w.__y.toFixed(2));w.style.setProperty('--lq',w.__q.toFixed(3));w.classList.add('lqa');keep.push(w)}});
+    L.act=keep;
+    if(mx<.01&&L.blk){if(++L.calm>12)return}else L.calm=0;
+    if(L.act.length||L.blk)L.raf=requestAnimationFrame(tick)}
+  d.addEventListener('pointermove',mv,{passive:true})
+})();
+
+/* скорость скролла → скос и RGB-сдвиг крупных заголовков */
+(function(){
+  var sv=0,ly=W.pageYOffset,raf=0,els=null,lt=0;
+  function tick(now){
+    raf=0;var dt=Math.min(.1,Math.max(.001,(now-lt)/1000||.016)),k=1-Math.pow(.84,dt*60);lt=now;
+    if(!els){els=$$('.hero h1 .ln,.sec-head h2,.about-text h2');els.forEach(function(e){var b=W.getComputedStyle(e).textShadow;e.style.setProperty('--tsb',b&&b!=='none'?b:'0 0 0 transparent')})}
+    var y=W.pageYOffset,v=y-ly;ly=y;sv+=(Math.max(-7,Math.min(7,v*.32))-sv)*k;
+    var on=Math.abs(sv)>.03;
+    els.forEach(function(e){if(on){e.style.setProperty('--sv',sv.toFixed(2));e.classList.add('xs')}else{e.style.removeProperty('--sv');e.classList.remove('xs')}});
+    if(on||Math.abs(v)>.1)raf=requestAnimationFrame(tick)}
+  W.addEventListener('scroll',function(){if(!raf&&root.classList.contains('mo-full')){lt=performance.now();raf=requestAnimationFrame(tick)}},{passive:true})
+})();
 
 /* ───────────────────────── 3D-кристалл (CSS 3D, вращается мышью/пальцем) ───────────────────────── */
 function Crystal(orb){
@@ -1385,7 +1703,6 @@ function Crystal(orb){
     g.style.scale=(1+S.gps*.14).toFixed(3);shade(rx,ry,rz)}
   function frame(t){
     S.raf=0;if(!S.vis||d.hidden)return;S.raf=requestAnimationFrame(frame);
-    if(d.body.classList.contains('ultra')&&!S.drag&&t-S.lt<48)return;
     var dt=Math.min(.05,Math.max(.001,(t-S.lt)/1000));S.lt=t;
     S.gps+=(S.gp-S.gps)*(1-Math.exp(-dt*7));
     if(!S.drag){
@@ -1411,103 +1728,140 @@ function Crystal(orb){
 /* ───────────────────────── сборка всех scroll-анимаций ───────────────────────── */
 function prepare(){
   $$('[data-k]').forEach(function(el){el.style.setProperty('--kn',el.querySelectorAll('.ch').length)});
-  $$('.f-grid>div,.f-end,.wcap').forEach(function(el){el.classList.add('mo-r')})}
+  $$('.f-grid>div,.f-end,.wcap,.live-wrap,.live-idle').forEach(function(el){el.classList.add('mo-r')});
+  $$('#kbar,#nav,#dock,#mmenu,#tgo').forEach(function(el){el.classList.add('mo-t')})}
 
 function build(full){
-  var SC=full?.8:.35,crystal=null;
+  var lean=Perf.tier>=1;if(lean)full=false;      /* tier>=1: без 3D/параллакса, но текст анимируется всегда */
+  var SC=full?.8:.35;
   root.classList.add('mo',full?'mo-full':'mo-lite');
   prepare();
   var hero=d.getElementById('home');
 
-  /* общий помощник: scrub одной переменной */
+  function heroDone(el){if(el.classList.contains('fx-c')){el.classList.add('tx-done');el.classList.remove('fx-act')}$$('.fx-c',el).forEach(function(b){b.classList.add('tx-done');b.classList.remove('fx-act')})}
+  /* личный scrub-триггер КАЖДОГО текстового блока: анимация идёт, когда до блока долистали (и строго назад при прокрутке вверх) */
+  function txTriggers(){
+    PLAN.forEach(function(P){
+      if(P.mode!=='own')return;var el=P.el,a=P.fill?.9:.94,b=P.fill?.5:.6;
+      gsap.fromTo(el,{'--tx':0},{'--tx':1,ease:'none',
+        scrollTrigger:{trigger:el,start:function(){return span(el,a,b,1)[0]},end:function(){return span(el,a,b,1)[1]},scrub:SC},
+        onUpdate:function(){var p=this.progress();el.classList.toggle('tx-done',p>=1);el.classList.toggle('fx-act',p>0&&p<1);if(P.dec)decodeOwn(el)}});
+      if(P.dec)decodeOwn(el)})}
+
+  /* 0 · текст: каждому блоку — свой эффект (decode / slice / flip / wave / focus / scan / fill); измеряем в покое, ДО твинов */
+  safe(function(){planText(full)});
+  W.__moTx=TXI;
+  safe(txTriggers);
+
   function scrubVar(el,prop,from,to,start,end,sc,ease,extra){
     var f={},v={ease:ease||'none',scrollTrigger:{trigger:el,start:start,end:end,scrub:sc}};
     f[prop]=from;v[prop]=to;if(extra)for(var k in extra)v[k]=extra[k];
     return gsap.fromTo(el,f,v)}
 
-  /* 1 · глубина фона: аврора/сетка плывут на протяжении всей страницы */
+  /* 1 · глубина фона (только полный режим) */
   var bg=d.querySelector('.bg');
-  if(bg)scrubVar(bg,'--bgp',0,1,0,function(){return maxS()},1.4);
+  if(bg&&!lean)safe(function(){scrubVar(bg,'--bgp',0,1,0,function(){return maxS()},1.4)});
 
   /* 2 · HERO: вход по времени (один раз) → выход по скроллу (обратимо) */
-  if(hero){
+  if(hero)safe(function(){
     var base=Math.max(.05,1.0-performance.now()/1000);
     [['.hero-kicker',0,1.5,'expo.out'],['.hero h1.rv',.1,2.4,'power2.out'],['.hero p.lead',.34,1.7,'expo.out'],['.hero .cta',.46,1.7,'expo.out'],['.hero-side',.22,2.1,'expo.out']].forEach(function(m){
       var el=d.querySelector(m[0]);if(!el)return;
-      if(heroPlayed){gsap.set(el,{'--rp':1});el.classList.add('mo-done');return}
-      gsap.fromTo(el,{'--rp':0},{'--rp':1,duration:m[2],delay:base+m[1],ease:m[3],onComplete:function(){el.classList.add('mo-done')}})});
+      if(heroPlayed){gsap.set(el,{'--rp':1});el.classList.add('mo-done');heroDone(el);decodeTick(el);return}
+      gsap.fromTo(el,{'--rp':0},{'--rp':1,duration:m[2],delay:base+m[1],ease:m[3],onUpdate:function(){decodeTick(el)},onComplete:function(){el.classList.add('mo-done');heroDone(el);decodeTick(el)}});decodeTick(el)});
     heroPlayed=true;
     hero.classList.add('hx0');
     scrubVar(hero,'--hx',0,1,0,function(){return hero.offsetHeight*.95},.6,'none',{onUpdate:function(){hero.classList.toggle('hx0',this.progress()<=0)}});
-    var orb=hero.querySelector('.orb');
-    if(orb&&!d.body.classList.contains('ultra')){
-      try{crystal=Crystal(orb)}catch(e){crystal=null}
-      if(crystal)ST.create({trigger:hero,start:0,end:function(){return hero.offsetHeight},onUpdate:function(s){crystal.setGP(s.progress)}})}}
+  });
 
-  /* 3 · 3D-появление всех карточек/блоков (scrub, реверс бесплатно) */
+  /* 4 · 3D-появление всех карточек/блоков (scrub, реверс бесплатно) */
   function reveal(el,o){
     o=o||{};var a=o.a==null?.95:o.a,b=o.b==null?.58:o.b;
-    function pos(){var vh=W.innerHeight,m=maxS(),t=topOf(el),k=o.stg?rowIdx(el):0,s=t-vh*(a-k*.045),e=t-vh*b;
-      s=Math.max(0,Math.min(s,m-70));e=Math.min(m,Math.max(e,s+70));return [s,e]}
     gsap.fromTo(el,{'--rp':0},{'--rp':1,ease:'power3.out',duration:1,
-      scrollTrigger:{trigger:el,start:function(){return pos()[0]},end:function(){return pos()[1]},scrub:SC,
+      scrollTrigger:{trigger:el,start:function(){return span(el,a,b,0,o.stg?rowIdx(el):0)[0]},end:function(){return span(el,a,b,0,o.stg?rowIdx(el):0)[1]},scrub:SC,
         onToggle:function(s){el.classList.toggle('mo-act',s.isActive)}},
-      onUpdate:function(){el.classList.toggle('mo-done',this.progress()>=1)}})}
-  $$('.rv').forEach(function(el){
-    if(hero&&hero.contains(el))return;
-    var o={};if(el.parentNode.classList.contains('stg'))o.stg=1;
-    if(el.classList.contains('sec-head')){o.a=.92;o.b=.5}
-    reveal(el,o)});
-  $$('.mo-r').forEach(function(el){reveal(el,{a:.98,b:.66})});
-  if(full){/* родители с перспективой: 3D-наклон карточек получает настоящую глубину */
-    $$('.rv,.mo-r').forEach(function(el){el.parentNode.classList.add('mo-p')});
-    var hi=d.getElementById('hin');if(hi)hi.classList.add('mo-p')}
+      onUpdate:function(){el.classList.toggle('mo-done',this.progress()>=1);if(el.__dec)decodeTick(el)}});
+    if(el.__dec)decodeTick(el)}
+  safe(function(){
+    $$('.rv').forEach(function(el){
+      if(hero&&hero.contains(el))return;
+      var o={};if(el.parentNode.classList.contains('stg'))o.stg=1;
+      if(el.classList.contains('sec-head')){o.a=.92;o.b=.5}
+      reveal(el,o)});
+    $$('.mo-r').forEach(function(el){reveal(el,{a:.98,b:.66})});
+    if(full){$$('.rv,.mo-r').forEach(function(el){el.parentNode.classList.add('mo-p')});
+      var hi=d.querySelector('.hero-in');if(hi)hi.classList.add('mo-p')}});
 
-  /* 4 · параллакс по слоям (desktop): заголовки, колонки «Молодь», карточка Spirit, карта */
+  /* 5 · всплывающие окна (меню, Telegram): текст оживает при ОТКРЫТИИ; фикс-панель — при СМЕНЕ раздела */
+  var obs=[];
+  safe(function(){
+    function enter(el,delay,dur){
+      $$('.fx-c',el).forEach(function(b){b.classList.remove('tx-done');b.classList.add('fx-act')});
+      gsap.fromTo(el,{'--rp':0},{'--rp':1,duration:dur||1.1,delay:delay||0,ease:'power2.out',
+        onUpdate:function(){decodeTick(el)},onComplete:function(){el.classList.add('mo-done');heroDone(el);decodeTick(el)}});decodeTick(el)}
+    ['#mmenu','#tgo'].forEach(function(s){
+      var el=d.querySelector(s);if(!el)return;gsap.set(el,{'--rp':1});el.classList.add('mo-done');heroDone(el);
+      var was=false;
+      var mo=new MutationObserver(function(){var o=el.classList.contains('open');if(o&&!was){el.classList.remove('mo-done');enter(el,.05,1.1)}was=o});
+      mo.observe(el,{attributes:true,attributeFilter:['class']});obs.push(mo)})});
+  safe(function(){
+    function pulse(id){
+      $$('#nav a[href="#'+id+'"],#dock a[href="#'+id+'"]').forEach(function(a){runDec(a)});
+      $$('#kbar .fx-scan').forEach(function(el){gsap.fromTo(el,{'--tx':0},{'--tx':1,duration:.9,ease:'power2.out',overwrite:'auto'})})}
+    $$('main>section[id]').forEach(function(sec){
+      ST.create({trigger:sec,start:function(){return topOf(sec)-W.innerHeight*.45},end:function(){return topOf(sec)+sec.offsetHeight-W.innerHeight*.45},
+        onToggle:function(s){if(s.isActive)pulse(sec.id)}})})});
+
+  /* 6 · параллакс по слоям (только полный режим) */
   function par(el,amp){
     if(!el)return;el.classList.add('mo-par');
     gsap.fromTo(el,{'--par':amp},{'--par':-amp,ease:'none',scrollTrigger:{trigger:el,start:function(){return topOf(el)-W.innerHeight},end:function(){return topOf(el)+el.offsetHeight},scrub:1}})}
-  if(full){
+  if(full)safe(function(){
     $$('.sec-head').forEach(function(el){par(el,16)});
     $$('.ycards>.yc').forEach(function(el,i){par(el,[10,24,38][i%3])});
-    par(d.querySelector('.spirit'),14);par(d.querySelector('.map'),18)}
+    par(d.querySelector('.spirit'),14);par(d.querySelector('.map'),18)});
 
-  /* 5 · переходы между секциями: луч пролетает при пересечении границы */
-  $$('.sep').forEach(function(el){
-    scrubVar(el,'--bp',0,1,function(){return topOf(el)-W.innerHeight},function(){return topOf(el)-W.innerHeight*.22},.6,'power1.inOut')});
+  /* 7 · переходы между секциями: луч пролетает при пересечении границы */
+  safe(function(){$$('.sep').forEach(function(el){
+    scrubVar(el,'--bp',0,1,function(){return topOf(el)-W.innerHeight},function(){return topOf(el)-W.innerHeight*.22},.6,'power1.inOut')})});
 
-  /* 6 · бегущая строка: дрейф от скролла */
+  /* 8 · бегущая строка: дрейф от скролла */
   var mq=d.querySelector('.mq');
-  if(mq)scrubVar(mq,'--mqx',0,1,function(){return topOf(mq)-W.innerHeight},function(){return topOf(mq)+mq.offsetHeight},.5);
+  if(mq&&!lean)safe(function(){scrubVar(mq,'--mqx',0,1,function(){return topOf(mq)-W.innerHeight},function(){return topOf(mq)+mq.offsetHeight},.5)});
 
-  /* 7 · плавающие неоновые формы (desktop): параллакс на своей глубине */
-  if(full)$$('.fs').forEach(function(el){
+  /* 9 · плавающие формы (только полный режим) */
+  if(full)safe(function(){$$('.fs').forEach(function(el){
     var sec=el.parentNode,k=el.classList.contains('s3')?[160,-160]:el.classList.contains('s2')?[-70,90]:[120,-120];
-    scrubVar(el,'--fy',k[0],k[1],function(){return topOf(sec)-W.innerHeight},function(){return topOf(sec)+sec.offsetHeight},1)});
+    scrubVar(el,'--fy',k[0],k[1],function(){return topOf(sec)-W.innerHeight},function(){return topOf(sec)+sec.offsetHeight},1)})});
 
-  /* 8 · таймлайн: точки зажигаются синхронно с растущей линией (обратимо) */
-  $$('.ti').forEach(function(ti){
+  /* 10 · таймлайн: точки зажигаются вместе с линией (обратимо) */
+  safe(function(){$$('.ti').forEach(function(ti){
     var y=function(){return topOf(ti)+40};
     scrubVar(ti,'--dl',0,1,function(){return y()-W.innerHeight*.66},function(){return y()-W.innerHeight*.58},.3,'none',
-      {onUpdate:function(){ti.classList.toggle('lit',this.progress()>=1)}})});
+      {onUpdate:function(){ti.classList.toggle('lit',this.progress()>=1)}})})});
 
-  /* 9 · зимняя сцена: «наезд камеры» */
+  /* 11 · зимняя сцена: «наезд камеры» */
   var ws=d.querySelector('.wscene');
-  if(ws)scrubVar(ws,'--sp',0,1,function(){return topOf(ws)-W.innerHeight*.9},function(){return Math.min(maxS(),topOf(ws)+ws.offsetHeight*.5)},1,'power1.out');
+  if(ws)safe(function(){scrubVar(ws,'--sp',0,1,function(){return topOf(ws)-W.innerHeight*.9},function(){return Math.min(maxS(),topOf(ws)+ws.offsetHeight*.5)},1,'power1.out')});
 
   refreshSoon();
   return function(){/* cleanup при смене режима (gsap.matchMedia сам откатывает твины/триггеры) */
-    if(crystal)crystal.destroy();
+    obs.forEach(function(o){o.disconnect()});
+    unsplitAll();
     root.classList.remove('mo','mo-full','mo-lite');
     $$('.mo-p,.mo-act,.mo-done,.mo-par,.hx0,.lit').forEach(function(el){el.classList.remove('mo-p','mo-act','mo-done','mo-par','hx0','lit')})}}
 
 /* режимы: full — десктоп с мышью, lite — телефоны/планшеты; при reduce-motion не включается ничего */
-var mm=gsap.matchMedia();
-mm.add({
+var mm=null,CONDS={
   full:'(prefers-reduced-motion: no-preference) and (min-width: 1021px) and (pointer: fine)',
-  lite:'(prefers-reduced-motion: no-preference) and (max-width: 1020px), (prefers-reduced-motion: no-preference) and (pointer: coarse)'
-},function(ctx){if(!ctx.conditions.full&&!ctx.conditions.lite)return;return build(!!ctx.conditions.full)});
+  lite:'(prefers-reduced-motion: no-preference) and (max-width: 1020px), (prefers-reduced-motion: no-preference) and (pointer: coarse)'};
+function startMotion(){
+  mm=gsap.matchMedia();
+  mm.add(CONDS,function(ctx){if(!ctx.conditions.full&&!ctx.conditions.lite)return;return build(!!ctx.conditions.full)})}
+function stopMotion(){if(mm){safe(function(){mm.revert()});mm=null}}
+Perf.restart=function(){stopMotion();startMotion();refreshSoon()};   /* смена уровня → пересборка без повтора входа hero */
+startMotion();
 })();
 </script>
 </body>
-</html>
+  </html>
